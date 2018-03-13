@@ -33,13 +33,14 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
 
     // FUNCAO MONTA E ATUALIZA Bloco PARA O FUNCIONAMENTO DA TABELA
     atualizarBloco = function (elm, nome) {
-        var filhos = elm.querySelectorAll("[data-le_da_tabela]");
+        var filhos = elm.querySelectorAll("[data-le_da_tabela], [data-nome]");
 
         for (var i = 0; i < filhos.length; i++) {
             filhos[i].dataset.elemento_bloco_id = "{{$index + 1}} _" + filhos[i].dataset.id;
 
-            if (filhos[i].dataset.nome && filhos[i].dataset.nome == "order_angular") {
-                filhos[i].innerHTML = "{{$index + 1}} º";
+            if (filhos[i].dataset.nome && filhos[i].dataset.nome.indexOf("order_angular") > -1) {
+                var num = filhos[i].dataset.nome.split("¦")[1];
+                filhos[i].innerHTML = "{{$index + " + ((num && num != "") ? num : 1) + "}} º";
             }
 
             if (filhos[i].dataset.le_da_tabela && filhos[i].dataset.le_da_tabela != "" && filhos[i].dataset.le_da_tabela != "null") {

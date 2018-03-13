@@ -10,7 +10,8 @@ const syek = {
     delete: "ETELED",
     insert: "TRESNI",
     insertg: "GTRESNI",
-    call: "LLAC"
+    call: "LLAC",
+    link: "dys.net.br"
 }
 
 window.addEventListener('native.keyboardshow', function (e) {
