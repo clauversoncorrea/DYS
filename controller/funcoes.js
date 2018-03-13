@@ -4,6 +4,8 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     // Troca todos os sargentos que estão na string 
     g$.alterSargentos = function (params) {
         var texto = params.split("»"), campo, encode, inArray = "";
+        if(params.indexOf("https")) params = params.replaceAll("https", "http")
+        if (params.indexOf("dys.net.br")) params = params.replaceAll("dys.net.br", g$.link)
         for (var i = 0; i < texto.length; i++) {
             if (texto[i].indexOf("|") == -1 && texto[i].indexOf("¦") == -1 && !!parseInt(texto[i])) {
                 campo = $("[data-id='" + texto[i] + "']")[0]
@@ -26,10 +28,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     else if (campo.type == "checkbox") texto[i] = (campo.checked) ? 1 : 0;
                     else if (campo.dataset.tipo == "file") {
                         if (campo.children[1].files.length) {
-                            texto[i] = (campo.children[1].files[0].name && campo.children[1].files[0].name != '') ? "http:½½dys.net.br½" + $rootScope.user.projeto + "½" + campo.children[1].files[0].name : '';
+                            texto[i] = (campo.children[1].files[0].name && campo.children[1].files[0].name != '') ? "http:½½"+g$.link+"½" + $rootScope.user.projeto + "½" + campo.children[1].files[0].name : '';
                         }
                         else {
-                            texto[i] = (campo.parentElement.querySelectorAll("input")[1].value && campo.parentElement.querySelectorAll("input")[1].value != '') ? "http:½½dys.net.br½" + $rootScope.user.projeto + "½" + campo.parentElement.querySelectorAll("input")[1].value : '';
+                            texto[i] = (campo.parentElement.querySelectorAll("input")[1].value && campo.parentElement.querySelectorAll("input")[1].value != '') ? "http:½½"+g$.link+"½" + $rootScope.user.projeto + "½" + campo.parentElement.querySelectorAll("input")[1].value : '';
                         }
                     }
                     else {
@@ -107,7 +109,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             else if (texto[i].indexOf("g$.") > -1) texto[i] = (g$[texto[i].split(".")[1]] == "") ? "" : g$[texto[i].split(".")[1]];
         }
         var regexp = new RegExp('dysweb.dys.com.br/' + $rootScope.user.projeto.toLowerCase() + '/', 'g');
-        return texto.join("").replace(regexp, 'dys.net.br/' + $rootScope.user.projeto + '/').split('|');
+        return texto.join("").replace(regexp, g$.link+'/' + $rootScope.user.projeto + '/').split('|');
     }
 
     // Função Alert
@@ -3034,7 +3036,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         if (data) {
                             gerando = 0;
                             $("[data-id=" + campo + "]")[0].value = data.replace(/"/g, "");
-                            $("[data-id=16860]")[0].innerHTML = "<iframe width='100%' height='100%' src=https://dys.net.br/BELEZAPINK/" + data.replace(/"/g, "") + "></iframe>"
+                            $("[data-id=16860]")[0].innerHTML = "<iframe width='100%' height='100%' src=http://"+g$.link+"/BELEZAPINK/" + data.replace(/"/g, "") + "></iframe>"
                             // tela_impressao = window.open('about:blank');
                             // tela_impressao.window.location.href = "http://dysweb.dys.com.br/" + $rootScope.user.banco + "/" + data.replace(/"/g, "") + ".pdf"
                         }
@@ -3168,7 +3170,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 g$.vfyFuncaoDepois(idFuncao);
             } else {
                 elemento.download = link[1];
-                elemento.href = (link.join("/").indexOf("https") == -1) ? "https://dys.net.br/" + link.join("/") : link.join("/");
+                elemento.href = (link.join("/").indexOf("https") == -1) ? "http://"+g$.link+"/" + link.join("/") : link.join("/");
                 elemento.click();
                 g$.vfyFuncaoDepois(idFuncao);
             }
@@ -3192,7 +3194,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 var query = "update " + $rootScope.user.banco + ".pedido set plp = " + data.message + ",statusplp = 0 where statusplp = 1 and coalesce(rastreamento,'') <> '' AND rastreamento rlike '([A-Z]){2}([0-9]){9}([A-Z]){2}'";
                 $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     tela_impressao = window.open('about:blank');
-                    tela_impressao.window.location.href = "http://dys.net.br/temp/plp/plp.html#plp=" + data.message + "&banco=" + $rootScope.user.banco + "&empresa=" + empresa.trim();
+                    tela_impressao.window.location.href = "http://"+g$.link+"/temp/plp/plp.html#plp=" + data.message + "&banco=" + $rootScope.user.banco + "&empresa=" + empresa.trim();
                 })
             }
         })
