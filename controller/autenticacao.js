@@ -5,21 +5,9 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
 
     function inputKeyDown() {
         if (event.keyCode == 13) {
-            if (location.href.indexOf("SAUDE") > -1) $scope.autenticacaoSAUDE();
-            else $scope.autenticacaoDYS();
+            $scope.autenticacaoSAUDE();
         }
     }
-
-    // SAUDE
-    if (location.href.indexOf("SAUDE") > -1) {
-        $("#senhaSaude")[0].addEventListener("keydown", inputKeyDownSAUDE, false);
-        $("#confirmarSenha")[0].addEventListener("keydown", inputKeyDownSAUDE, false);
-    }
-
-    function inputKeyDownSAUDE() {
-        if (event.keyCode == 13) $scope.cadastrarSenhaSAUDE();
-    }
-
 
     // Se o usuario não fez logout, já inicia sozinho
     // if (localStorage.user && JSON.parse(localStorage.user) && JSON.parse(localStorage.user).logado) {
@@ -83,16 +71,10 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                             if ($scope.user.valido == 0) return Materialize.toast("Compareça a unidade para validar o seu cadastro!", 4000, 'red darken-1');
                             dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                             $scope.user = data.data[0];
-                            $http.post(URL + "/leArquivo/", { arquivo: $scope.user.projeto.toUpperCase() + "/inicial.html" }).success(function (data) {
-                                if (data != "" && $scope.user.customiza == 0) {
-                                    // Sistema do cliente
-                                    $scope.user.sysCli = true;
-                                    window.location = $scope.user.projeto.toUpperCase()  + "/inicial.html?";
-                                }
-                                else window.location = dir + "inicial.html?";
-                                $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
-                                localStorage.user = JSON.stringify($scope.user);
-                            });
+                            $scope.user.sysCli = true;
+                            window.location = "/inicial.html?";
+                            $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
+                            localStorage.user = JSON.stringify($scope.user);
                         }
                         else {
                             $("#cadastrarSenha")[0].classList.remove("play-none");
@@ -188,16 +170,10 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                         }
                         dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                         $scope.user = data.data[0];
-                        $http.post(URL + "/leArquivo/", { arquivo: $scope.user.projeto.toUpperCase() + "/inicial.html" }).success(function (data) {
-                            if (data != "" && $scope.user.customiza == 0) {
-                                // Sistema do cliente
-                                $scope.user.sysCli = true;
-                                window.location = $scope.user.projeto.toUpperCase()  + "/inicial.html?";
-                            }
-                            else window.location = dir + "inicial.html?";
-                            $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
-                            localStorage.user = JSON.stringify($scope.user);
-                        });
+                        $scope.user.sysCli = true;
+                        window.location = "/inicial.html?";
+                        $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
+                        localStorage.user = JSON.stringify($scope.user);
                     });
                 });
             });

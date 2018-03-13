@@ -99,7 +99,6 @@ app.directive("menuTelas", function () {
                             $("#container-menu")[0].appendChild(menu_bloco);
                             if (g$.user.sysCli) {
                                 menu_bloco.addEventListener("click", g$.openTela.bind(null, nome_tela), false);
-                                menu_bloco.addEventListener("click", g$.openTela.bind(null, nome_tela), false);
                             }
                             else {
                                 menu_bloco.addEventListener("click", g$.retBlocoMenuTela.bind(null, data[i]), false);
