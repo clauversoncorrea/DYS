@@ -110,7 +110,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
                     if (filhos[i].dataset.id.split("http")[1]) {
                         filhos[i].src = "{{" + nome + ".e_" + filhos[i].dataset.id + "}}";
                     } else {
-                        filhos[i].src = "https://dys.net.br/{{user.projeto}}/{{" + nome + ".e_" + filhos[i].dataset.id + "}}";
+                        filhos[i].src = "https://"+g$.link+"/{{user.projeto}}/{{" + nome + ".e_" + filhos[i].dataset.id + "}}";
                     }
                 }
                 else if (filhos[i].id == "link") {
@@ -274,10 +274,10 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
 
             for (var i = 0; i < imagens.length; i++) {
                 if (imagens[i].dataset.valorImagem && imagens[i].dataset.valorImagem.indexOf("http") == -1) {
-                    if (imagens[i].dataset.valorImagem == "") imagens[i].src = "https://dys.net.br/img/sem-imagem.jpg";
-                    else imagens[i].src = "https://dys.net.br/" + $rootScope.user.projeto + "/" + imagens[i].dataset.valorImagem;
+                    if (imagens[i].dataset.valorImagem == "") imagens[i].src = "http://"+g$.link+"/img/sem-imagem.jpg";
+                    else imagens[i].src = "http://"+g$.link+"/" + $rootScope.user.projeto + "/" + imagens[i].dataset.valorImagem;
                 }
-                else imagens[i].src = "https://dys.net.br/img/sem-imagem.jpg";
+                else imagens[i].src = "http://"+g$.link+"/img/sem-imagem.jpg";
             };
 
             for (var i = 0; i < blocos.length; i++) {

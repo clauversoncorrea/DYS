@@ -815,7 +815,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
 
         g$.openTelaTemp = function (tempo, modal) {
             var tempInterval = setInterval(function () {
-                window.open("https://dys.net.br/customizador/inicial.html?" + "modal=" + modal, "", "width=600, height=600");
+                window.open("http://"+g$.link+"/customizador/inicial.html?" + "modal=" + modal, "", "width=600, height=600");
             }, tempo * 1000 * 60);
         }
 
