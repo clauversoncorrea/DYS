@@ -11,7 +11,7 @@ const syek = {
     insert: "TRESNI",
     insertg: "GTRESNI",
     call: "LLAC",
-    link: "dys.net.br"
+    link: "localhost:8000"
 }
 
 window.addEventListener('native.keyboardshow', function (e) {

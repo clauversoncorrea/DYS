@@ -5,7 +5,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
 
     function inputKeyDown() {
         if (event.keyCode == 13) {
-            $scope.autenticacaoSAUDE();
+            $scope.autenticacaoDYS();
         }
     }
 
