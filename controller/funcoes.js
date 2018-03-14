@@ -5704,7 +5704,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 // cliente_id = achaCliente(razao, email, cpf, cnpj, ie, im, razao, cpf, cnpj, endereco, bairro, cidade, uf, nr, complemento, cep, email, razao, cpf, cnpj, ie, endereco, bairro, cidade, uf, nr, complemento, cep, email, plano_de_contas_saida_id);
                 achaCliente(razao, email, cpf, cnpj, ie, im, razao, cpf, cnpj, endereco, bairro, cidade, uf, nr, complemento, cep, email, razao, cpf, cnpj, ie, endereco, bairro, cidade, uf, nr, complemento, cep, email, plano_de_contas_saida_id, function (resposta) {
                     console.log(resposta);
-                    var queryInsertRPS = ("INSERT INTO " + $rootScope.user.banco + ".nfse_rps (numeroRps, serie, cliente_id, empresa_id,  DataEmissao, ItemListaServico, ValorServicos, rps_id, cpftomador,cnpjtomador, RazaoSocialTomador, EnderecoTomador, NumeroTomador, ComplementoTomador, BairroTomador, cidadeTomador, UFTomador, CepTomador, etapa) VALUES ('" + nr_rps + "','" + serie_rps + "','" + resposta + "','" + empresa_id + "',CURDATE(),'" + ItemListaServico + "','" + valor_dos_servicos + "','" + rps_id + "','" + cpf + "','" + cnpj + "',\"" + razao + "\",'" + endereco + "','" + nr + "','" + complemento + "','" + bairro + "','" + cidade + "','" + uf + "','" + cep + "', 'finalizado')").replaceAll("'null'", "null").replaceAll("''", "null");
+                    var queryInsertFin = ("INSERT INTO " + $rootScope.user.banco + ".financeiro (documento,cliente_fornecedor_id,emissao,vencimento,valorOriginal, acrescimo,despesa,valor,forma_de_pagamento_id,carteira_id,empresa_id, plano_de_contas_id,usuario_id,rps_id,nr_rps ) VALUES ('RPS" + nr_rps + "','" + resposta + "',CURDATE(),DATE_ADD(CURDATE(),INTERVAL 14 DAY),'" + valor_dos_servicos + "','" + 0 + "','" + 0 + "','" + valor_dos_servicos + "','" + 1 + "','" + carteira_id + "','" + empresa_id + "','" + plano_de_contas_saida_id + "','" + 2 + "','" + rps_id + "','" + nr_rps + "')").replaceAll("'null'", "null").replaceAll("''", "null");
                     console.log(queryInsertRPS);
                     $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertRPS.trim().replaceAll("'null'", "null"))).then(function (data) {
                         if (!data.err) {
@@ -6015,9 +6015,9 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         cnabH = rightPad(cnabH, 157) + v_sequencial; // NuMERO SEQUENCIAL do arquivo
         cnabH = rightPad(cnabH, 142) + v_hoje; // DATA DE GERAcaO DDMMAA   mudar para DDMMAAAA
         cnab = cnab + '\n' + cnabH;  // quebra de linha
-        //  $("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
-        // $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
-        // $("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
+        $("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
+        $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
+        $("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
         // DETALHE 
         obj.registros.forEach(function (reg, i) {
 
@@ -6119,9 +6119,9 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
             cnab = cnab + '\n' + cnabP + '\n' + cnabQ;  // quebra de linha + registro
 
-            //$("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
-            // $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
-            //$("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
+            $("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
+            $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
+            $("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
 
         });
         // Trailer Lote
@@ -6149,9 +6149,9 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         cnabA = cnabA + leftPad('0', 6);
         cnabA = rightPad(cnabA, 240);
         cnab = cnab + '\n' + cnabL + '\n' + cnabA;
-        // $("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
-        //$("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
-        //$("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
+        $("#porcentualPC")[0].textContent = parseFloat(parseFloat($("#porcentualPC")[0].textContent.replace("%", "")) + parseFloat(porcentPC)).toFixed(2) + '%';
+        $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
+        $("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
 
         return cnab;
     };

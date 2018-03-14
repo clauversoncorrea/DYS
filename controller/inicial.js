@@ -815,7 +815,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
 
         g$.openTelaTemp = function (tempo, modal) {
             var tempInterval = setInterval(function () {
-                window.open("http://"+g$.link+"/customizador/inicial.html?" + "modal=" + modal, "", "width=600, height=600");
+                window.open("http://" + g$.link + "/customizador/inicial.html?" + "modal=" + modal, "", "width=600, height=600");
             }, tempo * 1000 * 60);
         }
 
@@ -1112,7 +1112,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             var nm_arquivo = "view/" + nomeTela + ".html", popup;
 
             //  Verifica a tela no banco do cliente 
-            $http.post(URL + "/leArquivo/", { arquivo: $rootScope.user.banco + "/" + nm_arquivo }).success(function (data) {
+            $http.post(URL + "/leArquivo/", { arquivo: $rootScope.user.banco.toUpperCase() + "/" + nm_arquivo }).success(function (data) {
                 if (data == "") {
                     // Se nao tiver, pega da raiz
                     $http.post(URL + "/leArquivo/", { arquivo: nm_arquivo }).success(function (data) {
@@ -1130,8 +1130,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             popupp = $compile(popup)($scope)[0];
         }
 
-        // Notificação Tarefa Socket
-        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://localhost:8000");
+        // Notificação Tarefa Socket 
+        g$._socket = typeof (io) == "undefined" ? null : io.connect("https://" + g$.link);
 
         g$.NotificationTarefa = function (params) {
             var params = g$.alterSargentos(params),
