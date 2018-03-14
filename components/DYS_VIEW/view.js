@@ -102,7 +102,7 @@ app.directive("view", function () {
                     if (g$.exceptionRequisicao("Monta Tela", data)) return;
 
                     if (data.data.length == 0) {
-                        $("#loadzinTelam")[0].outerHTML = "";
+                        if($("#loadzinTelam")[0]) $("#loadzinTelam")[0].outerHTML = "";
                     }
 
                     data.data.forEach(function (obj, i) {
@@ -628,7 +628,7 @@ app.directive("view", function () {
 
             $scope.addEventos = function (data) {
                 if (data.length == 0) {
-                    $("#loadzinTelam")[0].outerHTML = "";
+                    if($("#loadzinTelam")[0]) $("#loadzinTelam")[0].outerHTML = "";
                 }
 
                 // Chamar o configTela
@@ -651,7 +651,7 @@ app.directive("view", function () {
                         }
                     }
                     if (ultimo == i) {
-                        $("#loadzinTelam")[0].outerHTML = "";
+                        if($("#loadzinTelam")[0]) $("#loadzinTelam")[0].outerHTML = "";
                     }
                 });
             }

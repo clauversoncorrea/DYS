@@ -10,8 +10,7 @@ const syek = {
     delete: "ETELED",
     insert: "TRESNI",
     insertg: "GTRESNI",
-    call: "LLAC",
-    link: "localhost:8000"
+    call: "LLAC"
 }
 
 window.addEventListener('native.keyboardshow', function (e) {
@@ -46,6 +45,7 @@ var g$ = {
     memo4: "",
     memo5: "",
     desktop: 1,
+    link: "localhost:8000",
     arrayTelas: [],
     arr_focus_elemento: [],
     mySql_keys: ["GTRESNI", "TRESNI", "ETELED", "GETADPU", "ETADPU"]
