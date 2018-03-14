@@ -84,10 +84,10 @@ app.directive("menuTelas", function () {
                         elm = ul;
                     }
 
+                    var nome_tela = data[i].menu.split(" ").join("") + data[i].id;
                     if (data[i].tipo == "tela") {
                         if (data[i].menu_tela_inicial == "1") {
                             var menu_bloco = angular.element($.template[0]["menu_bloco"])[0];
-                            var nome_tela = data[i].menu.split(" ").join("") + data[i].id;
                             menu_bloco.dataset.app_menu = data[i].app_menu;
                             menu_bloco.dataset.web_menu = data[i].web_menu;
                             menu_bloco.dataset.popup = data[i].popup;
