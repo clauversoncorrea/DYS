@@ -94,6 +94,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 // Materialize.toast(data.error, 4000, 'red darken-1');
                 g$.exibeQuery(tipo, data.query);
                 g$.exibeQuery("ERRO", data.error);
+                console.log(tipo + " - " + data.query)
+                console.log("ERRO" + data.error);
                 event.preventDefault();
                 event.stopPropagation();
                 return true;
