@@ -6285,9 +6285,24 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.vfyFuncaoDepois(idFuncao, isTela);
         };
 
-        $http.post("http://localhost:8001/imprimeSenha/" + senha_id).success(function (data) {
-            console.log(data);
-            return g$.vfyFuncaoDepois(idFuncao, isTela);
+        var query = "SELECT u.nome, p.razao, p.nascimento, p.carterinha, f.data_hora, f.senha, l.local, CONCAT('Dirija-se a ',l.local, ' e aguarde ser chamado no painel') as mensagem"
+            + " FROM saude.fila_chamada f "
+            + " LEFT JOIN saude.unidade_saude u ON u.id = f.unidade_id "
+            + " LEFT JOIN saude.cliente_fornecedor p ON p.id = f.paciente_id "
+            + " LEFT JOIN saude.local l ON l.id = f.local_id "
+            + " WHERE f.id = " + senha_id;
+
+        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+            // Trata Excecao
+            if (g$.exceptionRequisicao("Dados da senha", data)) return;
+            data.data = data.data[0]
+            var nascimento = (data.data.nascimento) ? data.data.nascimento.replaceAll("/", "_") : null;
+            $http.get("http://localhost:8001/imprimeSenha/" + data.data.senha + "/" + data.data.local + "/" + data.data.nome +
+                "/" + data.data.mensagem + "/" + nascimento + "/" + data.data.razao + "/" + data.data.carterinha).success(function (data) {
+                    console.log(data);
+                    return g$.vfyFuncaoDepois(idFuncao, isTela);
+                });
+
         });
 
     }
