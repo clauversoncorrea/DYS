@@ -57,7 +57,7 @@ app.use(express.static('./'));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://54.233.66.37/');
+    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.66.19:8000');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -1010,7 +1010,10 @@ app.get('/', function (req, res) {
 var server = app.listen(port, function () {
     console.log("Servidor rodando na porta 8000");
 });
+
 var io = socket(server);
+
+io.origins(['http://localhost:8000', 'http://192.168.66.19:8000']);
 
 var emitir = function (req, res, next) {
     var notificar = req.query.notificacao || '';
