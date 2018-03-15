@@ -24,10 +24,10 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         // Log 
         $scope.logs = [];
 
-        g$.exibeQuery = function (tipo, query) {
+        g$.exibeQuery = function (tipo, query, error) {
             var data = new Date();
             data = data.toLocaleTimeString();
-            $scope.logs[$scope.logs.length] = { data: data, tipo: tipo, query: query };
+            $scope.logs[$scope.logs.length] = { data: data, tipo: tipo, query: query, error: error };
         }
 
         g$.converteQuerySaas = function () {
@@ -35,8 +35,6 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 g$.extraiQuerys(data);
             });
         }
-
-
 
         g$.extraiQuerys = function (text) {
             var json = { texto: text }, querySaas = [], t, tables = [];
@@ -92,16 +90,14 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         g$.exceptionRequisicao = function (tipo, data) {
             if (data.err) {
                 // Materialize.toast(data.error, 4000, 'red darken-1');
-                g$.exibeQuery(tipo, data.query);
-                g$.exibeQuery("ERRO", data.error);
-                console.log(tipo + " - " + data.query)
-                console.log("ERRO" + data.error);
+                g$.exibeQuery(tipo, data.query, 1);
+                g$.exibeQuery("ERRO", data.error, 1);
                 event.preventDefault();
                 event.stopPropagation();
                 return true;
             }
             else {
-                g$.exibeQuery(tipo, data.query);
+                g$.exibeQuery(tipo, data.query, 0);
                 return false;
             }
         }

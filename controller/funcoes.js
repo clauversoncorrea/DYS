@@ -3356,10 +3356,6 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.popCloseLogo = function () {
-        if ($rootScope.user.customiza == "1") {
-            g$.limpaTelaAcoes();
-            g$.limpaConsultas();
-        }
 
         var tabelas = $("#view #tabela"),
             prop;
@@ -3392,10 +3388,6 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     g$.popClose = function (params) {
 
-        if ($rootScope.user.customiza == "1") {
-            g$.limpaTelaAcoes();
-            g$.limpaConsultas();
-        }
 
         if (params) {
             var params = g$.alterSargentos(params),
@@ -3439,10 +3431,6 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var id, idFuncao, query, elm = event.target;
 
         if (params == "modal-perfil") g$.arrayTelas = g$.arrayTelas.filter(v => v.toString() != "ModalPerfil");
-        if ($rootScope.user.customiza == "1") {
-            g$.limpaTelaAcoes();
-            g$.limpaConsultas();
-        }
         if (params) {
             if (params.indexOf("|") > 0) {
                 var params = g$.alterSargentos(params),
@@ -3495,11 +3483,6 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 g$[funcao.trim()](params, true);
             });
         })
-
-        if ($rootScope.user.customiza == "1") {
-            g$.limpaTelaAcoes();
-            g$.limpaConsultas();
-        }
 
         if (g$.user.sysCli) {
             g$.arrayTelas = g$.arrayTelas.filter(v => v.toString() != $("#view #" + id.replace(id_tela, ""))[0].children[0].dataset.tela);

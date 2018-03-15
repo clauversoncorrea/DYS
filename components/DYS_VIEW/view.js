@@ -315,7 +315,7 @@ app.directive("view", function () {
                     if (obj.tipo == "file" && obj.nome && obj.nome.indexOf("importar_excel") > -1) {
                         template.classList.add("file-path");
                         template.setAttribute("onchange", "g$.importExcel()");
-                        template = "<div class='file-field'> <div class='btn' style='background: #4CAF50;' data-tipo='file' data-id = " + obj.id + "> <i class='fa fa-file-excel-o no-margin'></i> <input type='file' data-id = " + obj.id + "> </div>" +
+                        template = "<div class='file-field'> <div class='btn' style='background: #4CAF50;' data-tipo='file' data-id = " + obj.id + " data-menu_id = " + obj.menu_id + "> <i class='fa fa-file-excel-o no-margin'></i> <input type='file' data-id = " + obj.id + "> </div>" +
                             "<div class='file-path-wrapper'> " + template.outerHTML + "</div> </div>";
                         template = angular.element(template)[0];
                         template.dataset.nome = obj.nome;
@@ -323,7 +323,7 @@ app.directive("view", function () {
                     else if (obj.tipo == "file") {
                         template.classList.add("file-path");
                         template.setAttribute("onchange", "g$.uploadFile()");
-                        template = "<div class='file-field'> <div class='btn' data-tipo='file' data-id = " + obj.id + "> <i class='fa fa-search no-margin'></i> <input type='file' data-id = " + obj.id + "> </div>" +
+                        template = "<div class='file-field'> <div class='btn' data-tipo='file' data-id = " + obj.id + " data-menu_id = " + obj.menu_id + "> <i class='fa fa-search no-margin'></i> <input type='file' data-id = " + obj.id + "> </div>" +
                             "<div class='file-path-wrapper'> " + template.outerHTML + "</div> </div>";
                         template = angular.element(template)[0];
                     }

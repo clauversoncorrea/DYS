@@ -2,13 +2,18 @@
     #modal-log .popup {
         height: 100% !important;
     }
+
+    .row-erro {
+        background: #d68680 !important;
+        color: #FFF !important;
+    }
 </style>
 
 <div id="popLog" class='popup card col s12 no-margin-tb no-padding fill-height'>
     <div class='card-header'>
         <div class='card-title'> DYS Console Log </div>
         <div class='card-icone'>
-            <i id="modal-log" class='fa fa-close' onclick="g$.closeModal()">  </i>
+            <i id="modal-log" class='fa fa-close' onclick="g$.closeModal()"> </i>
         </div>
     </div>
     <div class='card-content'>
@@ -24,7 +29,7 @@
                 <colgroup>
                     <col width="100">
                     <col width="140">
-                    <tr ng-repeat="log in logs | orderBy : data : true" data-irow="{{$index}}">
+                    <tr ng-repeat="log in logs | orderBy : data : true" data-irow="{{$index}}" ng-class="(log.error = 1) ? 'row-erro' : ''">
                         <td> {{log.data}} </td>
                         <td> {{log.tipo}} </td>
                         <td> {{log.query}} </td>
