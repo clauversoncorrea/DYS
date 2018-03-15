@@ -1121,11 +1121,27 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             });
         }
 
+        g$.fullScreen = function() {
+            var el = document.documentElement,
+                rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen;
+            rfs.call(el);
+        }
+
         function criaPopup(data, nomeTela) {
             popup = angular.element(data)[0];
             popup.querySelector(".card-content").setAttribute("ng-controller", nomeTela);
             $("#view")[0].insertBefore(popup, $("#view")[0].firstChild);
-            popupp = $compile(popup)($scope)[0];
+            popup = $compile(popup)($scope)[0];
+            if (nomeTela == "TotemSenha705" || nomeTela == "TELÃO1054") {
+                // Deixa a tela fullscreen
+                $("#view").addClass("fullscreen");
+                // remove o cabecalho da tela
+                popup.removeChild(popup.querySelector(".card-header"));
+            }
+            else {
+                // Remove tela fullscreen
+                $("#view").removeClass("fullscreen");
+            }
         }
 
         // Notificação Tarefa Socket 
