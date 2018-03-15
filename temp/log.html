@@ -29,7 +29,7 @@
                 <colgroup>
                     <col width="100">
                     <col width="140">
-                    <tr ng-repeat="log in logs | orderBy : data : true" data-irow="{{$index}}" ng-class="(log.error = 1) ? 'row-erro' : ''">
+                    <tr ng-repeat="log in logs | orderBy : data : true" data-irow="{{$index}}" ng-class="log.error == 1 ? 'row-erro' : ''">
                         <td> {{log.data}} </td>
                         <td> {{log.tipo}} </td>
                         <td> {{log.query}} </td>
