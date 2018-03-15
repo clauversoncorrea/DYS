@@ -45,7 +45,7 @@ var g$ = {
     memo4: "",
     memo5: "",
     desktop: 1,
-    link: "localhost:8000",
+    link: "192.168.66.19",
     arrayTelas: [],
     arr_focus_elemento: [],
     mySql_keys: ["GTRESNI", "TRESNI", "ETELED", "GETADPU", "ETADPU"]
