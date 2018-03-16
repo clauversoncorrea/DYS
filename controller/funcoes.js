@@ -1159,13 +1159,13 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 else valor = valores[i];
             }
             else if (valores[0] && valores[0].trim() != "") {
-                if (elemento.dataset && elemento.dataset.filtro_bloco) {
+                if (elemento && elemento.dataset && elemento.dataset.filtro_bloco) {
                     $scope.$parent.$parent["e_" + elemento.dataset.id_filtro_bloco] = valores[0].trim();
                 }
                 else valor = valores[0].trim();
             }
             else {
-                if (elemento.dataset && elemento.dataset.filtro_bloco) {
+                if (elemento && elemento.dataset && elemento.dataset.filtro_bloco) {
                     $scope.$parent.$parent["e_" + elemento.dataset.id_filtro_bloco] = valores[0].trim();
                 }
                 else valor = valores[0];
