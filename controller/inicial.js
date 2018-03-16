@@ -945,7 +945,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         // Controla Abas
         g$.displayTab = function (id, nomeTela) {
 
-            if (event.target.id == "tab") {
+            if (event && event.target.id == "tab") {
                 elm = event.target;
                 id = elm.parentElement.dataset.id;
             }
