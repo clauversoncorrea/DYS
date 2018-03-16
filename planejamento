@@ -13,5 +13,6 @@ arefas Douglas Egis - Fabiano vai avaliar dis 08-03
  - Ajudar Claudio com os Templates
  - Finalizar a lista do Fabiano 
 
- - Arrumar socket na ubs 192.168.66.19
- - Arrumar a tela de totem, deixar fullscreen e nao permitir fechar
+- Modal de pacientes na tela de atendimento guiche nao esta carregando
+- botao de editar na tabela de pacientes, nao carrega os dados
+- pesquisa no totem
