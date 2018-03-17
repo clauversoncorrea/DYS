@@ -3438,25 +3438,22 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     id = params[1].trim(),
                     cond = params[2];
 
-                if (g$.user.sysCli) {
-                    while (!elm.dataset.menu_id) {
-                        elm = elm.parentElement;
-                    }
-                    id = $("[data-tela='" + elm.dataset.menu_id + "']")[0].parentElement.parentElement.id;
-                }
-
-                g$.arrayTelas = g$.arrayTelas.filter(v => v.toString() != $("#view #" + id)[0].children[0].dataset.tela);
-
                 valida = (!cond) ? true : g$.validaCondicao(cond);
                 if (valida == false) {
                     console.log("Não executou porque" + cond + " é falso");
                     return g$.vfyFuncaoDepois(idFuncao);
                 };
 
+                // Fecha a ultima tela
+                if (g$.user.sysCli) $("#view")[0].removeChild($("#view .tela-modal")[$("#view .tela-modal").length - 1]);
+
+                // g$.arrayTelas = g$.arrayTelas.filter(v => v.toString() != $("#view #" + id)[0].children[0].dataset.tela);
+
                 g$.vfyFuncaoDepois(idFuncao);
             }
             else return $('#' + params).modal("close");
-            $("#view")[0].removeChild($('#' + id)[0]);
+
+            if (!g$.user.sysCli) $("#view")[0].removeChild($('#' + id)[0]);
 
         }
         else {
