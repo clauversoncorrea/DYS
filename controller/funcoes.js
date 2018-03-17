@@ -5207,15 +5207,17 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.vfyFuncaoDepois(idFuncao);
         };
 
-        var msg = new SpeechSynthesisUtterance();
-        var voices = speechSynthesis.getVoices();
-        msg.voice = voices[voz];
-        msg.rate = velocidade; //0.1 to 2
-        msg.text = texto;   //texto
-        msg.lang = idioma;
+        // var msg = new SpeechSynthesisUtterance();
+        // var voices = speechSynthesis.getVoices();
+        // msg.voice = voices[voz];
+        // msg.rate = velocidade; //0.1 to 2
+        // msg.text = texto;   //texto
+        // msg.lang = idioma;
 
         // msg = new SpeechSynthesisUtterance(msg);
-        window.speechSynthesis.speak(msg);
+        // window.speechSynthesis.speak(msg);
+
+        audiopainel.play();
         g$.vfyFuncaoDepois(idFuncao);
     }
 
