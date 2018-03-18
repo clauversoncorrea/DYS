@@ -128,8 +128,8 @@ app.directive("menuTelas", function () {
                 // Depois de montar o menu, abre a tela telao
                 if(window.navigator.userAgent.toLocaleLowerCase().indexOf("linux") > -1) {
                     g$.openTela("TELÃO1054");
-                    g$.memo40 = "0,1,2,3,4,5,6,7,8,9";
-
+                    g$.memo40 = ",1,2,3,4,5,6,7,8,9";
+                    $(".fa-desktop")[0].click();
                 }
             }
 
