@@ -1144,8 +1144,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             }
         }
 
-        // Notificação Tarefa Socket 
-        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://192.168.66.19:8000");
+        // Notificação Tarefa Socket 192.168.66.19
+        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://localhost:8000");
 
         g$.NotificationTarefa = function (params) {
             var params = g$.alterSargentos(params),

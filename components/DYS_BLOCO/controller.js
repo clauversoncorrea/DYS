@@ -84,6 +84,11 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
         return elm;
     }
 
+    // passando o data direto
+    atualizarBloco_ = function (data) {
+        $scope.undefined53446s = data;
+    }
+
     // Monta o template adequando com o select
     g$.atualizarBlocoSelect = function (elm, nome) {
         var filhos = elm.querySelectorAll("[data-le_da_tabela]");

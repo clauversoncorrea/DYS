@@ -1,5 +1,6 @@
 app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     var gerando = 0;
+     g$.filaSenhaaChamar = [];
 
     // Troca todos os sargentos que estão na string 
     g$.alterSargentos = function (params) {
@@ -1337,7 +1338,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     // }
 
     g$.carregaQuery = function (params, isTela, id_elemento, callback) {
-        var banco = $rootScope.user.banco, campo, script, elemento_id, elemento = event.target,
+        var banco = $rootScope.user.banco, campo, script, elemento_id, elemento = (event) ? event.target : "loadTela",
             params = g$.alterSargentos(params),
             query = params[1],
             elms = params[2],
@@ -1360,7 +1361,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             }
             elemento_id = elemento.dataset.id;
         }
-        else if (isTela) {
+        else if (isTela || elemento == "loadTela") {
             if (!id_elemento) {
                 elemento_id = "loadTela"
             }
@@ -5141,20 +5142,58 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         g$.vfyFuncaoDepois(idFuncao);
     }
 
+    // tem um array, enquanto tiver alguem no array, vai ter um setTimeout de 9 segundos (quando terminar de rodar os 9segundos remove o primeiro)
+
+    function chamaSenha(data, teste) {
+        // console.log("oi");
+        if (teste) {
+            // g$.carregaQuery("carregaQuery | SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM »user.banco».fila_chamada f LEFT JOIN »user.banco».local l ON l.id = f.local_id WHERE local_id in (0»memo40») AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT 1 | 53453 ¦ 53451 ¦ 53705 ¦ memo41 ¦ memo42", null, null, function (data) {
+            //     if (data[0] && g$.memo43 != data[0].ordem) {
+            //         g$.memo43 = data[0].ordem;
+            //         g$.falar('falar | ' + g$.memo42 + '¦¦1.2');
+            //         g$.atualizarBloco("atualizarBloco | 53470");
+            //     }
+            // })
+            // g$.carregaQuery('carregaQuery ¦ 841 | SELECT servico_guiche, unidade_id FROM »user.banco».cliente_fornecedor WHERE node_usuario_id = »user.id»| memo21 ¦ memo22', true)
+        }
+    }
+
+    g$.podechamar = true;
+
+    function teste(paramData) {
+        if ($(".popup[data-tela='1054']")[0]) {
+            var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT " + ((g$.filaSenhaaChamar.length) ? g$.filaSenhaaChamar.length -1 : g$.filaSenhaaChamar.length) + ",1");
+            $http.post(URL + "/jsonQuery/", query).success(function (primeiro_bloco) {
+                // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length] = { primeiro_bloco: data.data[0] }
+                var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 order by ordem DESC limit " + g$.filaSenhaaChamar.length + ",3");
+                $http.post(URL + "/jsonQuery/", query).success(function (segundo_bloco) {
+                    // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length - 1].segundo_bloco = data.data;
+                    if (g$.podechamar) {
+                        $("[data-id='53453'")[0].innerHTML = primeiro_bloco.data[0].descricao_chamada;
+                        $("[data-id='53451'")[0].innerHTML = primeiro_bloco.data[0].senha;
+                        $("[data-id='53705'")[0].innerHTML = primeiro_bloco.data[0].local;
+                        atualizarBloco_(segundo_bloco.data)
+                        g$.podechamar = false;
+                        g$.filaSenhaaChamar.splice(0, 1);
+                        g$.falar('falar | ' + g$.memo42 + '¦¦1.2');
+                    }
+                });
+            });
+        }
+    }
+
+    if ($(".popup[data-tela='1054']")[0]) {
+        var chamaRecursivo = setInterval(function () {
+            g$.podechamar = true;
+            if (g$.filaSenhaaChamar.length) teste();
+        }, 7000);
+    }
+
     if (g$.user.projeto == "SAUDE") {
         g$._socket.on('senha', function (data) {
-            // Se o telao estiver aberto
-            if ($(".popup[data-tela='1054']")[0]) {
-                console.log('Recebi chamado');
-                g$.carregaQuery("carregaQuery | SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM »user.banco».fila_chamada f LEFT JOIN »user.banco».local l ON l.id = f.local_id WHERE local_id in (0»memo40») AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT 1 | 53453 ¦ 53451 ¦ 53705 ¦ memo41 ¦ memo42", null, null, function (data) {
-                    if (data[0] && g$.memo43 != data[0].ordem) {
-                        g$.memo43 = data[0].ordem;
-                        g$.falar('falar | ' + g$.memo42 + '¦¦1.2');
-                        g$.atualizarBloco("atualizarBloco | 53470");
-                    }
-                })
-                g$.carregaQuery('carregaQuery ¦ 841 | SELECT servico_guiche, unidade_id FROM »user.banco».cliente_fornecedor WHERE node_usuario_id = »user.id»| memo21 ¦ memo22', true)
-            }
+            g$.filaSenhaaChamar.push("");
+            console.log("cadastrou uma senha");
+            teste(true);
         });
         g$._socket.on('atendimento', function (data) {
             // Se o telao estiver aberto
@@ -5225,7 +5264,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 $("[data-id='53445']").addClass("pisca")
                 tiraPisca = setTimeout(function () {
                     if (contTiraPisca == 2) clearTimeout(tiraPisca);
-                    contTiraPisca++; 
+                    contTiraPisca++;
                     $("[data-id='53445']").removeClass("pisca")
                 }, 1000);
             }, 1500);
