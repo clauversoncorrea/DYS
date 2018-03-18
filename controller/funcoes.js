@@ -5217,6 +5217,20 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         // msg = new SpeechSynthesisUtterance(msg);
         // window.speechSynthesis.speak(msg);
 
+        if ($("#view .popup")[0].id == "1054") {
+            var contColocaPisca = contTiraPisca = 0, colocaPisca, tiraPisca;
+            colocaPisca = setInterval(function () {
+                if (contColocaPisca == 3) clearInterval(colocaPisca);
+                contColocaPisca++;
+                $("[data-id='53445']").addClass("pisca")
+                tiraPisca = setTimeout(function () {
+                    if (contTiraPisca == 2) clearTimeout(tiraPisca);
+                    contTiraPisca++; 
+                    $("[data-id='53445']").removeClass("pisca")
+                }, 1000);
+            }, 1500);
+        }
+
         audiopainel.play();
         g$.vfyFuncaoDepois(idFuncao);
     }

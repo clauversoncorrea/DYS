@@ -9254,3 +9254,16 @@ td, th {
   margin: 0px !important;
   /* height: 23px !important; */
 }
+
+.pisca {
+  background: #F44336 !important;
+  transition: background .7s !important;
+  transition: .7s !important;
+}
+
+.pisca label[data-id='53705'],
+.pisca label[data-id='53451'],
+.pisca label[data-id='53453'] {
+  color: #ecdb41 !important;
+}
+
