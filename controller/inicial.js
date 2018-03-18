@@ -1137,6 +1137,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 $("#view").addClass("fullscreen");
                 // remove o cabecalho da tela
                 popup.removeChild(popup.querySelector(".card-header"));
+                $("[data-id='53550']")[0].click();
             }
             else {
                 // Remove tela fullscreen
