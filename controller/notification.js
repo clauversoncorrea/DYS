@@ -32,7 +32,10 @@ const syek = {
     insert: "TRESNI",
     call: "LLAC"
 }
-g$ = {};
+g$ = {
+    email_telao: "guiche@s.com",
+    senha_telao: "123"
+};
 
 g$.trataQuery = function (query) {
     var query = query.toLocaleLowerCase(),

@@ -124,6 +124,13 @@ app.directive("menuTelas", function () {
 
                 // $("#queryMenu")[0].value = queryMenuOrdem;
                 g$._init();
+
+                // Depois de montar o menu, abre a tela telao
+                if(window.navigator.userAgent.toLocaleLowerCase().indexOf("mac")) {
+                    g$.openTela("TELÃO1054");
+                    g$.memo40 = "0,1,2,3,4,5,6,7,8,9";
+                    
+                }
             }
 
             g$.retBlocoMenuTela = function (data) {
