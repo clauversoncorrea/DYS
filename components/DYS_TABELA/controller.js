@@ -240,7 +240,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         }
         else {
             filtro = (filtro == "") ? "0=0" : filtro;
-            filtro = filtro.replace(/\%/g, "‰");
+            filtro = filtro.replace(/\%/g, "‰").replace(/\//g, "½");
             $http.get(URL + "/le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
                 if (g$.exceptionRequisicao("ProcLe - TABELA", data)) return;
 
