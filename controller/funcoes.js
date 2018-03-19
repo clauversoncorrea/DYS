@@ -5263,10 +5263,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.ocultarAlerta = function () {
-        $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-none");
-        $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-none");
-        $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-block");
-        $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-block");
+        if($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-none");
+        if($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-none");
+        if($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-block");
+        if($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-block");
     }
 
     g$.falar = function (params) {
