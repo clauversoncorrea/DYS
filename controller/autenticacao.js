@@ -260,10 +260,10 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         });
     }
 
-    if (window.navigator.userAgent.toLocaleLowerCase().indexOf("linux") > -1) {
-        $("#email")[0].value = g$.email_telao;
-        $("#senha")[0].value = g$.senha_telao;
-        $scope.autenticacaoDYS();
-    }
+    // if (window.navigator.userAgent.toLocaleLowerCase().indexOf("linux") > -1) {
+    //     $("#email")[0].value = g$.email_telao;
+    //     $("#senha")[0].value = g$.senha_telao;
+    //     $scope.autenticacaoDYS();
+    // }
 
 });
