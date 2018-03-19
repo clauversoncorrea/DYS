@@ -5124,7 +5124,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.socket = function (params) {
-        // socket | tipo
+        // socket | tipo 
 
         var params = g$.alterSargentos(params),
             tipo = params[1],
@@ -5174,7 +5174,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             $("[data-id='53453'")[0].innerHTML = primeiro_bloco.data[0].descricao_chamada;
                             $("[data-id='53451'")[0].innerHTML = primeiro_bloco.data[0].senha;
                             $("[data-id='53705'")[0].innerHTML = primeiro_bloco.data[0].local;
-                            atualizarBloco_(segundo_bloco.data)
+                            atualizarBloco_(segundo_bloco.data, "undefined53446s")
                             g$.podechamar = false;
                             g$.filaSenhaaChamar.splice(0, 1);
                             g$.falar('falar | ' + g$.memo42 + '¦¦1.2');
@@ -5228,6 +5228,18 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         g$.memoAtendimentos = data[0].atendimentos;
                         g$.atualizarTabela("atualizarTabela | 6222");
                     }
+                })
+            }
+            else if ($(".popup[data-tela='1092']")[0]) {
+                var query = "SELECT AGDA.especialidade_id AS e_55685, AGDA.id AS e_55509, AGDA.senha AS e_55541, AGDA.status_id AS e_55519, CLTF.razao AS e_55543, " +
+                 "CONCAT(ESPE.especialidade,COALESCE(CONCAT('-',CLTV.razao),'')) AS e_55545, TIME(FICH.data_hora) AS e_55518 FROM saude.cliente_fornecedor CLI, saude.sala s, " +
+                 "saude.agenda AGDA LEFT JOIN saude.cliente_fornecedor CLTF on CLTF.id = AGDA.cliente_fornecedor_id LEFT JOIN saude.especialidade ESPE on ESPE.id = " +
+                 "AGDA.especialidade_id LEFT JOIN saude.cliente_fornecedor CLTV on CLTV.id = AGDA.medico_id LEFT JOIN saude.fila_chamada FICH on AGDA.cliente_fornecedor_id " +
+                 "= FICH.paciente_id and COALESCE(encaminhado,0) = 0 and local_id = 2 and AGDA.senha = FICH.senha WHERE NOT ISNULL(AGDA.guiche_id) and ISNULL(atendimento_id) " +
+                 "and IF('67'='3',(AGDA.status_id = 7 OR AGDA.status_id = 8), AGDA.status_id < 3) and s.id = CLI.sala_id and AGDA.unidade_id = s.unidade_id and " +
+                 "CLI.node_usuario_id = '" + g$.user.id + "' limit 150;";
+                g$.carregaQuery("carregaQuery | " + query, null, null, function (data) {
+                    g$.atualizarBloco_(data, "colsaude55506s");
                 })
             }
         });

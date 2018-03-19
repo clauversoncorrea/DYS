@@ -85,8 +85,8 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
     }
 
     // passando o data direto
-    atualizarBloco_ = function (data) {
-        $scope.undefined53446s = data;
+    atualizarBloco_ = function (data, nome) {
+        $scope[nome] = data;
     }
 
     // Monta o template adequando com o select
