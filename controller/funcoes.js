@@ -5208,6 +5208,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     }
                 })
             }
+            else if ($(".popup[data-tela='1093']")[0]) {
+                $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-block");
+                $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-block");
+            }
         });
         g$._socket.on('pos-atendimento', function (data) {
             // Se o telao estiver aberto
@@ -5218,6 +5224,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         // g$.atualizarTabela("atualizarTabela | 53812");
                     }
                 })
+            }
+            else if ($(".popup[data-tela='1094']")[0]) {
+                $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-block");
+                $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-block");
             }
         });
         g$._socket.on('pre-atendimento', function (data) {
@@ -5231,19 +5243,30 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 })
             }
             else if ($(".popup[data-tela='1092']")[0]) {
-                var query = "SELECT AGDA.especialidade_id AS e_55685, AGDA.id AS e_55509, AGDA.senha AS e_55541, AGDA.status_id AS e_55519, CLTF.razao AS e_55543, " +
-                 "CONCAT(ESPE.especialidade,COALESCE(CONCAT('-',CLTV.razao),'')) AS e_55545, TIME(FICH.data_hora) AS e_55518 FROM saude.cliente_fornecedor CLI, saude.sala s, " +
-                 "saude.agenda AGDA LEFT JOIN saude.cliente_fornecedor CLTF on CLTF.id = AGDA.cliente_fornecedor_id LEFT JOIN saude.especialidade ESPE on ESPE.id = " +
-                 "AGDA.especialidade_id LEFT JOIN saude.cliente_fornecedor CLTV on CLTV.id = AGDA.medico_id LEFT JOIN saude.fila_chamada FICH on AGDA.cliente_fornecedor_id " +
-                 "= FICH.paciente_id and COALESCE(encaminhado,0) = 0 and local_id = 2 and AGDA.senha = FICH.senha WHERE NOT ISNULL(AGDA.guiche_id) and ISNULL(atendimento_id) " +
-                 "and IF('67'='3',(AGDA.status_id = 7 OR AGDA.status_id = 8), AGDA.status_id < 3) and s.id = CLI.sala_id and AGDA.unidade_id = s.unidade_id and " +
-                 "CLI.node_usuario_id = '" + g$.user.id + "' limit 150;";
-                g$.carregaQuery("carregaQuery | " + query, null, null, function (data) {
-                    g$.atualizarBloco_(data, "colsaude55506s");
-                })
+                $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-none");
+                $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-block");
+                $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-block");
             }
         });
 
+    }
+
+    if ($(".popup[data-tela='1092']")[0] || $(".popup[data-tela='1094']")[0] || $(".popup[data-tela='1093']")[0]) {
+        var contColocaPiscaHeader = contTiraPiscaHeader = 0, colocaPiscaHeader, tiraPiscaHeader;
+        colocaPiscaHeader = setInterval(function () {
+            $("#view .popup .card-header .card-icone .alerta-icone").addClass("pisca");
+            tiraPisca = setTimeout(function () {
+                $("#view .popup .card-header .card-icone .alerta-icone").removeClass("pisca");
+            }, 1000);
+        }, 1500);
+    }
+
+    g$.ocultarAlerta = function () {
+        $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-none");
+        $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-none");
+        $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-block");
+        $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-block");
     }
 
     g$.falar = function (params) {

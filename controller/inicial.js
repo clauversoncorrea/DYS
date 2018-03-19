@@ -1139,14 +1139,31 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 popup.removeChild(popup.querySelector(".card-header"));
                 $("[data-id='53550']")[0].click();
             }
+            else if (nomeTela == "PréAtendimentoMobile1092" || nomeTela == "PósAtendimentoMobile1094" || nomeTela == "AtendimentoMobile1093") {
+                $("#view .popup .card-header .card-icone")[0].appendChild(angular.element("<i class='fa fa-refresh play-none'> </i>")[0]);
+                $("#view .popup .card-header .card-icone")[0].appendChild(angular.element("<div class='pisca alerta-icone play-none'> </div>")[0]);
+                if(nomeTela == "PréAtendimentoMobile1092") {
+                    $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55548"), false);
+                }
+                else if(nomeTela == "PósAtendimentoMobile1094") {
+                    $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55673"), false);
+                }
+                else if(nomeTela == "AtendimentoMobile1093") {
+                    $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55584"), false);
+                }
+            }
             else {
                 // Remove tela fullscreen
                 $("#view").removeClass("fullscreen");
             }
         }
 
+        function clickAtualizar(id) {
+            $("[data-id='" + id + "']")[0].click();
+        }
+
         // Notificação Tarefa Socket 192.168.66.19
-        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://localhost:8000");
+        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://192.168.66.19:8000");
 
         g$.NotificationTarefa = function (params) {
             var params = g$.alterSargentos(params),

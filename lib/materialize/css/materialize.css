@@ -9255,6 +9255,14 @@ td, th {
   /* height: 23px !important; */
 }
 
+.alerta-icone {
+  height: 15px;
+  width: 15px;
+  float: right;
+  border-radius: 15px;
+  background: #222;
+}
+
 .pisca {
   background: #F44336 !important;
   transition: background .7s !important;
@@ -9267,3 +9275,23 @@ td, th {
   color: #ecdb41 !important;
 }
 
+[data-tela='1093'] .card-header .card-icone .fa-close,
+[data-tela='1092'] .card-header .card-icone .fa-close {
+  float: right;
+  left: 10px;
+}
+
+[data-tela='1093'] .card-header .card-icone .alerta-icone,
+[data-tela='1092'] .card-header .card-icone .alerta-icone {
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.popup .card-header .card-icone .fa {
+  float: right;
+}
+
+[data-tela='1094'] .card-header .card-icone .fa-close {
+  float: right;
+  left: 10px;
+}
