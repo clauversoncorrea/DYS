@@ -862,27 +862,27 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                         retorno = "1";
                     }
                     else if (obj.formato == "Telefone DDD") {
-                        if (obj.obrigatorio == "0")
+                        if (!obj.obrigatorio || obj.obrigatorio == "0")
                             campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 14 | 0', false), false);
                         else campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 14 | 1', false), false);
                     }
                     else if (obj.formato == "Telefone") {
-                        if (obj.obrigatorio == "0")
+                        if (!obj.obrigatorio || obj.obrigatorio == "0")
                             campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 9 | 0', false), false);
                         else campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 9 | 1', false), false);
                     }
                     else if (obj.formato == "Cep") {
-                        if (obj.obrigatorio == "0")
+                        if (!obj.obrigatorio || obj.obrigatorio == "0")
                             campos[i].addEventListener("blur", g$.validaCep, false);
                         else campos[i].addEventListener("blur", g$.validaCep, false);
                     }
                     else if (obj.formato == "Celular DDD") {
-                        if (obj.obrigatorio == "0")
+                        if (!obj.obrigatorio || obj.obrigatorio == "0")
                             campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 15 | 0', false), false);
                         else campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 15 | 1', false), false);
                     }
                     else if (obj.formato == "Celular") {
-                        if (obj.obrigatorio == "0")
+                        if (!obj.obrigatorio || obj.obrigatorio == "0")
                             campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 10 | 0', false), false);
                         else campos[i].addEventListener("blur", g$.validaTel.bind(null, 'validaTel | 0 ¦ 10 | 1', false), false);
                     }

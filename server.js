@@ -11,7 +11,7 @@ var mysql = require("mysql"),
     xlsxj = require("xlsx-to-json"),
     xlsj = require("xls-to-json"),
     json2xls = require("json2xls"),
-    ofx = require('ofx'),
+    // ofx = require('ofx'),
     { bradesco } = require('boleto-pdf'),
     Boleto = require('node-boleto').Boleto,
     conexaoNot, intervalConexaoNot;

@@ -543,12 +543,7 @@ setDadosView = function (elm, obj, th, alterCombo) {
             // Se for um link para download
             if (elm.dataset.download == "1") elm.setAttribute("download", true);
 
-            // Se for para abrir no Sistema
-            if (elm.dataset.abrir_no_sistema == "1") {
-                elm.removeAttribute("download");
-                elm.removeAttribute("href");
-            }
-            else elm.setAttribute("target", "_blank");
+            elm.setAttribute("target", "_blank");
         }
 
         if (obj.obrigatorio == "1") elm.setAttribute("required", true);

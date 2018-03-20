@@ -4,13 +4,21 @@ app.controller("configtable", function ($scope, $http, $rootScope) {
 
         $scope.configtables = [];
         var teste = [];
+        var cellsTbody = [];
+        var cell = "";
 
-        var cellsTbody = elm.tBodies[0].rows[0].cells;
-        var cell, vfyData = ["DD_MM_YYYY", "DD-MM-YYYY", "YYYY_MM_DD"];
+        for (var i = 0; i < elm.tBodies[0].rows[0].cells.length; i++) {
+            cell = elm.tBodies[0].rows[0].cells[i];
+            if (cell.dataset.abrir_no_sistema && cell.dataset.abrir_no_sistema == "1") cellsTbody.push(cell);
+        }
+
+        if (!cellsTbody.length) cellsTbody = elm.tBodies[0].rows[0].cells;
+
+        cell = "", vfyData = ["DD_MM_YYYY", "DD-MM-YYYY", "YYYY_MM_DD"];
 
         for (var i = 0; i < cellsTbody.length; i++) {
             cell = cellsTbody[i];
-            if (cell.id == "td") {
+            if (cell.id == "td" && (cell.dataset.le_do_campo && cell.dataset.le_do_campo != "") && (cell.dataset.display != "none")) {
                 teste[teste.length] =
                     {
                         tabela_id: elm.dataset.id,
