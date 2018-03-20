@@ -54,16 +54,30 @@ app.directive("teste", function () {
                 else query = "SELECT " + ((!elm.dataset.comboGravaCampo) ? 'id' : elm.dataset.comboGravaCampo) +
                     "," + campo + " FROM " + ((tabela.indexOf('node.') == -1) ? $rootScope.user.banco + "." : '') + tabela + ((filtro.length) ? " WHERE " : " ") + filtro;
 
-                console.log(g$.alterSargentos(query)[0]);
                 query = g$.alterSargentos(query)[0];
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                var queryCount = g$.trataQuery(query);
+                queryCount.sopmac.push("count(id) count");
 
-                    if (g$.exceptionRequisicao("Combobox", data)) return;
-                    id = elm.dataset.id;
-                    data = (data.data[0] && data.data[0][0]) ? data.data[0] : data.data;
-                    // id do elemento, json, nome do popup, descricao, valor, isTela
-                    _initCombo(id, data, elm.dataset.nome, coluna, value, true);
+                $http.post(URL + "/jsonQuery/", queryCount).success(function (data) {
+
+                    if (g$.exceptionRequisicao("Count Combobox", data)) return;
+
+                    if (data.data[0].count > 100) {
+                        id = elm.dataset.id;
+                        _initCombo(id, data, elm.dataset.nome, coluna, value, true, true, query);
+                    }
+                    else {
+                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+
+                            if (g$.exceptionRequisicao("Combobox", data)) return;
+                            id = elm.dataset.id;
+                            data = (data.data[0] && data.data[0][0]) ? data.data[0] : data.data;
+                            // id do elemento, json, nome do popup, descricao, valor, isTela
+                            _initCombo(id, data, elm.dataset.nome, coluna, value, true);
+
+                        });
+                    }
 
                 });
             }

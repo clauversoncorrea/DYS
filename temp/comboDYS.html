@@ -62,7 +62,20 @@
 
     <div class='card-content'>
 
-        <div class="row no-padding no-margin">
+        <div class="row no-padding no-margin" ng-show="comboGrande">
+            <div class="col m12 l12 s12 no-padding" style="padding: 0px 1.6% 0px 1% !important;margin: 6px 0px;">
+                <input id="search-combogrande" placeholder="Filtrar por.." class="form-control" style="width:50%;">
+                <a id="botao" onclick="g$.buscaComboGrande()" class="waves-effect waves-light btn null ng-scope blue darken-4" style="float:right;margin-right: 10px;">
+                    <i class="fa fa-search"> </i>
+                    Buscar
+                </a>
+                <a id="botao" onclick="g$.limparCombo()" class="waves-effect waves-light btn null ng-scope red darken-4" style="float:right;margin-right: 10px;">
+                    Limpar
+                </a>
+            </div>
+        </div>
+
+        <div class="row no-padding no-margin" ng-show="comboPequeno">
             <div class="col m11 l11 s11 no-padding" style="padding: 0px 1.6% 0px 1% !important;margin: 6px 0px;" ng-show="!showSearch">
                 <input id="search-combo" placeholder="O que você está procurando.." ng-model="idCombo" class="form-control">
             </div>
