@@ -57,7 +57,7 @@ app.directive("teste", function () {
                 query = g$.alterSargentos(query)[0];
 
                 var queryCount = g$.trataQuery(query);
-                queryCount.sopmac.push("count(id) count");
+                queryCount.sopmac.push("count(*) count");
 
                 $http.post(URL + "/jsonQuery/", queryCount).success(function (data) {
 
