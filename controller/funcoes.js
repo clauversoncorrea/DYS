@@ -2179,11 +2179,11 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             $http.get("/").success(function () {
                 $http.get("/").success(function () {
                     $http.get("/").success(function () {
-                        if (tamanho.indexOf("fullscreen") > -1) {
+                        if (tamanho && tamanho.indexOf("fullscreen") > -1) {
                             $("#view #" + tela)[0].classList.add("fullscreen");
                             $("#view #" + tela)[0].parentElement.parentElement.classList.add("fullscreen");
                         }
-                        if (tamanho.trim() == "fullscreen_full") {
+                        if (tamanho && tamanho.trim() == "fullscreen_full") {
                             $("#view #" + tela)[0].querySelector(".card-header").classList.add("play-none");
                         }
                         g$.atualizaFuncoes(tela);
