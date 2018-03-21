@@ -53,7 +53,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 }
                 else if (texto[i].indexOf("_combo_desc") > -1) {
                     campo = $("[data-id='" + texto[i].split("_")[0].trim() + "']")[0]
-                    texto[i] = (campo.querySelector("#selectbox").value == "") ? null : campo.querySelector("#selectbox").value;
+                    texto[i] = (campo && campo.querySelector("#selectbox").value != "") ? campo.querySelector("#selectbox").value : null;
                 }
 
                 else if (texto[i].indexOf("file") > -1) {

@@ -1,19 +1,6 @@
-arefas Douglas Egis - Fabiano vai avaliar dis 08-03
-- Deixar automático a opção Mostrar "100" (Resultados por Página)
-- Incluir gráficos com os valores de manutenção em geral por contrato
-- Ao clicar em PDF ou Imprimir o resultado, apare um campo "cordaLinha" que estaria oculto
-- Mostrar valores exatos nas colunas dos gráficos. Do jeito que está, só aparece quando passa o mouse sobre as linhas dos gráficos. Se ficar assim não mostra na impressão
-- Verificar as informações das planilhas (PDF, EXCEL e impressão),Fazr cabeçario com: título da tela, Nome da empresa etc. 
-- Configurar a máscara de números para App(Celular bloqueia digitação de dinheiro): ao clicar no campo para digitar um valor. O cursor fica no final e não deixa entra a digitação
-- BUG no sistema, clicando "ESC" em um select trava elementos da tela como botão, input e icones
+anotações
 
- - Gerar APP da Saude
- - Alterar todos os links externos do sistema OK
- - Dar uma olhada na impressao do totem
- - Ajudar Claudio com os Templates
- - Finalizar a lista do Fabiano 
+-- quando gerar modal alterar
 
-- Modal de pacientes na tela de atendimento guiche nao esta carregando OK
-- botao de editar na tabela de pacientes, nao carrega os dados OK
-- pesquisa no totem OK
-- O TELÂO falta mais um pouco para ocupar a tela toda OK
+modal 943 - 
+g$.carregaQuery("carregaQuery | SELECT GROUP_CONCAT(DISTINCT CONCAT('(\\\"',a.unidade_id,',',a.especialidade_id,',',a.dia_semana,',\'',a.hora_inicio,'\',\'',a.hora_fim,'\',',a.sala_id,',',a.medico_id),'\\\",',a.unidade_id,',',a.especialidade_id,',',a.dia_semana,',\'',a.hora_inicio,'\',\'',a.hora_fim,'\',',a.sala_id,',',a.medico_id,')'), GROUP_CONCAT(DISTINCT CONCAT(u.nome,' / ',m.razao,' - ',e.especialidade,' / Sala:',sala.numero,' / ',s.dia_da_semana,' / ',a.hora_inicio,' - ',a.hora_fim) SEPARATOR ' <br>') FROM »user.banco».agenda_dow a LEFT JOIN »user.banco».cliente_fornecedor m on m.id = a.medico_id LEFT JOIN »user.banco».especialidade e on e.id = a.especialidade_id LEFT JOIN »user.banco».dia_da_semana s on s.id = a.dia_semana LEFT JOIN »user.banco».sala sala on sala.id = a.sala_id LEFT JOIN »user.banco».unidade_saude u on u.id = a.unidade_id WHERE a.id IN (»memo14») | 44326 ¦ 44296 | '»memo14»' <> ''", true);g$.alteraPropriedade("alteraPropriedade  ¦1706| 44296 ¦ 44326 | valor | »8359_combo_desc» / »44086_combo_desc» - »25330_combo_desc» / SALA:»8373_combo_desc» / »25333_combo_desc» / »8376» - »8377» ¦ (\"»8359»,»25330»,»25333»,'»8376»','»8377»',»8373»,»44086»\",»8359»,»25330»,»25333»,'»8376»','»8377»',»8373»,»44086») | | '»memo14»' = ''", true);$("[data-id=44322]")[0].addEventListener("click", g$.carregaQuery.bind(null, "carregaQuery ¦ 11529 | call »user.banco».gerar_agenda_particular('»44308»-»44305»', \"»44326»\") | memo19 ¦ memo16 | | alert", false), false);$("[data-id=44323]")[0].addEventListener("click", g$.confirm.bind(null, "confirm ¦ ¦ 11549 | Isto APAGARÁ os registros vistos na tabela abaixo. Prosseguir?", false), false);$("[data-id=44302]")[0].addEventListener("click", g$.carregaQuery.bind(null, "carregaQuery ¦ 11529 | call »user.banco».gerar_agenda_particular('»44308»-»44305»', \"»44326»\") | memo19 ¦ memo16 | | alert", false), false);$("[data-id=44333]")[0].addEventListener("click", g$.alteraPropriedade.bind(null, "alteraPropriedade | 44302 | disabled | false ", false), false);$("[data-id=44333]")[0].addEventListener("click", g$.atualizarTabela.bind(null, "atualizarTabela | 44311 | | | '»memo16»' <> '1'", false), false);$("[data-id=44333]")[0].addEventListener("click", g$.alteraPropriedade.bind(null, "alteraPropriedade | 44309 | display | none |'»memo16»' <> '1'", false), false);
