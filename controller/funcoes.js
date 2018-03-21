@@ -2175,6 +2175,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             template = angular.element($.templateModals[0][tela])[0];
             template = $compile(template)($scope)[0];
             $("#view")[0].appendChild(template);
+            g$.isModal = 1;
             $http.get("/").success(function () {
                 $http.get("/").success(function () {
                     $http.get("/").success(function () {

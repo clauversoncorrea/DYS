@@ -1107,6 +1107,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             // se tiver alguma tela aberta, fecha
             if ($("#view .popup")[0]) $("#view")[0].removeChild($("#view .popup")[0]);
 
+            g$.isModal = 0;
+
             var nm_arquivo = "view/" + nomeTela + ".html", popup;
 
             //  Verifica a tela no banco do cliente 
