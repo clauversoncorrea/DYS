@@ -1,0 +1,1 @@
+app.controller('OrigensReceitaExterna1096', function ($scope){ g$.configTela('Origens Receita Externa');g$.atualizarTabela("atualizarTabela | 55839", true);});

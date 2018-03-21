@@ -1,0 +1,1 @@
+app.directive('modalorigensreceitaexterna1096', function () {return {restrict: 'E',templateUrl: '../modals/modalOrigensReceitaExterna1096.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Origens Receita Externa');}}});
