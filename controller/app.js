@@ -993,8 +993,8 @@ g$.formataPeso = function () {
     v = v.replace(/\D/, "");
     v = v.replace(/^[0]+/, "");
     v = v.substring(0, 6);
-    if (v.length <= 3 || !integer) {
-        if (v.length === 1) v = '0.00' + v;
+    if (v.length <= 2 || !integer) {
+        // if (v.length === 1) v = '0.00' + v;
         if (v.length === 2) v = '0.0' + v;
         if (v.length === 3) v = '0.' + v;
     } else {
