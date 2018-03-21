@@ -995,10 +995,10 @@ g$.formataPeso = function () {
     v = v.substring(0, 6);
     if (v.length <= 2 || !integer) {
         // if (v.length === 1) v = '0.00' + v;
-        if (v.length === 2) v = '0.0' + v;
-        if (v.length === 3) v = '0.' + v;
+        if (v.length === 1) v = '0.0' + v;
+        if (v.length === 2) v = '0.' + v;
     } else {
-        v = v.replace(/^(\d{1,})(\d{3})$/, "$1.$2");
+        v = v.replace(/^(\d{1,})(\d{2})$/, "$1.$2");
     }
 
     this.value = v;
