@@ -42,7 +42,7 @@ app.directive("comboTabela", function () {
 
                 if (g$.exceptionRequisicao("Count Combobox", data)) return;
 
-                if (data.data[0] && data.data[0].count > 100) {
+                if (data.data[0] && data.data[0].count > 2000) {
                     id = elmTabela.dataset.nome + "_elemento | " + elm.parentElement.dataset.id;
                     _initCombo(id, data, elm.dataset.nome, $scope.coluna, $scope.value, false, true, query);
                 }

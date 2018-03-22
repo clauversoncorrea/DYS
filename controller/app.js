@@ -967,7 +967,7 @@ g$.formato = [
         "R$ Money": "#.##0,00",
         "Peso": "#.000",
         "Altura": "#.000",
-        "PA": "00mmHg",
+        "PA": "000mmHg",
         "FC": "000bpm",
         "Glicemia": "000mg/dl",
         "Temperatura": "00°C"
@@ -1129,13 +1129,16 @@ g$.controllerToview = function (obj, user) {
                 }
             }
             else {
-                if (elm.dataset.formato && elm.dataset.formato != "" && elm.dataset.formato != "null") {
-                    if (elm.dataset.formato == "Money" || elm.dataset.formato == "R$ Money") {
-                        if (obj[keys[i]] && obj[keys[i]].toString() != "") elm.value = g$.setValorFormatado(obj[keys[i]]);
+                if (elm.dataset.formato == "Peso") elm.value = (!obj[keys[i]]) ? "" : obj[keys[i]];
+                else {
+                    if (elm.dataset.formato && elm.dataset.formato != "" && elm.dataset.formato != "null") {
+                        if (elm.dataset.formato == "Money" || elm.dataset.formato == "R$ Money") {
+                            if (obj[keys[i]] && obj[keys[i]].toString() != "") elm.value = g$.setValorFormatado(obj[keys[i]]);
+                        }
+                        else elm.value = (!obj[keys[i]]) ? "" : $(elm).masked(obj[keys[i]]);
                     }
-                    else elm.value = (!obj[keys[i]]) ? "" : $(elm).masked(obj[keys[i]]);
+                    else elm.value = (obj[keys[i]] == null || obj[keys[i]] == undefined) ? "" : obj[keys[i]];
                 }
-                else elm.value = (obj[keys[i]] == null || obj[keys[i]] == undefined) ? "" : obj[keys[i]];
             }
         }
     }
