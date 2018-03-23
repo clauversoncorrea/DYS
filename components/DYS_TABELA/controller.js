@@ -244,7 +244,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             $http.get(URL + "/le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
                 if (g$.exceptionRequisicao("ProcLe - TABELA", data)) return;
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {
+                $http.post(URL + "/jsonQuery/", g$.trataQuery(g$.alterSargentos(data.data[0][0].consulta)[0])).success(function (data) {
 
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Query - Tabela", data)) return;

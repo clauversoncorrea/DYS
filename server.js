@@ -14,7 +14,8 @@ var mysql = require("mysql"),
     // ofx = require('ofx'),
     { bradesco } = require('boleto-pdf'),
     Boleto = require('node-boleto').Boleto,
-    conexaoNot, intervalConexaoNot;
+    conexaoNot, intervalConexaoNot, podeChamar = true,
+    filaTelao = [];
 
 const multer = require('multer')
 const { ftp } = require('./src/config/ftp')
@@ -300,8 +301,6 @@ app.get("/proc/:nome", function (req, res) {
     var nome = req.params.nome,
         query = 'call ' + nome;
 
-    console.log(query);
-
     query = query.replace(/\^/g, "%");
     query = query.replace(/\½/g, "/");
     query = query.replace(/\‰/g, "%");
@@ -392,7 +391,6 @@ app.get("/le/:consulta/:banco/:filtro/:le3", function (req, res) {
         query;
 
     query = 'call node.' + le + '("' + consulta + '","' + banco + '", "' + filtro + '")';
-    console.log(query);
     query = query.replace(/\½/g, "/");
     query = query.replace(/\‰/g, "%");
 
@@ -586,7 +584,6 @@ function montaQuery(post) {
                 campos += Object.keys(post.sopmac[i]) + "=" + post.sopmac[i][Object.keys(post.sopmac[i])] + key;
             }
             else {
-                console.log(JSON.stringify(post.sopmac[i]));
                 campos += Object.keys(post.sopmac[i]) + "=" + post.sopmac[i][Object.keys(post.sopmac[i])].oicini + montaQuery(post.sopmac[i][Object.keys(post.sopmac[i])].sub) + post.sopmac[i][Object.keys(post.sopmac[i])].mif + key;
             }
         }
@@ -624,12 +621,10 @@ function montaQuery(post) {
     }
     else if (tipo == "INSERT") {
         campo2 = (typeof (post.sopmac[1]) == "object") ? post.sopmac[1].oicini + montaQuery(post.sopmac[1].sub) + post.sopmac[1].mif : post.sopmac[1];
-        console.log('INSERT' - campo2);
         query = "INSERT INTO " + post.morf + " " + post.sopmac[0] + " " + campo2;
     } else if (tipo == "INSERTG") {
         campo2 = (typeof (post.sopmac[1]) == "object") ? post.sopmac[1].oicini + montaQuery(post.sopmac[1].sub) + post.sopmac[1].mif : post.sopmac[1];
         query = "INSERT IGNORE INTO " + post.morf + " " + post.sopmac[0] + " " + campo2;
-        console.log('INSERT' - campo2);
     }
     return query;
 }
@@ -1014,14 +1009,47 @@ var emitir = function (req, res, next) {
 
 app.use(emitir);
 
+app.delete('/filaTelao/', function (req, res) {
+    if (filaTelao[0] && filaTelao[0].chamou) {
+        console.log("apagou")
+        filaTelao.splice(0, 1);
+    }
+    res.send("");
+});
+
+app.get('/filaTelao/', function (req, res) {
+    res.send(filaTelao);
+});
+
+app.get('/podeChamar/:operacao', function (req, res) {
+    var operacao = req.params.operacao;
+    if (operacao == 1) {
+        filaTelao[0].chamou = true;
+        podeChamar = false;
+    }
+    else podeChamar = true;
+    res.send("");
+});
+
+// io.on('end', () => {
+//     console.log('desconectou');
+// });
+
 io.on('connection', function (socket) {
     console.log('Usuario conectado');
 
     // Chamar senha system da saude
     socket.on('chamaSenha', function (data) {
-        console.log('fui chamado')
-        // we tell the client to execute 'new message'
+        // filaTelao.push({ data: data, chamou: false });
+        // console.log("Cadastrou uma senha");
+        // // we tell the client to execute 'new message'
+        // if (filaTelao.length == 1 && podeChamar) {
+        //     console.log("chamou - a - " + filaTelao[0].data);
+        //     filaTelao[0].chamou = true;
+        // console.log(data);
         socket.broadcast.emit('senha', data);
+        // podeChamar = false;
+        // }
     });
 
     // Novo Atendimento system da saude

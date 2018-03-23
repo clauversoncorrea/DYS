@@ -5168,25 +5168,25 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     g$.podechamar = true;
 
-    function teste(paramData) {
+    function teste(id) {
         if ($(".popup[data-tela='1054']")[0]) {
-            var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT " + ((g$.filaSenhaaChamar.length) ? g$.filaSenhaaChamar.length - 1 : g$.filaSenhaaChamar.length) + ",1");
+            var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND f.id = " + id + " AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT 1");
             $http.post(URL + "/jsonQuery/", query).success(function (primeiro_bloco) {
                 if (primeiro_bloco.data[0] && g$.memo43 != primeiro_bloco.data[0].ordem) {
                     g$.memo43 = primeiro_bloco.data[0].ordem;
                     // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length] = { primeiro_bloco: data.data[0] }
-                    var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 order by ordem DESC limit " + g$.filaSenhaaChamar.length + ",3");
-                    $http.post(URL + "/jsonQuery/", query).success(function (segundo_bloco) {
-                        // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length - 1].segundo_bloco = data.data;
-                        if (g$.podechamar) {
+                    $http.post(URL + "/jsonQuery/", g$.trataQuery("SELECT ordem FROM saude.fila_chamada where id = " + id)).success(function (data) {
+                        var ordem = data.data[0].ordem;
+                        var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 AND ordem < " + ordem + " order by ordem desc limit 3;");
+                        $http.post(URL + "/jsonQuery/", query).success(function (segundo_bloco) {
+                            // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length - 1].segundo_bloco = data.data;
                             $("[data-id='53453'")[0].innerHTML = primeiro_bloco.data[0].descricao_chamada;
                             $("[data-id='53451'")[0].innerHTML = primeiro_bloco.data[0].senha;
                             $("[data-id='53705'")[0].innerHTML = primeiro_bloco.data[0].local;
                             atualizarBloco_(segundo_bloco.data, "undefined53446s")
                             g$.podechamar = false;
-                            g$.filaSenhaaChamar.splice(0, 1);
                             g$.falar('falar | ' + g$.memo42 + '¦¦1.2');
-                        }
+                        });
                     });
                 }
             });
@@ -5195,17 +5195,27 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     if ($(".popup[data-tela='1054']")[0]) {
         var chamaRecursivo = setInterval(function () {
-            g$.podechamar = true;
-            if (g$.filaSenhaaChamar.length) teste();
+            if (g$.filaSenhaaChamar[0] && g$.filaSenhaaChamar[0].chamou) {
+                g$.filaSenhaaChamar.splice(0, 1);
+            }
+
+            // Se tiver alguem na fila chama
+            if (g$.filaSenhaaChamar.length && g$.podeChamar) {
+                teste(g$.filaSenhaaChamar[0].data);
+                g$.filaSenhaaChamar[0].chamou = true;
+                g$.podeChamar = false;
+            }
+            else g$.podeChamar = true;
         }, 7000);
     }
 
     if (g$.user.projeto == "SAUDE") {
         g$._socket.on('senha', function (data) {
-            g$.filaSenhaaChamar.push("");
+            g$.filaSenhaaChamar.push({ data: data, chamou: false });
             console.log("cadastrou uma senha");
-            teste(true);
+            teste(g$.filaSenhaaChamar[0].data);
         });
+
         g$._socket.on('atendimento', function (data) {
             // Se o telao estiver aberto
             if ($(".popup[data-tela='230']")[0] && $("[data-id='5664'] a")[0].classList.contains("active")) {
@@ -5271,10 +5281,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.ocultarAlerta = function () {
-        if($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-none");
-        if($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-none");
-        if($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-block");
-        if($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-block");
+        if ($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").addClass("play-none");
+        if ($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").addClass("play-none");
+        if ($("#view .popup .card-header .card-icone .fa-refresh")[0]) $("#view .popup .card-header .card-icone .fa-refresh").removeClass("play-block");
+        if ($("#view .popup .card-header .card-icone .alerta-icone")[0]) $("#view .popup .card-header .card-icone .alerta-icone").removeClass("play-block");
     }
 
     g$.falar = function (params) {
