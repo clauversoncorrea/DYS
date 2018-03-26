@@ -19,7 +19,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         var email = $("#email")[0],
             senha = $("#senha")[0],
             dir,
-            query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas,0) nao_saas  FROM node.usuario u, projeto p WHERE u.projeto_id = p.id AND u.email = '" + email.value + "' AND u.senha = '" + senha.value + "'";
+            query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas,0) nao_saas  FROM " + banco_node + ".usuario u, projeto p WHERE u.projeto_id = p.id AND u.email = '" + email.value + "' AND u.senha = '" + senha.value + "'";
         $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 $scope.user = data.data[0];
@@ -46,7 +46,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             senha = $("#senha")[0],
             dir,
             query = "SELECT * FROM saude.cliente_fornecedor cf LEFT JOIN saude.cns c ON c.node_usuario_id = cf.node_usuario_id WHERE (c.cns = '" + email.value + "' OR cf.cpf = '" + email.value + "');",
-            query_existy = "SELECT c.cns, coalesce(cf.valido, 0) valido, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas, u .* FROM node.usuario u LEFT JOIN node.projeto p ON p.id = u.projeto_id LEFT JOIN  saude.cliente_fornecedor cf ON cf.node_usuario_id = u.id LEFT JOIN saude.cns c ON c.node_usuario_id = u.id WHERE (c.cns = '" + email.value + "' OR cf.cpf = '" + email.value + "') AND COALESCE(u.senha,'" + senha.value + "') = '" + senha.value + "'";
+            query_existy = "SELECT c.cns, coalesce(cf.valido, 0) valido, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas, u .* FROM " + banco_node + ".usuario u LEFT JOIN " + banco_node + ".projeto p ON p.id = u.projeto_id LEFT JOIN  saude.cliente_fornecedor cf ON cf.node_usuario_id = u.id LEFT JOIN saude.cns c ON c.node_usuario_id = u.id WHERE (c.cns = '" + email.value + "' OR cf.cpf = '" + email.value + "') AND COALESCE(u.senha,'" + senha.value + "') = '" + senha.value + "'";
 
         if (email.value.trim() == "") {
             if ($("#toast-container")[0] && $("#toast-container")[0].children.length) return;
@@ -99,7 +99,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         var email = $("#email")[0],
             senha = $("#senha")[0],
             dir,
-            query = "SELECT * FROM node.usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'",
+            query = "SELECT * FROM " + banco_node + ".usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'",
             queryFornecedor;
         $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
@@ -109,7 +109,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                 queryFornecedor = "SELECT USUA.id, USUA.nome, USUA.ip, USUA.logado, USUA.id_one, USUA.email, USUA.banco, USUA.foto, USUA.id_face, USUA.senha, USUA.projeto_id, USUA.customiza, PERF.intervalo, PERF.modal," +
                     "USUA.id_one, USUA.espanhol, USUA.bloqueado FROM " + $scope.user.banco + ".cliente_fornecedor CLTF LEFT JOIN " + $scope.user.banco + ".perfil PERF ON PERF.id = CLTF.perfil_id " +
-                    "LEFT JOIN node.usuario USUA ON USUA.id = CLTF.node_usuario_id WHERE CLTF.node_usuario_id = USUA.id and CLTF.node_usuario_id = '" + $scope.user.id + "'";
+                    "LEFT JOIN " + banco_node + ".usuario USUA ON USUA.id = CLTF.node_usuario_id WHERE CLTF.node_usuario_id = USUA.id and CLTF.node_usuario_id = '" + $scope.user.id + "'";
                 // Pega o IP da maquina
                 $.ajax({
                     url: "http://jsonip.com/",
@@ -146,8 +146,8 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             senha = $("#senhaSaude")[0],
             confirmarSenha = $("#confirmarSenha")[0],
             query = "select cf.node_usuario_id from saude.cliente_fornecedor cf LEFT JOIN saude.cns c ON cf.id = c.cliente_fornecedor_id where c.cns = '" + cns.value + "' OR cf.cpf = '" + cns.value + "';",
-            queryUpdate = "update node.usuario SET senha = '" + senha.value + "' WHERE id = ",
-            query_existy = "SELECT c.cns, coalesce(cf.valido, 0) valido, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas, u .* FROM node.usuario u LEFT JOIN node.projeto p ON p.id = u.projeto_id LEFT JOIN  saude.cliente_fornecedor cf ON cf.node_usuario_id = u.id LEFT JOIN saude.cns c ON c.node_usuario_id = u.id WHERE (c.cns = '" + cns.value + "' OR cf.cpf = '" + cns.value + "') AND COALESCE(u.senha,'" + senha.value + "') = '" + senha.value + "'";
+            queryUpdate = "update " + banco_node + ".usuario SET senha = '" + senha.value + "' WHERE id = ",
+            query_existy = "SELECT c.cns, coalesce(cf.valido, 0) valido, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas, u .* FROM " + banco_node + ".usuario u LEFT JOIN " + banco_node + ".projeto p ON p.id = u.projeto_id LEFT JOIN  saude.cliente_fornecedor cf ON cf.node_usuario_id = u.id LEFT JOIN saude.cns c ON c.node_usuario_id = u.id WHERE (c.cns = '" + cns.value + "' OR cf.cpf = '" + cns.value + "') AND COALESCE(u.senha,'" + senha.value + "') = '" + senha.value + "'";
 
         if (senha.value.trim() == confirmarSenha.value.trim()) {
             $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
@@ -182,7 +182,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             query = 'INSERT INTO saude.cliente_fornecedor (carterinha,razao,perfil_id,node_usuario_id,usuario,cliente,email,cbrCep,cbrEndereco,cbrBairro,cbrCidade,cbrUf) values ("' + getVal("cns")
                 + '","' + getVal("nome") + '","99","val_node_usuario_id","1","1","' + getVal("login") + '","' + getVal("cep") + '","' + getVal("endereco")
                 + '","' + getVal("bairro") + '","' + getVal("cidade") + '","' + getVal("estado") + '")',
-            query_node_usuario = "CALL node._old_insere_altera_usuario('" + getVal("nome") + "', '" + getVal("login") + "', '" + getVal("senha") + "', 'saude', '')",
+            query_node_usuario = "CALL " + banco_node + "._old_insere_altera_usuario('" + getVal("nome") + "', '" + getVal("login") + "', '" + getVal("senha") + "', 'saude', '')",
             query_cliente_fornecedor = "SELECT id FROM saude.cliente_fornecedor WHERE node_usuario_id = ",
             query_cns = "INSERT INTO saude.cns (cns, cliente_fornecedor_id, node_usuario_id) VALUES ('" + getVal("cns") + "', 'val_cliente_fornecedor_id', 'val_usuario_id')";
 
@@ -246,14 +246,14 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         objCliente.razao = objUsuario.nome;
         objCliente.email = objUsuario.email;
         objCliente.adm = "1";
-        $http.post(URL + '/post/node.usuario/', objUsuario).success(function (data) {
+        $http.post(URL + '/post/" + banco_node + ".usuario/', objUsuario).success(function (data) {
             data = data.data;
             objCliente.node_usuario_id = data.insertId;
             $http.post(URL + '/post/' + camposCliente_Fornecedor[0].dataset.banco + '.' + camposCliente_Fornecedor[0].dataset.tabela + '/', objCliente).success(function (data) {
                 data = data.data;
                 if (!data.err) {
                     Materialize.toast("Cadastrado com Sucesso.", 5000, 'green darken-1');
-                    var query = "SELECT * FROM node.usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'";
+                    var query = "SELECT * FROM " + banco_node + ".usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'";
                     $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (data.data.length) {
                             window.location = "../inicial.html?auth=DYS&nome=" + data.data[0].nome + "&banco=" + data.data[0].banco + "&foto=" + data.data[0].foto + "&email=" + data.data[0].email;

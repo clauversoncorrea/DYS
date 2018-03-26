@@ -43,8 +43,6 @@ g$ = {
 
 g$.trataQuery = function (query) {
     var query = query.toLocaleLowerCase(),
-        query = query.replace(/node\./g, " " + banco_node + "."),
-        query = query.replace(/saude\./g, " " + banco_saude + "."),
         tipo, sopmac, morf, ortilf, arrmorf = [], arrfiltro = [], arrsopmac = [];
     key = (query.indexOf(" where ") > -1) ? " where " : (query.indexOf(" group by ") > -1) ? " group by " : (query.indexOf(" order by ") > -1) ? " order by " : (query.indexOf(" limit ") > -1) ? " limit " : "";
     ortlif = (key.trim() == "") ? "" : trataFiltro(query.substring((key.indexOf(" where ") > -1) ? query.indexOf(key) + 7 : query.indexOf(key), query.length));
