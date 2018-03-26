@@ -36,7 +36,7 @@ const upload = multer({ storage })
 const nodemailer = require('nodemailer');
 
 var port = process.env.PORT || 8000;
-var ambiente = process.env.AMBIENTE || "./";
+var ambiente = process.env.AMBIENTE || "";
 
 var connection = mysql.createPool({
     host: conexao.get('auth').host,

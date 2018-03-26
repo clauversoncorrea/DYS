@@ -26,7 +26,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 if ($scope.user.bloqueado == 1) return Materialize.toast("Usuário Bloqueado, entrar em contato!", 4000, 'red darken-1');
                 dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                 $scope.user.sysCli = true;
-                window.location = "/inicial.html?";
+                window.location = window.location.href + "inicial.html?";
                 $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
                 localStorage.user = JSON.stringify($scope.user);
             }
@@ -64,7 +64,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                             dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                             $scope.user = data.data[0];
                             $scope.user.sysCli = true;
-                            window.location = "/inicial.html?";
+                            window.location = window.location.href + "inicial.html?";
                             $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
                             localStorage.user = JSON.stringify($scope.user);
                         }
@@ -163,7 +163,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                         dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                         $scope.user = data.data[0];
                         $scope.user.sysCli = true;
-                        window.location = "/inicial.html?";
+                        window.location = window.location.href + "inicial.html?";
                         $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
                         localStorage.user = JSON.stringify($scope.user);
                     });
