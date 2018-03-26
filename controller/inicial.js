@@ -1112,14 +1112,14 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             var nm_arquivo = "view/" + nomeTela + ".html", popup;
 
             //  Verifica a tela no banco do cliente 
-            $http.post(URL + "/leArquivo/", { arquivo: $rootScope.user.banco.toUpperCase() + "/" + nm_arquivo }).success(function (data) {
+            $http.post(URL + "/leArquivo/", { arquivo: "saude/" + nm_arquivo }).success(function (data) {
                 if (data == "") {
                     // Se nao tiver, pega da raiz
                     $http.post(URL + "/leArquivo/", { arquivo: nm_arquivo }).success(function (data) {
                         criaPopup(data, nomeTela);
                     });
                 }
-                else criaPopup(data, $rootScope.user.banco + nomeTela);
+                else criaPopup(data, "saude" + nomeTela);
             });
         }
 
