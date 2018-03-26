@@ -1,0 +1,8 @@
+{
+    "auth" : {
+        "host": "127.0.0.1",
+        "user": "root",
+        "password": "smB@Joh6",
+        "database": "node_homologacao"
+    }
+}

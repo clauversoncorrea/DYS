@@ -1,7 +1,8 @@
 var mysql = require("mysql"),
     express = require('express'),
     bodyParser = require('body-parser'),
-    conexao = require('./config/conexao'),
+    // conexao = require('./config/conexao'),
+    conexao = require('config'),
     app = express(),
     request = require('request'),
     fs = require('fs'),
@@ -37,10 +38,10 @@ const nodemailer = require('nodemailer');
 var port = process.env.port || 8000;
 
 var connection = mysql.createPool({
-    host: conexao.auth.host,
-    user: conexao.auth.user,
-    password: conexao.auth.password,
-    database: conexao.auth.database
+    host: conexao.get('auth').host,
+    user: conexao.get('auth').user,
+    password: conexao.get('auth').password,
+    database: conexao.get('auth').database
 });
 
 connection.on('error', function (err) {
