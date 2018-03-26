@@ -259,8 +259,8 @@ app.post("/leArquivo/", jsonParser, function (req, res) {
     var post = req.body,
         arquivo = post.arquivo;
 
-    fs.readFile(__dirname + "/" + arquivo, function (err, data)  {
-        res.send(data);
+    fs.readFile(__dirname + "/" + arquivo, function (err, data) {
+        res.send({ data: data, arquivo: __dirname + "/" + arquivo });
     });
 });
 
