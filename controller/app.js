@@ -1,4 +1,7 @@
 var URL = "";
+var ambiente = (location.href.indexOf("treinamento") > -1 ? "_treinamento" : (location.href.indexOf("homologacao") > -1) ? "_homologacao" : "");
+var banco_node = "node" + ambiente;
+var banco_saude = "saude" + ambiente;
 // var URL = "http://dys.net.br";
 
 const KEYPAYGOL = "gXdeOtns6R1Iex0qQ77hq8O7fRlKOcTs%2bDE5yqJkpWjggbXzfMIKfgR6kOH1L6hT1vQ193YiLer15y04yPGACvFqep2Ns2brBkjW%2bV8flwE%3d";
@@ -300,9 +303,10 @@ g$.tiraVirgulaEntreAspas = function (query) {
 }
 
 g$.trataQuery = function (query, semFiltro) {
-
-    var query = g$.tiraVirgulaEntreAspas(g$.keyWords(query).replace(/\%/g, "‰")), queryTemp,
-        tipo, sopmac, morf, morf_posicao, ortlif, arrmorf = [], arrfiltro = [], arrsopmac = [];
+    
+    var query = query.replace(/node./g, banco_node + ".");
+    query = g$.tiraVirgulaEntreAspas(g$.keyWords(query).replace(/\%/g, "‰"))
+    var queryTemp, tipo, sopmac, morf, morf_posicao, ortlif, arrmorf = [], arrfiltro = [], arrsopmac = [];
 
     if (!semFiltro && JSON.parse(localStorage.user).nao_saas == 1) { semFiltro = 1 }
 

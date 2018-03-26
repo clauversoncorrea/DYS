@@ -27,7 +27,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                 $scope.user.sysCli = true;
                 window.location = window.location.href + "inicial.html?";
-                $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
+                $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
                 localStorage.user = JSON.stringify($scope.user);
             }
             else {
@@ -65,7 +65,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                             $scope.user = data.data[0];
                             $scope.user.sysCli = true;
                             window.location = window.location.href + "inicial.html?";
-                            $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
+                            $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
                             localStorage.user = JSON.stringify($scope.user);
                         }
                         else {
@@ -164,7 +164,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                         $scope.user = data.data[0];
                         $scope.user.sysCli = true;
                         window.location = window.location.href + "inicial.html?";
-                        $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: $scope.user.banco, nao_saas: $scope.user.nao_saas };
+                        $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
                         localStorage.user = JSON.stringify($scope.user);
                     });
                 });
