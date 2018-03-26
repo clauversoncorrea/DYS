@@ -56,6 +56,8 @@ var jsonParser = bodyParser.json()
 
 app.use(express.static(__dirname + "/" + ambiente));
 
+console.log(__dirname + "/" + ambiente);
+
 // Add headers
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
