@@ -52,8 +52,9 @@ connection.on('error', function (err) {
 
 // create application/json parser
 var jsonParser = bodyParser.json()
+var ambiente = (port == "8010") ? "homologacao" : (port == "8020") ? "treinamento" : "";
 
-app.use(express.static('./'));
+app.use(express.static('./' + ambiente));
 
 // Add headers
 app.use(function (req, res, next) {
