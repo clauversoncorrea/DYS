@@ -256,10 +256,13 @@ app.post("/geraArquivoPDF/", jsonParser, function (req, res) {
 });
 
 app.post("/leArquivo/", jsonParser, function (req, res) {
+    console.log("entrou no le arquivo")
+    
     var post = req.body,
         arquivo = post.arquivo;
 
     fs.readFile(__dirname + "/" + arquivo, function (err, data) {
+        console.log("leu arquivo")
         console.log(__dirname + "/" + arquivo);
         res.send({ data: data, arquivo: __dirname + "/" + arquivo });
     });
