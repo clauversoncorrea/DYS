@@ -36,7 +36,6 @@ const upload = multer({ storage })
 const nodemailer = require('nodemailer');
 
 var port = process.env.PORT || 8000;
-var ambiente = process.env.AMBIENTE || "";
 
 var connection = mysql.createPool({
     host: conexao.get('auth').host,
@@ -54,9 +53,9 @@ connection.on('error', function (err) {
 // create application/json parser
 var jsonParser = bodyParser.json()
 
-app.use(express.static(__dirname + "/" + ambiente));
+app.use(express.static(__dirname));
 
-console.log(__dirname + "/" + ambiente);
+console.log(__dirname);
 
 // Add headers
 app.use(function (req, res, next) {
