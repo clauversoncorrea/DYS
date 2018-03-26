@@ -7,6 +7,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "boleto-pdf": "^0.2.2",
+    "config": "^1.30.0",
     "connect-multiparty": "^2.0.0",
     "cors": "^2.8.4",
     "del": "^3.0.0",
