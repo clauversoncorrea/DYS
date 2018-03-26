@@ -19,7 +19,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         var email = $("#email")[0],
             senha = $("#senha")[0],
             dir,
-            query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas,0) nao_saas  FROM usuario u, projeto p WHERE u.projeto_id = p.id AND u.email = '" + email.value + "' AND u.senha = '" + senha.value + "'";
+            query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas,0) nao_saas  FROM node.usuario u, projeto p WHERE u.projeto_id = p.id AND u.email = '" + email.value + "' AND u.senha = '" + senha.value + "'";
         $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 $scope.user = data.data[0];
@@ -97,7 +97,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         var email = $("#email")[0],
             senha = $("#senha")[0],
             dir,
-            query = "SELECT * FROM usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'",
+            query = "SELECT * FROM node.usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'",
             queryFornecedor;
         $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
@@ -249,7 +249,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 data = data.data;
                 if (!data.err) {
                     Materialize.toast("Cadastrado com Sucesso.", 5000, 'green darken-1');
-                    var query = "SELECT * FROM usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'";
+                    var query = "SELECT * FROM node.usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'";
                     $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (data.data.length) {
                             window.location = "../inicial.html?auth=DYS&nome=" + data.data[0].nome + "&banco=" + data.data[0].banco + "&foto=" + data.data[0].foto + "&email=" + data.data[0].email;

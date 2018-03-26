@@ -303,9 +303,10 @@ g$.tiraVirgulaEntreAspas = function (query) {
 }
 
 g$.trataQuery = function (query, semFiltro) {
-    
-    var query = query.replace(/node./g, banco_node + ".");
-    query = g$.tiraVirgulaEntreAspas(g$.keyWords(query).replace(/\%/g, "‰"))
+
+    var query = query.replace(/from node./g, "from " + banco_node + "."),
+        query = query.replace(/from saude./g, "from " + banco_saude + "."),
+        query = g$.tiraVirgulaEntreAspas(g$.keyWords(query).replace(/\%/g, "‰"))
     var queryTemp, tipo, sopmac, morf, morf_posicao, ortlif, arrmorf = [], arrfiltro = [], arrsopmac = [];
 
     if (!semFiltro && JSON.parse(localStorage.user).nao_saas == 1) { semFiltro = 1 }
