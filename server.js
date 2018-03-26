@@ -35,7 +35,7 @@ const upload = multer({ storage })
 
 const nodemailer = require('nodemailer');
 
-var port = process.env.port || 8000;
+var port = process.env.PORT || 8000;
 
 var connection = mysql.createPool({
     host: conexao.get('auth').host,
@@ -993,7 +993,7 @@ app.get('/', function (req, res) {
 });
 
 var server = app.listen(port, function () {
-    console.log("Servidor rodando na porta 8000");
+    console.log("Servidor rodando na porta " + port);
 });
 
 var io = socket(server, { log: false, origins: '*:*' });
