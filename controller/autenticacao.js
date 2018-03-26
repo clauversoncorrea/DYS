@@ -26,6 +26,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 if ($scope.user.bloqueado == 1) return Materialize.toast("Usuário Bloqueado, entrar em contato!", 4000, 'red darken-1');
                 dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                 $scope.user.sysCli = true;
+                $scope.user.banco = banco_saude;
                 window.location = window.location.href + "inicial.html?";
                 $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
                 localStorage.user = JSON.stringify($scope.user);
@@ -63,6 +64,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                             if ($scope.user.valido == 0) return Materialize.toast("Compareça a unidade para validar o seu cadastro!", 4000, 'red darken-1');
                             dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                             $scope.user = data.data[0];
+                            $scope.user.banco = banco_saude;
                             $scope.user.sysCli = true;
                             window.location = window.location.href + "inicial.html?";
                             $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
@@ -102,6 +104,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 $scope.user = data.data[0];
+                $scope.user.banco = banco_saude;
                 if ($scope.user.bloqueado == 1) return Materialize.toast("Usuário Bloqueado, entrar em contato!", 4000, 'red darken-1');
                 dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                 queryFornecedor = "SELECT USUA.id, USUA.nome, USUA.ip, USUA.logado, USUA.id_one, USUA.email, USUA.banco, USUA.foto, USUA.id_face, USUA.senha, USUA.projeto_id, USUA.customiza, PERF.intervalo, PERF.modal," +
@@ -162,6 +165,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                         }
                         dir = ($scope.user.customiza == 1) ? "../customizador/" : "../";
                         $scope.user = data.data[0];
+                        $scope.user.banco = banco_saude;
                         $scope.user.sysCli = true;
                         window.location = window.location.href + "inicial.html?";
                         $scope.user.logado = { id: $scope.user.id, projeto: $scope.user.projeto, projeto_id: $scope.user.projeto_id, banco: banco_saude, nao_saas: $scope.user.nao_saas };
