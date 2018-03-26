@@ -255,11 +255,13 @@ app.post("/geraArquivoPDF/", jsonParser, function (req, res) {
 
 });
 
+console.log(__dirname);
+
 app.post("/leArquivo/", jsonParser, function (req, res) {
     var post = req.body,
         arquivo = post.arquivo;
 
-    fs.readFile(__dirname + "/" + arquivo, function (err, data) {
+    fs.readFile(__dirname + "/saude/" + arquivo, function (err, data) {
         res.send(data);
     });
 });
