@@ -395,7 +395,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
     $scope.setAttributesCells = function (elm) {
         var trs, cells, campo;
-        $http.get("/").success(function () {
+        $http.get(URL).success(function () {
             trs = $("#view [data-id='" + elm.dataset.id + "']")[0].tBodies[0].rows;
 
             for (var i = 0; i < trs.length; i++) {
@@ -1179,7 +1179,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                                                 novaLinha.push(templateLinha.cells[i].innerHTML);
                                             }
                                             $scope[elementoTabela.dataset.nome + elementoTabela.dataset.id + "s"][$scope[elementoTabela.dataset.nome + elementoTabela.dataset.id + "s"].length] = {};
-                                            $http.get("/").success(function () {
+                                            $http.get(URL).success(function () {
                                                 var row2 = $("#view [data-id=" + elementoTabela.dataset.id + "] tr")[$("#view [data-id=" + elementoTabela.dataset.id + "] tr").length - 1];
                                                 var rowNode = tableJquery.row.add(row2).draw();
                                             });

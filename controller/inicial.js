@@ -191,8 +191,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                     g$.openTelaTemp(g$.user.intervalo, g$.user.modal);
                 }
 
-                $http.get("/").success(function () {
-                    $http.get("/").success(function () {
+                $http.get(URL).success(function () {
+                    $http.get(URL).success(function () {
                         $.createMenuTelas(g$.user.projeto_id);
                     });
                 });

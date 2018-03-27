@@ -79,7 +79,7 @@ app.controller("checkbox", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.alteraChecks = function (elm) {
-        $http.get("/").success(function (data) {
+        $http.get(URL).success(function (data) {
             var elms = $("[data-id='" + elm.dataset.id + "'] input.new_check");
             for (var i = 0; i < elms.length; i++) {
                 elms[i].id = elms[i].id + "_" + i;

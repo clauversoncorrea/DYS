@@ -683,8 +683,8 @@ app.directive("view", function () {
                 });
             }
 
-            $http.get("/").success(function () {
-                $http.get("/").success(function () {
+            $http.get(URL).success(function () {
+                $http.get(URL).success(function () {
                     var modal = (location.href.indexOf("=") > -1) ? location.href.substring(location.href.indexOf("modal")) : undefined;
                     if (modal && modal.length) {
                         modal = modal.split("=")[1].replace("%7C", "|");

@@ -259,7 +259,7 @@ app.directive("linhaprop", function () {
                 }
                 else if (elm.id == "botao" && elm.tagName == "SPAN") elm = elm.parentElement;
 
-                $http.get("/").success(function () {
+                $http.get(URL).success(function () {
                     $scope.search = { id: elm.dataset.id };
                 });
 

@@ -2176,9 +2176,9 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             template = $compile(template)($scope)[0];
             $("#view")[0].appendChild(template);
             g$.isModal = 1;
-            $http.get("/").success(function () {
-                $http.get("/").success(function () {
-                    $http.get("/").success(function () {
+            $http.get(URL).success(function () {
+                $http.get(URL).success(function () {
+                    $http.get(URL).success(function () {
                         if (tamanho && tamanho.indexOf("fullscreen") > -1) {
                             $("#view #" + tela)[0].classList.add("fullscreen");
                             $("#view #" + tela)[0].parentElement.parentElement.classList.add("fullscreen");
@@ -2447,7 +2447,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
             ge.loadProject(ret);
 
-            $http.get("/").success(function () {
+            $http.get(URL).success(function () {
                 if ($(".col-ativo_tarefa")[0].dataset.id == "47767") {
                     $("#addLinhaNovaProject")[0].style.display = "";
                 }

@@ -13,7 +13,7 @@ app.controller("comboDYS", function ($scope, $http, $rootScope) {
         $scope.comboPequeno = !$scope.comboGrande;
         $scope.query = (comboGrande) ? query : "";
         // Abrir o modal so depois que atualizou as linhas
-        // $http.get("/").success(function () {
+        // $http.get(URL).success(function () {
         g$.openModalCust('modal-comboDYS');
         g$.arrayTelas.push("ModalCombo");
         $("#modal-comboDYS")[0].classList.add("play-block");

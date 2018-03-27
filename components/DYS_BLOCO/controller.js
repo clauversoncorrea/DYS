@@ -262,7 +262,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.alteraChecksBloco = function (elm) {
-        $http.get("/").success(function (data) {
+        $http.get(URL).success(function (data) {
             var elms = $("[data-id='" + elm.dataset.id + "'] input.new_check");
             for (var i = 0; i < elms.length; i++) {
                 elms[i].id = elms[i].id + "_" + i;
@@ -274,7 +274,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
 
     setAttributesCellsBloco = function (elm) {
         var blocos, labels, campo, elmsCorDoBloco, style, imagens;
-        $http.get("/").success(function () {
+        $http.get(URL).success(function () {
             blocos = $("#view [data-id='" + elm.dataset.id + "']")[0].parentElement.children;
             imagens = $("#view [data-id='" + elm.dataset.id + "'] #imagem");
 
@@ -308,7 +308,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
     hrefLinkBloco = function (elm) {
         var tabela, campo, query, blocos, elms, campoBloco;
 
-        $http.get("/").success(function () {
+        $http.get(URL).success(function () {
             blocos = [].slice.call($("[data-id='" + elm.dataset.id + "']"));
 
             blocos.forEach(function (v) {

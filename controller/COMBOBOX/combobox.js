@@ -25,7 +25,7 @@ app.directive("comboBox", function () {
                 $scope.isOpened = false;
                 $scope.linhas = response.data;
                 $scope.coluna = elm.dataset.comboCampo;
-                $http.get("/").success(function () {
+                $http.get(URL).success(function () {
                     elm.querySelector("input").value = elm.dataset.value;
                     elm.querySelector("input").focus();
                 });
