@@ -1,4 +1,4 @@
-var URL = "";
+var URL = "http://192.168.66.19/homologacao";
 // var URL = "http://dys.net.br";
 var ambiente = (location.href.indexOf("treinamento") > -1 ? "_treinamento" : (location.href.indexOf("homologacao") > -1) ? "_homologacao" : "");
 var banco_node = "node" + ambiente;

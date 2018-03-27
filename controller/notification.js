@@ -27,7 +27,7 @@ var app2 = angular.module('myApp', ['ionic'])
 
     });
 
-const URL = "";
+var URL = "http://192.168.66.19/homologacao";
 // const URL = "http://dys.net.br";
 const syek = {
     select: "TCELES",
