@@ -1593,6 +1593,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         //         console.log("START");
         //     });
         // }
+        if (params.indexOf("https://dys.net.br/")) arquivo = arquivo.replaceAll("https://dys.net.br/", g$.link);
         if (tamanho) window.open(arquivo, "", "width=" + tamanho[1], "height=" + tamanho[2]);
         else window.open(arquivo, "_blank");
     }

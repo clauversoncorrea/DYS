@@ -1,8 +1,15 @@
 var app = angular.module('myApp', []);
 
 // const URL = "http://dysweb.dys.com.br";
-const URL = "";
 if (!g$) var g$ = {};
+
+var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (location.href.indexOf("homologacao") > -1) ? "homologacao" : "");
+var banco_node = (ambiente == "") ? "node" : "node_" + ambiente;
+var banco_saude = (ambiente == "") ? "saude" : "saude_" + ambiente;
+var port = (location.href.indexOf("treinamento") > -1 ? "8020" : (location.href.indexOf("homologacao") > -1) ? "8010" : "8000");
+var URL;
+if(location.href.indexOf("localhost") > -1) URL = "" + ((ambiente == "") ? "/" : "");
+else URL = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente);
 
 g$.urlObj = function (url) {
     var url = url.split("?")[1],

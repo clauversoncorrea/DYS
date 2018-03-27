@@ -3,10 +3,15 @@ var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (loc
 var banco_node = (ambiente == "") ? "node" : "node_" + ambiente;
 var banco_saude = (ambiente == "") ? "saude" : "saude_" + ambiente;
 var port = (location.href.indexOf("treinamento") > -1 ? "8020" : (location.href.indexOf("homologacao") > -1) ? "8010" : "8000");
-
-var URL = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente);
-// local
-// var URL = "" + ((ambiente == "") ? "/" : "");
+var URL, link;
+if(location.href.indexOf("localhost") > -1) {
+    URL = "" + ((ambiente == "") ? "/" : "");
+    link = "http://localhost:8000/" + ((ambiente == "") ? "/" : ambiente);
+}
+else {
+    URL = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente);
+    link = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente) + "/";
+}
 
 const KEYPAYGOL = "gXdeOtns6R1Iex0qQ77hq8O7fRlKOcTs%2bDE5yqJkpWjggbXzfMIKfgR6kOH1L6hT1vQ193YiLer15y04yPGACvFqep2Ns2brBkjW%2bV8flwE%3d";
 const URLPAYGOL = "http://pay2alldemo.azurewebsites.net/webapi";
@@ -52,7 +57,7 @@ var g$ = {
     memo4: "",
     memo5: "",
     desktop: 1,
-    link: "192.168.66.19",
+    link: link,
     arrayTelas: [],
     arr_focus_elemento: [],
     mySql_keys: ["GTRESNI", "TRESNI", "ETELED", "GETADPU", "ETADPU"]
@@ -1014,6 +1019,14 @@ g$.formataPeso = function () {
 
     this.value = v;
 }
+
+String.prototype.replaceAll = function (from, to) {
+	return this.replace(new RegExp(RegExp.quote(from), 'g'), to);
+};
+
+RegExp.quote = function (str) {
+	return str.replace(/([.?*+^$[\]\\(){}-])/g, "\\$1");
+};
 
 addEventListener("keydown", function (e) {
     // Sargento = alt + 1

@@ -1,3 +1,4 @@
+
 app.controller("template", function ($scope, $http, $rootScope) {
 
     var obj = g$.urlObj(location.href);
