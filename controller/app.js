@@ -1,8 +1,10 @@
-var URL = "http://192.168.66.19/homologacao";
 // var URL = "http://dys.net.br";
-var ambiente = (location.href.indexOf("treinamento") > -1 ? "_treinamento" : (location.href.indexOf("homologacao") > -1) ? "_homologacao" : "");
-var banco_node = "node" + ambiente;
-var banco_saude = "saude" + ambiente;
+var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (location.href.indexOf("homologacao") > -1) ? "homologacao" : "");
+var banco_node = "node_" + ambiente;
+var banco_saude = "saude_" + ambiente;
+var port = (location.href.indexOf("treinamento") > -1 ? "8020" : (location.href.indexOf("homologacao") > -1) ? "8010" : "8000");
+
+var URL = "http://192.168.66.19/" + ambiente;
 
 const KEYPAYGOL = "gXdeOtns6R1Iex0qQ77hq8O7fRlKOcTs%2bDE5yqJkpWjggbXzfMIKfgR6kOH1L6hT1vQ193YiLer15y04yPGACvFqep2Ns2brBkjW%2bV8flwE%3d";
 const URLPAYGOL = "http://pay2alldemo.azurewebsites.net/webapi";

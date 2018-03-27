@@ -172,7 +172,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             // }); 
 
             $rootScope.user = g$.user;
-            imgAnonimo = (g$.user.customiza || g$.user.sysCli) ? "../img/anonimo.png" : "img/anonimo.png";
+            imgAnonimo = (g$.user.customiza || g$.user.sysCli) ? "img/anonimo.png" : "img/anonimo.png";
             g$.user.foto = (!g$.user.foto) ? imgAnonimo : g$.user.foto;
 
             $(".user-image")[0].src = $(".logo-user")[0].src = g$.user.foto;
@@ -204,7 +204,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             query = "UPDATE node.usuario SET ip = null, logado = 0 where id = " + g$.user.id;
             $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 delete localStorage.user;
-                window.location = window.location.href.split("/").splice(0, window.location.href.split("/").length-1).join("/");
+                window.location = window.location.href.split("/").splice(0, window.location.href.split("/").length - 1).join("/");
             });
         }
 
@@ -1123,7 +1123,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             });
         }
 
-        g$.fullScreen = function() {
+        g$.fullScreen = function () {
             var el = document.documentElement,
                 rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen;
             rfs.call(el);
@@ -1144,13 +1144,13 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             else if (nomeTela == "PréAtendimentoMobile1092" || nomeTela == "PósAtendimentoMobile1094" || nomeTela == "AtendimentoMobile1093") {
                 $("#view .popup .card-header .card-icone")[0].appendChild(angular.element("<i class='fa fa-refresh play-none'> </i>")[0]);
                 $("#view .popup .card-header .card-icone")[0].appendChild(angular.element("<div class='pisca alerta-icone play-none'> </div>")[0]);
-                if(nomeTela == "PréAtendimentoMobile1092") {
+                if (nomeTela == "PréAtendimentoMobile1092") {
                     $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55548"), false);
                 }
-                else if(nomeTela == "PósAtendimentoMobile1094") {
+                else if (nomeTela == "PósAtendimentoMobile1094") {
                     $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55673"), false);
                 }
-                else if(nomeTela == "AtendimentoMobile1093") {
+                else if (nomeTela == "AtendimentoMobile1093") {
                     $("#view .popup .card-header .card-icone .fa-refresh")[0].addEventListener("click", clickAtualizar.bind(null, "55584"), false);
                 }
             }
@@ -1165,7 +1165,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         }
 
         // Notificação Tarefa Socket 192.168.66.19
-        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://192.168.66.19:8000");
+        g$._socket = typeof (io) == "undefined" ? null : io.connect("http://192.168.66.19:" + port + "/" + ambiente);
 
         g$.NotificationTarefa = function (params) {
             var params = g$.alterSargentos(params),

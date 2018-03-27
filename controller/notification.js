@@ -1,6 +1,6 @@
-var ambiente = (location.href.indexOf("treinamento") > -1 ? "_treinamento" : (location.href.indexOf("homologacao") > -1) ? "_homologacao" : "");
-var banco_node = "node" + ambiente;
-var banco_saude = "saude" + ambiente;
+var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (location.href.indexOf("homologacao") > -1) ? "homologacao" : "");
+var banco_node = "node_" + ambiente;
+var banco_saude = "saude_" + ambiente;
 
 var app2 = angular.module('myApp', ['ionic'])
 
@@ -27,7 +27,7 @@ var app2 = angular.module('myApp', ['ionic'])
 
     });
 
-var URL = "http://192.168.66.19/homologacao";
+var URL = "http://192.168.66.19/" + ambiente;
 // const URL = "http://dys.net.br";
 const syek = {
     select: "TCELES",
