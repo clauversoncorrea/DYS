@@ -1,7 +1,7 @@
 app.directive("view", function () {
     return {
         restrict: 'E',
-        templateUrl: "../components/DYS_VIEW/view.html",
+        templateUrl: "./view.html",
         controller: function ($scope, $http, $compile, $rootScope, $timeout) {
 
             g$.criaTela = function (nome, tela, idModal, isModal, closeMenu, tamanho, pesquisa) {
