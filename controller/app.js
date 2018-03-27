@@ -130,7 +130,8 @@ g$.colocaFiltroSaas = function (jsonQuery) {
         for (i = 0; i < b.morf.length; i++) {
             // todo: trocar user.banco por sas.
             if (typeof (b.morf[i].nome) == "string") {
-                if (b.morf[i].nome.indexOf('node.') == -1 && b.morf[i].nome.indexOf('.') > -1) {
+                //morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || 
+                if ((b.morf[i].nome.indexOf('node.') == -1 || b.morf[i].nome.indexOf('node_homologacao.') || b.morf[i].nome.indexOf('node_treinamento.')) && b.morf[i].nome.indexOf('.') > -1) {
                     if (!b.morf[i].lado || b.morf[i].lado == 'virgula') {
                         var tab = ((b.morf[i].alias && b.morf[i].alias != '') ? b.morf[i].alias : b.morf[i].nome);
                         if (b.ortlif.oicini) b.ortlif.oicini = tab + '.id_projeto=' + JSON.parse(localStorage.user).projeto_id + ' and coalesce(' + tab + '._inativo,0)=0 and ' + b.ortlif.oicini;
@@ -323,15 +324,15 @@ g$.trataQuery = function (query, semFiltro) {
         arrsopmac[0] = query.substring(query.indexOf("("), query.indexOf(")") + 1);
         arrsopmac[1] = query.substring((query.indexOf(" values ") > -1) ? query.indexOf(" values ") : query.indexOf(" select "), query.length);
         // if(JSON.parse(localStorage.user).banco = 'sas'){
-        arrsopmac[0] = (morf.indexOf("node.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? arrsopmac[0] : arrsopmac[0].substring(0, arrsopmac[0].lastIndexOf(")")) + ", id_projeto)";
+        arrsopmac[0] = (morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? arrsopmac[0] : arrsopmac[0].substring(0, arrsopmac[0].lastIndexOf(")")) + ", id_projeto)";
         if ((typeof (arrsopmac[1]) == "string" && arrsopmac[1].indexOf('values ') > -1) || (typeof (arrsopmac[1]) != "string" && arrsopmac[1].oicini.indexOf('values ') > -1)) {
             // arrsopmac[1].forEach(function (e,i) {
             arrsopmac[1] = g$.separaMantendoParenteses(arrsopmac[1])
             for (var i = 0; i < arrsopmac[1].length; i++) {
                 e = arrsopmac[1][i];
                 valores = e;
-                if (typeof (arrsopmac[1][0]) == "string") e = (morf.indexOf("node.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? e : valores.substring(0, valores.lastIndexOf(')')) + ", " + JSON.parse(localStorage.user).projeto_id + valores.substring(valores.lastIndexOf(')'));
-                else e.mif = (morf.indexOf("node.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? e.mif : valores.mif.substring(0, valores.mif.lastIndexOf(')')) + ", " + JSON.parse(localStorage.user).projeto_id + valores.mif.substring(valores.mif.lastIndexOf(')'));
+                if (typeof (arrsopmac[1][0]) == "string") e = (morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? e : valores.substring(0, valores.lastIndexOf(')')) + ", " + JSON.parse(localStorage.user).projeto_id + valores.substring(valores.lastIndexOf(')'));
+                else e.mif = (morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf('.') == -1 || semFiltro) ? e.mif : valores.mif.substring(0, valores.mif.lastIndexOf(')')) + ", " + JSON.parse(localStorage.user).projeto_id + valores.mif.substring(valores.mif.lastIndexOf(')'));
                 // if (e.indexOf('select ', 8) > -1) {
                 //     // var simple, sub;
                 //     // simple = ortlif.split('select')[0];
@@ -348,7 +349,8 @@ g$.trataQuery = function (query, semFiltro) {
                 //         else if (char == ")") cont = cont - 1
                 //         if (cont == 0) sair = 1;
                 //         else i++;
-                //     }
+                //     }morf.indexOf("node_homologacao.") == -1 || morf.indexOf("node_treinamento.") == -1 ||
+                // morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || 
                 //     e = { oicini: y.split('(select ')[0] + "(", sub: g$.trataQuery(res.substring(res.indexOf("(select ") + 1, i)), mif: res.substring(i, res.length) }
                 // }
                 arrsopmac[1][i] = e;
@@ -356,7 +358,7 @@ g$.trataQuery = function (query, semFiltro) {
             arrsopmac[1] = arrsopmac[1].join(",");
             detalhes = arrsopmac[1].substring(arrsopmac[1].indexOf("(") + 1, arrsopmac[1].lastIndexOf(")"));
         } else if ((typeof (arrsopmac[1]) == "string" && arrsopmac[1].indexOf('select ') > -1) || (typeof (arrsopmac[1]) != "string" && arrsopmac[1].oicini.indexOf('select ') > -1)) {
-            valores = (morf.indexOf("node.") == -1 && morf.indexOf('.') > -1 && !semFiltro) ? arrsopmac[1].replace(" from ", ", " + JSON.parse(localStorage.user).projeto_id + " from ") : arrsopmac[1];
+            valores = ((morf.indexOf("node.") == -1 || morf.indexOf("node_homologacao.") == -1 || morf.indexOf("node_treinamento.") == -1) && morf.indexOf('.') > -1 && !semFiltro) ? arrsopmac[1].replace(" from ", ", " + JSON.parse(localStorage.user).projeto_id + " from ") : arrsopmac[1];
             arrsopmac[1] = { oicini: "", sub: g$.trataQuery(valores), mif: "" };
             detalhes = "[Resultado de Pesquisa]";
         }
@@ -366,7 +368,7 @@ g$.trataQuery = function (query, semFiltro) {
     else if (query.indexOf("call ") > -1) {
         tipo = syek["call"];
         morf = query.substring(query.indexOf(" call ") + 6, query.indexOf("("));
-        morf = (semFiltro && (morf.indexOf("node.") > -1 || morf.indexOf(".") == -1)) ? "node._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
+        morf = (semFiltro && (morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf(".") == -1)) ? "node._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
         sopmac = query.substring(query.indexOf("("));
         sopmac = g$.separaMantendoParenteses(sopmac);
         jsonQuery = { tipo: tipo, sopmac: sopmac, morf: morf, ortlif: null };
@@ -498,7 +500,7 @@ g$.trataQuery = function (query, semFiltro) {
         ortlif = g$.pegaFiltro(query, key);
         // if ($rootScope.user.banco = 'sas'){
         query = 'UPDATE ' + morf + ' SET _inativo = 1 WHERE ' + ortlif;
-        jsonQuery = (semFiltro || morf.indexOf("node.") > -1 || morf.indexOf(".") == -1) ? { tipo: tipo, sopmac: null, morf: morf, ortlif: ortlif } : g$.trataQuery(query)
+        jsonQuery = (semFiltro || morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf(".") == -1) ? { tipo: tipo, sopmac: null, morf: morf, ortlif: ortlif } : g$.trataQuery(query)
         jsonQuery.script = { usuario_id: JSON.parse(localStorage.user).id, data: new Date().toLocaleDateString().split("/").reverse().join("-"), hora: new Date().toLocaleTimeString(), banco: JSON.parse(localStorage.user).banco, projeto_id: JSON.parse(localStorage.user).projeto_id, descricao: "Usuário(a) " + JSON.parse(localStorage.user).nome + " deletou o registro com " + ortlif + " da tabela " + ((morf.indexOf(".") > -1) ? morf.substring(morf.indexOf(".") + 1) : morf) }
         return jsonQuery;
         //}
