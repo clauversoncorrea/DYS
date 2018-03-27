@@ -636,7 +636,7 @@ function montaQuery(post) {
     return query;
 }
 
-app.get("/teste/", function (req, res) {
+app.get("teste/", function (req, res) {
     res.send("teste aprovado");
 })
 
