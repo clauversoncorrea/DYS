@@ -45,11 +45,13 @@
             right: auto;
         }
 
-        .row .col.s15 {
-            width: 15%;
+        .row .col.s17 {
+            width: 14%;
             margin-left: auto;
             left: auto;
             right: auto;
+            padding: 0px;
+            padding-left: 10px;
         }
 
         .row .col.s60 {
@@ -91,7 +93,7 @@
         }
 
         .bordado {
-            border-bottom: 0px solid #444;
+            border-bottom: 1px solid #444;
             border-top: 1px solid #444;
             border-left: 1px solid #444;
             border-right: 1px solid #444;
@@ -130,131 +132,374 @@
         .negrito {
             font-weight: bold;
         }
+
+        .campo {
+            height: 48px;
+        }
+
+        .padrao {
+            font-size: 11px;
+        }
+
+        .rotated {
+            transform: rotate(270deg);
+        }
     </style>
 
     <title></title>
 </head>
 
-<body ng-controller="inicial">
+<body ng-controller="inicial" class="ng-scope">
     <div class="container">
-        <div class='row'>
+        <div class="row">
             <div class="col">
-                <img src="logo_encaminhamento.JPG" style="width:80px;height: 120px;">
+                <img src="logo_encaminhamento.JPG" style="width: 80px;height: 101px;">
             </div>
-            <div class="col center" style="display: inline-block; float: none; width: 420px;">
-                <label class="negrito"> Prefeitura Municipal da Estância Balneária de Caraguatatuba Secretaria Municipal de Saúde <br> Guia de interconsulta</label>
+            <div class="col center" style="display: inline-block; float: none; ">
+                <label class="negrito" style="font-size: 14px"> Prefeitura Municipal da Estância Balneária de Caraguatatuba
+                    <br> Secretaria Municipal de Saúde
+                    <br> Guia de interconsulta
+                </label>
             </div>
             <div class="col" style="float: right;">
-                <img src="logo_encaminhamento_esus.JPG" style="width:50px;height: 70px;">
+                <img src="logo_encaminhamento_esus.JPG" style="width: 44px; height: 53px;">
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: -50px;">
+            <div class="col center" style="width: 175px;">
+            </div>
+
             <div class="col center">
-                <label>
+                <label style="font-size: 12px;">
                     <b>Formulário de referência e Contra-referência</b>
                     <br>
                 </label>
-                <label>
+                <label style="font-size: 14px;">
                     <b>Interno</b>
                     <br>
                 </label>
             </div>
-            <div class="col center bordado s15 right">
-                <label>
-                    <b>n° CROSS</b>
+            <div class="col bordado s17 right campo">
+                <label class="padrao">
+                    <b>n° cross</b>
                     <br>
                 </label>
             </div>
-            <div class="col center bordado s15 right">
-                <label>
+            <div class="col bordado s17 right campo">
+                <label class="padrao">
                     <b>n° prontuário</b>
                     <br>
                 </label>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12">
-                <label>Atesto para os devidos fins que o/a sr.(a) ou menor:
+        <div class="row" style="margin-top: -50px;">
+            <div class="col center bordado rotated" style="height: 12%;background: #d2d3d5;margin-left: -105px;margin-top: 170px;padding-left: 49px;padding-right: 49px;">
+                <label style="font-size: 14px">
+                    IDENTIFICAÇÃO
                 </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> {{(atestado.paciente)?atestado.paciente:'__________________________________________________________________'}}
+                <br>
+                <label style="font-size: 11px">
+                    Preenchimento pelo agente administrativo
                 </label>
+
             </div>
+            <!-- LINHA 2 -->
+            <div class="row" style="margin-top: -114px;">
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>Bairro</b>
+                        <br>
+                    </label>
+                </div>
+
+                <div class="col bordado s17 right campo">
+                    <label class="padrao">
+                        <b>nº</b>
+                        <br>
+                    </label>
+                </div>
+
+
+                <div class="col bordado s17 right campo" style="width: 53%;">
+                    <label class="padrao">
+                        <b>Endereço</b>
+                        <br>
+                    </label>
+                </div>
+            </div>
+            <!-- LINHA 1 -->
+            <div class="row" style="margin-top: -161px;">
+                <div class="col bordado s17 right campo" style="width: 15%;">
+                    <label class="padrao">
+                        <b>Data Nasc.:</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 13%;">
+                    <label class="padrao">
+                        <b>Raça Cor</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 14%;">
+                    <label class="padrao">
+                        <b>Sexo</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 49%;">
+                    <label class="padrao">
+                        <b>Nome do Paciente</b>
+                        <br>
+                    </label>
+                </div>
+            </div>
+
+            <!-- LINHA 3 -->
+            <div class="row" style="margin-top: -67px;">
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>Falar com</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>3° telefone de contato</b>
+                        <br>
+                    </label>
+                </div>
+                
+                
+            <div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>2° telefone de contato</b>
+                        <br>
+                    </label>
+                </div><div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>1° telefone de contato</b>
+                        <br>
+                    </label>
+                </div><div class="col bordado s17 right campo" style="width: 13%;">
+                    <label class="padrao">
+                        <b>CEP da rua</b>
+                        <br>
+                    </label>
+                </div></div>
+
+            <!-- LINHA 4 -->
+            <div class="row" style="margin-top: -20px;">
+                <div class="col bordado s17 right campo" style="width: 42%;">
+                    <label class="padrao">
+                        <b>Cartão nacional SUS</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 25%;">
+                    <label class="padrao">
+                        <b>CPF</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>RG</b>
+                        <br>
+                    </label>
+                </div>
+                
+            </div>
+
+            <!-- LINHA 5 -->
+            <div class="row" style="margin-top: -1px;">
+                <div class="col bordado s17 right campo" style="width: 46%;">
+                    <label class="padrao">
+                        <b>Nome da Mãe</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 45%;">
+                    <label class="padrao">
+                        <b>Nome do Pai</b>
+                        <br>
+                    </label>
+                </div>
+                
+                
+            </div>
+
+            <!-- LINHA 6s -->
+            <div class="row" style="margin-top: -1px;height: 50px;">
+                
+                <div class="col bordado s17 right campo" style="width: 32%;">
+                    <label class="padrao">
+                        <b>Data Solicitação</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 32%;">
+                    <label class="padrao">
+                        <b>Enfermeira responsável</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 27%;">
+                    <label class="padrao">
+                        <b>Unidade de saúde Solicitante</b>
+                        <br>
+                    </label>
+                </div>
+            </div>
+            
         </div>
-        <div class="row">
-            <div class="col s12">
-                <label> Compareceu nesta Unidade de Saúde dia {{(atestado.data)?atestado.data.split('-').reverse().join('/'):'____/____/20____'}}
-                    às {{(atestado.hora_inicio)?atestado.hora_inicio:'____:____'}} horas para:
+
+        <div class="row" style="margin-top: -50px;">
+            <div class="col center bordado rotated" style="height: 12%;background: #d2d3d5;margin-left: -105px;margin-top: 170px;padding-left: 49px;padding-right: 49px;">
+                <label style="font-size: 14px">
+                    IDENTIFICAÇÃO
                 </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Consulta Médica - CID - Z00.0
+                <br>
+                <label style="font-size: 11px">
+                    Preenchimento pelo agente administrativo
                 </label>
+
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Colher exames complementares - CID - Z01.7
-                </label>
+            <!-- LINHA 2 -->
+            <div class="row" style="margin-top: -114px;">
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>Bairro</b>
+                        <br>
+                    </label>
+                </div>
+
+                <div class="col bordado s17 right campo">
+                    <label class="padrao">
+                        <b>nº</b>
+                        <br>
+                    </label>
+                </div>
+
+
+                <div class="col bordado s17 right campo" style="width: 53%;">
+                    <label class="padrao">
+                        <b>Endereço</b>
+                        <br>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Acompanhar familiares - CID - Z76.3
-                </label>
+            <!-- LINHA 1 -->
+            <div class="row" style="margin-top: -161px;">
+                
+                
+                
+                <div class="col bordado s17 right campo" style="width: 91%;">
+                    <label class="padrao">
+                        <b>Hipótese Diagnóstica</b>
+                        <br>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Apto para frequentar a Creche
-                </label>
+
+            <!-- LINHA 3 -->
+            <div class="row" style="margin-top: -67px;">
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>Falar com</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>3° telefone de contato</b>
+                        <br>
+                    </label>
+                </div>
+                
+                
+            <div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>2° telefone de contato</b>
+                        <br>
+                    </label>
+                </div><div class="col bordado s17 right campo" style="width: 18%;">
+                    <label class="padrao">
+                        <b>1° telefone de contato</b>
+                        <br>
+                    </label>
+                </div><div class="col bordado s17 right campo" style="width: 13%;">
+                    <label class="padrao">
+                        <b>CEP da rua</b>
+                        <br>
+                    </label>
+                </div></div>
+
+            <!-- LINHA 4 -->
+            <div class="row" style="margin-top: -20px;">
+                <div class="col bordado s17 right campo" style="width: 42%;">
+                    <label class="padrao">
+                        <b>Cartão nacional SUS</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 25%;">
+                    <label class="padrao">
+                        <b>CPF</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 24%;">
+                    <label class="padrao">
+                        <b>RG</b>
+                        <br>
+                    </label>
+                </div>
+                
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Apto para frequentar piscinas coletivas
-                </label>
+
+            <!-- LINHA 5 -->
+            <div class="row" style="margin-top: -1px;">
+                <div class="col bordado s17 right campo" style="width: 46%;">
+                    <label class="padrao">
+                        <b>Nome da Mãe</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 45%;">
+                    <label class="padrao">
+                        <b>Nome do Pai</b>
+                        <br>
+                    </label>
+                </div>
+                
+                
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) Apto (somente para avaliação clínica e histórica) a prática de atividades físicas, sendo recomendado
-                    exames complementares adequados
-                </label>
+
+            <!-- LINHA 6s -->
+            <div class="row" style="margin-top: -1px;">
+                
+                <div class="col bordado s17 right campo" style="width: 32%;">
+                    <label class="padrao">
+                        <b>Raça Cor</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 32%;">
+                    <label class="padrao">
+                        <b>Sexo</b>
+                        <br>
+                    </label>
+                </div>
+                <div class="col bordado s17 right campo" style="width: 27%;">
+                    <label class="padrao">
+                        <b>Nome do Paciente</b>
+                        <br>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> ( ) outros: _________________________________________________________
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> Deverá permanecer afastado de sua atividades trabalhistas / escolares por período de _____ dias a contar
-                    do dia ____/____ 20____ a ____/____ 20____ - CID __________.
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> Deverá permanecer afastado de suas atividades trabalhistas / escolares no dia de hoje CID _____________
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <label> Caraguatatuba, {{(atestado.data)?atestado.data.split('-')[3]:'_________'}} de {{(atestado.data)?nomeMes[atestado.data.split('-')[2]]:'_____________'}}
-                    de {{(atestado.data)?atestado.data.split('-')[1]:'20_____'}}
-                </label>
-            </div>
-        </div>
-        <div class="row">
+            
+        </div><div class="row">
             <div class="col s12 bordado">
                 <label> Exames físico especial
                 </label>
@@ -405,7 +650,6 @@
         </div>
     </div>
 </body>
-
 <script type="text/javascript" src="../../lib/angular/angular.js"></script>
 <script type="text/javascript" src="../../lib/jQuery/jquery-2.1.1.js"></script>
 <script type="text/javascript" src="../../controller/app.js"></script>

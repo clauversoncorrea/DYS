@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title></title>
+  <style type="text/css">
+label{
+	font-size: 20px;
+	size: 20px;
+}
+	td {
+    
+    border-radius:10px;
+     border-color: #000;
+    font-size: 10px;
+    
+}
+.a{
+
+	padding: 1000px;
+}
+
+h1{
+	font-size: 20px;
+	size: 20px;
+
+}
+
+.c{
+  margin: -10px 0px 0px 0px;
+  float: right;
+}
+
+</style>
+</head>
+
+<body ng-controller="inicial">
+  <div ng-controller="template">
+    <div class="divisor">
+      <table border='1px' align="center" style="  width:100%;border-color: #FFF;border:0px;" >
+<tr>
+  <td border='1px' style="  width:75%;">
+<br>
+<img src="http://www.abm.org.br/wp-content/uploads/2017/09/640x321xlogo_sus-718x360.png.pagespeed.ic.B49KrYh_PL.png" height="45px"
+  width="90px" />
+<center>
+  <h1 class="c"> Prefeitura Municipal da Estância Balneária de Caraguatatuba<br> Estado de São Paulo<br> Secretaria Municipal de Saúde</h1>
+</center>
+</td>
+<td style="  width:25%;" >
+<center>
+  <img style="opacity: 1;background-repeat: no-repeat;    " src="http://veracidade.info/wp-content/uploads/2014/01/CARAGUATATUBA.png" height="90px" width="75px"></center>
+<center>
+  <h1>Unidade<br>Tinga</h1>
+</center>
+</td>
+</tr>
+</table>
+<table style="height: 800px;border: 1px solid #000;border-radius: 10px;width: 100%;">
+<tbody>
+<tr ng-repeat="receita in receituario" style="height: 20px !important;display: block;">
+  <td colspan="2" id="a" style="font-size: 15px;border:0px;"> {{receita.receita}}</td>
+</tr>
+</tbody>
+</table>
+
+<table style="border: 1px solid #000;border-radius: 10px;width: 100%;">
+<tr>
+  <td colspan="2">
+    <label>
+  	Data:  _________/_____________/___________ </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <label><b>Assinatura e Carimbo: </b></label></td>
+
+</tr>
+</table>
+</div>
+</div>
+
+<script type="text/javascript" src="../../controller/app.js"></script>
+<script type="text/javascript" src="../../lib/angular/angular.js"></script>
+<script type="text/javascript" src="../../temp/template.js"></script>
+<script type="text/javascript" src="../../lib/jQuery/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="template.js"></script>
+
+</body>
+
+</html>

@@ -9,6 +9,10 @@
             margin: 0px;
         }
 
+        .play-none {
+            display: none;
+        }
+
         .row .col.s8 {
             width: 66.6666666667%;
             margin-left: auto;
@@ -70,7 +74,7 @@
 </head>
 
 <body ng-controller="inicial">
-    <div class="container">
+    <div class="container" ng-controller="template">
         <div class='row super-centro' style='margin-bottom: -12px !important;'>
             <div class="col">
                 <img src="logo_atestado.JPG" style="width:80px;height: 110px;">
@@ -108,7 +112,9 @@
         </div>
         <div class="row">
             <div class="col s12">
-                <label> Compareceu nesta Unidade de Saúde dia {{(atestado.data)?atestado.data.split('-').reverse().join('/'):'____/____/20____'}} às {{(atestado.hora_inicio)?atestado.hora_inicio:'____:____'}} horas para:
+                <label id="PreencherData"> Compareceu nesta Unidade de Saúde dia ____/____/20____ às {{(atestado.hora_inicio)?atestado.hora_inicio:'____:____'}} horas para:
+                </label>
+                <label id="dataFormatada" > Compareceu nesta Unidade de Saúde dia {{atestado.data | date : 'dd/MM/yyyy'}} às {{(atestado.hora_inicio)?atestado.hora_inicio:'____:____'}} horas para:
                 </label>
             </div>
         </div>

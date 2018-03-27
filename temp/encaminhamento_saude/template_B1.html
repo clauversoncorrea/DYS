@@ -1,0 +1,286 @@
+<html>
+
+<style>
+  .divisor,hr{
+border-color:#000000;
+border-style:solid;
+border-width:1px;
+border-bottom:0px;
+border-top:0px;
+}
+.divcorte{
+border-color:#000000;
+border-style:solid;
+border-width:1px;
+width:100%;
+border-collapse: collapse; 
+}
+.a{
+  text-align: center;
+}
+
+.rotate {
+-moz-transform: rotate(-90.0deg);  /* FF3.5+ */
+       -o-transform: rotate(-90.0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(-90.0deg);  /* Saf3.1+, Chrome */
+             filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);  /* IE6,IE7 */
+         -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
+writing-mode: tb-rl;
+    filter: flipv fliph;
+
+    /* Safari/Chrome function */
+    -webkit-transform: rotate(270deg);
+
+    /* works in latest FX builds */
+    -moz-transform: rotate(90deg);
+
+}
+</style>
+<table class="a" border="1px" align="center" style="width:100%;height: 100%;border-collapse: collapse; ">
+ 
+  <tbody><tr>
+    <th style="width:30px;height: 60px;border:none;" rowspan="2"><img src="logo_encaminhamento.JPG" style="width: 80px;height: 101px;"></th>
+    <th colspan="4">Prefeitura Municipal da Estância Balneária de Caraguatatuba <br>Secretaria Municipal de Saúde<br>Guia de interconsulta</th>
+    <th>  <img src="logo_encaminhamento_esus.JPG" style="width: 44px; height: 53px;"></th>
+  </tr>
+  <tr>
+    
+    <td colspan="3"><br>Formulário de referência e Contra-referência<br>Interno<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>n° prontuario<br>{{(encaminhamento.prontuario)?encaminhamento.prontuario:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>n° CROSS<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td style="transform: rotate(-90deg);width:30px;height: 60px;" rowspan="6">Indentificação<br>Preenchiento Pelo agente admnistrativo</td><td colspan="2">Nome do Paciente<br>{{(encaminhamento.nome)?encaminhamento.nome:'&nbsp;&nbsp;&nbsp;&nbsp;'}}</td>
+    <td>Sexo<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Raça/Cor<br>{{(encaminhamento.raca_cor)?encaminhamento.raca_cor:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>Data Nascimento<br>{{(encaminhamento.nascimento)?encaminhamento.nascimento:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+  </tr>
+  <tr>
+    <td colspan="3">Endereço<br>{{(encaminhamento.cbrEndereco)?encaminhamento.cbrEndereco:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>Numero<br>{{(encaminhamento.cbrNumero)?encaminhamento.cbrNumero :&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>Bairro<br>{{(encaminhamento.cbrBairro)?encaminhamento.cbrBairro:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+  </tr>
+  <tr>
+    <td>CEP da Rua<br>{{(encaminhamento.cbrCep)?encaminhamento.cbrCep:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>1 telefone de contato<br>{{(encaminhamento.tel1)?encaminhamento.tel1:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>2 telefone de contato<br>{{(encaminhamento.tel2)?encaminhamento.tel2:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>3 telefone de contato<br>{{(encaminhamento.tel3)?encaminhamento.tel3:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>falar com<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">RG<br>{{(encaminhamento.rg)?encaminhamento.rg:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td>CPF<br>{{(encaminhamento.cpf)?encaminhamento.cpf:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td colspan="2">Cartão nacional SUS<br>{{(encaminhamento.cartao_sus)?encaminhamento.cartao_sus:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+  </tr>
+  <tr>
+    <td colspan="3">Nome do Pai<br>{{(encaminhamento.nome_pai)?encaminhamento.nome_pai:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td colspan="2">Nome da Mãe<br>{{(encaminhamento.nome_mae)?encaminhamento.nome_mae:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Unidade de saude solicitante<br>{{(encaminhamento.unidade_solicitante)?encaminhamento.unidade_solicitante:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td colspan="2">Enfermeira responsavel<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Data Solicitação<br>{{(encaminhamento.data_solicitacao)?encaminhamento.data_solicitacao:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+  </tr>
+  <tr>
+    <td style="transform: rotate(-90deg);width:30px;" rowspan="8">Dados Clísnicos<br>Preenchimento exclusivo do médico</td>
+    <td>Hipótese Diagnóstica<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Estado hidrico<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Mucosos<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>P.A.<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="5">Sinais de Gravidade (arritmias, malignidades, inf. severas)             <br>                                                                                                                      [ ]Não tem sinais de gravides               <br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="5">Sipnopse de HPMA<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="5"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="5" rowspan="2">Exames<br><br>                                                                                                                                                      [ ]Não fez<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td colspan="5">Baseado no exame clinico, o paciente necessita do recurso:  [ ] a curto prazo      [  ]a médio prazo<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Especialidades solicitada <br>{{(encaminhamento.especialidade_solicitada)?encaminhamento.especialidade_solicitada:&nbsp;&nbsp;&nbsp;&nbsp;}}</td>
+    <td colspan="3">Assinatura e carimbo do solicitante<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td style="transform: rotate(-90deg);width:30px;height: 60px;" rowspan="6">Agendamento<br>Uso exclusivo da central de vagas<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td colspan="2">Recebido em:<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td colspan="2">Processado em<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Responsavel<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Local do atendimento<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td colspan="3" rowspan="5"><br><br>Carimbo de aprovação<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"> Nome do especialista<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Data da interconsulta<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Unidade de origem<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">___/____/_____   [   ] já comunicada<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</tbody></table>
+<br>
+<br>
+
+<table class="a" border="1px" align="center" style="width:100%;height: 100%;border-collapse: collapse; ">
+  <tbody><tr>
+    <th rowspan="32" style="transform: rotate(-90deg)">Uso exclusivo do consultor</th>
+    <th colspan="2">Exames fisico especial</th>
+  </tr>
+  <tr>
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Sinais e/ou sintomas<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Exames e provas diagnósticas<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Conclusão diagnóstica<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2">Conduta terapeutica<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2">Orientações quanto ao antendimento clinico pelo PSF<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td colspan="2"><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td rowspan="5" style="transform: rotate(-90deg)">Casos especiais<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>Encaminhamento ou exame solicitado<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td>Justificativa<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr><tr>
+    
+    <td><br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr><tr>
+    
+    <td rowspan="3" style="transform: rotate(-90deg)">Prognósticos<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td>[ ] Doença aguda ou bengna - não necessita de retorno<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td>[  ] Doença cronica de acompanhamento clinico - não necessita de retorno<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td>[  ] Doença cronica de acompanhamento clinuco - acompnhamento do PSF com retornos periodicos. Primeiro retorno em _______ dias. <br>Será necessários outros retornos (   ) Sim    (  )Não<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td>O Paciente foi avaliado pelo Dr(a):<br>Caraguatatuba,_________de________de_____<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <td>Prontuário do Centro de Especialidade<br>____________________________________________<br>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr>
+    
+    
+    
+  </tr>
+  <tr>
+    
+    <td><br>___________________________________________<br>Médico especialista assinatura sobre o carimbo<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><br>____________________________________________________________<br>Enfermeira do centro de especialidades assinatura sobre o carimbo<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    
+    <td style="border:none;">Tomei ciencia da interconsulta do paciente<br>___________________________________________<br>Enfermeira da unidade assianatura sobre o carimbo<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td><br>____________________________________________________________<br>Médico da Unidade <br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr><tr>
+    <td colspan="3">Este impresso é documento legal e pertence ao prontuario do paciente - arquive imediatamente<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</tbody></table>
+
+<script type="text/javascript" src="../../lib/angular/angular.js" ></script>
+<script type="text/javascript" src="../../lib/jQuery/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../../controller/app.js"></script>
+ <script type="text/javascript" src="../../temp/template.js"></script> 
+<script type="text/javascript" src="template.js"></script>
+</html>
+
+<!-- SELECT c.prontuario, c.razao nome, c.sexo_id, r.raca_cor, date_format(c.nascimento, '%d/%m/%Y'), c.cbrEndereco, c.cbrNumero, cbrBairro, cbrCep, residencial tel1, celular tel2 ,whatsapp tel3 , rg, cpf, carterinha cartao_sus, nome_pai, nome_mae,u.nome unidade_solicitante, date_format(e.data, '%d/%m/%Y') data_solicitacao,es.especialidade especialidade_solicitada
+FROM saude.encaminhamento e 
+left join saude.especialidade es on es.id = e.especialidade_id 
+left join saude.unidade_saude u on u.id = e.unidade_id
+left join saude.cliente_fornecedor c on c.id = e.paciente_id 
+LEFT JOIN saude.raca_cor r on r.id = c.cor_raca_id WHERE e.id = 78; -->
+
+<!-- SELECT CONCAT(p.descricao,'______ TOMAR ', dosagem, ' ', u.unidade, ' de ', r.frequencia,'/', r.frequencia, 'h por ', SUM(r.duracao),' dias') 
+FROM saude.receituario r
+LEFT JOIN saude.produto p on p.id = r.remedio_id
+LEFT JOIN saude.unidade_remedio u on u.id = p.unidade_id
+ where atendimento_id = 10 group by p.descricao; -->
