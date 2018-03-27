@@ -54,10 +54,10 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         }
 
         // Verifica se tem o CNS ou CPF
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 // Se existir alguem com cns ou cpf, verifica se os credidenciais estao certos
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query_existy.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query_existy.trim())).success(function (data) {
                     if (data.data.length) {
                         $scope.user = data.data[0];
                         if ($scope.user.senha && $scope.user.senha != "") {
@@ -101,7 +101,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             dir,
             query = "SELECT * FROM " + banco_node + ".usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'",
             queryFornecedor;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 $scope.user = data.data[0];
                 $scope.user.banco = banco_saude;
@@ -119,7 +119,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                     success: function (data) {
                         if ($scope.user.logado && data.ip != $scope.user.ip && $scope.user.customiza == 0) return Materialize.toast("Esse usuário está logado em outra máquina!", 4000, 'red darken-1');
                         else {
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryFornecedor.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryFornecedor.trim())).success(function (data) {
                                 if (data.data.length) {
                                     // Se já estiver logado 
                                     window.location = dir + "inicial.html?";
@@ -150,10 +150,10 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             query_existy = "SELECT c.cns, coalesce(cf.valido, 0) valido, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas, u .* FROM " + banco_node + ".usuario u LEFT JOIN " + banco_node + ".projeto p ON p.id = u.projeto_id LEFT JOIN  saude.cliente_fornecedor cf ON cf.node_usuario_id = u.id LEFT JOIN saude.cns c ON c.node_usuario_id = u.id WHERE (c.cns = '" + cns.value + "' OR cf.cpf = '" + cns.value + "') AND COALESCE(u.senha,'" + senha.value + "') = '" + senha.value + "'";
 
         if (senha.value.trim() == confirmarSenha.value.trim()) {
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryUpdate.trim() + data.data[0].node_usuario_id)).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(queryUpdate.trim() + data.data[0].node_usuario_id)).success(function (data) {
                     Materialize.toast("Senha alterada com sucesso!", 4000, 'green darken-1');
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query_existy.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query_existy.trim())).success(function (data) {
                         $scope.user = data.data[0];
                         if ($scope.user.valido == 0) {
                             $("#cadastrarSenha")[0].classList.add("play-none");
@@ -187,17 +187,17 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             query_cns = "INSERT INTO saude.cns (cns, cliente_fornecedor_id, node_usuario_id) VALUES ('" + getVal("cns") + "', 'val_cliente_fornecedor_id', 'val_usuario_id')";
 
         if ($("#cadastrarPaciente #cns")[0].value != "" && $("#cadastrarPaciente #senha")[0].value != "" && $("#cadastrarPaciente #nome")[0].value != "" && $("#cadastrarPaciente #login")[0].value != "" && $("#cadastrarPaciente #cep")[0].value != "") {
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query_node_usuario.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query_node_usuario.trim())).success(function (data) {
                 if (data.data[0][0].REPETIDO) return Materialize.toast("Já existe esse usuário!!", 4000, 'red darken-1');
                 else {
                     node_usuario = data.data[0][0]["LAST_INSERT_ID()"];
                     query = query.replace("val_node_usuario_id", node_usuario);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query_cliente_fornecedor.trim() + node_usuario)).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query_cliente_fornecedor.trim() + node_usuario)).success(function (data) {
                             cliente_fornecedor = data.data[0].id;
                             query_cns = query_cns.replace("val_usuario_id", node_usuario);
                             query_cns = query_cns.replace("val_cliente_fornecedor_id", cliente_fornecedor);
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query_cns.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query_cns.trim())).success(function (data) {
                                 Materialize.toast("Cadastrado com Sucesso!", 4000, 'green darken-1');
                                 Materialize.toast("Compareça a unidade para validar o seu cadastro!", 4000, 'red darken-1');
                                 $("#cadastrarPaciente")[0].classList.add("play-none");
@@ -220,7 +220,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
         var email = $("#email")[0];
 
         var query = "SELECT * FROM usuario WHERE email = '" + email.value + "'";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 Materialize.toast("Autenticação realizada com sucesso!", 4000, 'green darken-1');
                 window.location = "/auth/facebook";
@@ -254,7 +254,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
                 if (!data.err) {
                     Materialize.toast("Cadastrado com Sucesso.", 5000, 'green darken-1');
                     var query = "SELECT * FROM " + banco_node + ".usuario WHERE email = '" + email.value + "' AND senha = '" + senha.value + "'";
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (data.data.length) {
                             window.location = "../inicial.html?auth=DYS&nome=" + data.data[0].nome + "&banco=" + data.data[0].banco + "&foto=" + data.data[0].foto + "&email=" + data.data[0].email;
                         }

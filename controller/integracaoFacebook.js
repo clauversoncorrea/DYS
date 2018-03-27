@@ -4,14 +4,14 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
     g$.integraAlbumFB = function (params) {
         g$.alerta("Sucesso!", "Os Álbuns estão sendo Sincronizados!");
         var query = "SELECT fb_token, fb_pageID FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data = data.data
             $http.get("/integraAlbumFB/" + data.data[0].fb_pageID + "/" + data.data[0].fb_token).then(function (data) {
                 data = JSON.parse(data.data);
                 var ultimo = data.data.length
                 data.data.forEach(function (v, i) {
                     var query = "insert ignore into " + $rootScope.user.banco + ".fb_albuns (album,album_id) values ('" + v.name + "'," + v.id + ");";
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if(ultimo == i + 1){
                             g$.atualizarTabela("atualizarTabela | 13181");
                             g$.alerta("Sucesso!", "Álbuns Sincronizados com Sucesso!");
@@ -26,12 +26,12 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
             nome = params[1],
             desc = params[2],
             query = "SELECT fb_token, fb_pageID FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data = data.data
             $http.get("/newAlbumFB/" + data.data[0].fb_pageID + "/" + data.data[0].fb_token + "/" + nome + "/" + desc).then(function (data) {
                 data = JSON.parse(data.data);
                 var query = "INSERT INTO " + $rootScope.user.banco + ".fb_albuns (album,album_id) values ('" + nome + "'," + data.id + ");";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     g$.atualizarTabela("atualizarTabela | 13181");
                     g$.closeModal("closeModal | novoalbumfb");
                 });
@@ -46,7 +46,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
             alb = params[3],
             urls = params[4],
             query = "SELECT fb_token, fb_pageID FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data = data.data
             $http.get("/newAlbumFB/" + data.data[0].fb_token + "/" + data.data[0].fb_pageID + "/" + alb + "/" + urls + "/" + desc).then(function (data) {
                 data = JSON.parse(data.data);
@@ -56,11 +56,11 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
     }
     g$.integraFotosFB = function (params) {
         var query = "SELECT fb_token FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3", count = 0;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data = data.data
             token = data.data[0].fb_token;
             var query = "SELECT album_id FROM " + $rootScope.user.banco + ".fb_albuns";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 data = data.data
                 var ultimo = data.length
                 data.forEach(function (v, i) {
@@ -70,7 +70,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                         data.data.forEach(function (v, i) {
                             if (v.id) {
                                 var query = "INSERT IGNORE INTO " + $rootScope.user.banco + ".fb_imagens (descricao,album_id,imagem_id) values ('Foto " + v.id + "'," + alb + "," + v.id + ");";
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     if (data.data.insertId > 0) {
                                         count = count + 1
                                     }
@@ -106,7 +106,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
     g$.gerarTemplateFB = function (produto, template, prodArray, porcent) {
         var prodID = produto.e_19478,
             query = "SELECT * FROM " + $rootScope.user.banco + ".produto where id = " + prodID
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var prod = data.data[0],
                 fotoX = parseInt($("[data-id=13569]")[0].value),
                 fotoY = parseInt($("[data-id=13571]")[0].value),
@@ -180,13 +180,13 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                     console.log(data)
                     if (data.data.status == 1) {
                         var query = "SELECT fb_token, fb_pageID FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3";
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             var token = data.data[0].fb_token,
                                 pag = data.data[0].fb_pageID
                             $http.get("/postarFotoFB/" + $("[data-id=14908]")[0].querySelector("input").dataset.value + "/http:½½54.233.115.242½base64½" + data.data.replace("/", "½") + "/" + descricaoFacebook + "/" + token).then(function (data) {
                                 data = JSON.parse(data.data);
                                 var query = "insert into " + $rootScope.user.banco + ".fb_imagens (descricao,album_id,imagem_id,produto_id) values ('" + descricaoFacebook + "'," + $("[data-id=14908]")[0].querySelector("input").dataset.value + "," + data.id + "," + prodID + ")";
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     $("#progressBarFB")[0].style.width = parseFloat($("#progressBarFB")[0].style.width.replace("%", "")) + parseFloat(porcent) + '%'
                                     $("#concluidoFB")[0].textContent = parseInt($("#concluidoFB")[0].textContent) + 1;
                                     prodArray.splice(0, 1);
@@ -200,7 +200,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                 });
             });
             var query2 = "select nomeArquivo from " + $rootScope.user.banco + ".fb_template where id = " + template;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query2.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query2.trim())).success(function (data) {
                 img_in1.src = 'http://dysweb.dys.com.br/' + $rootScope.user.banco + '/' + data.data[0].nomeArquivo;
             });
         });
@@ -210,11 +210,11 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
         loadzinTela = angular.element($.template[0]["loadzinTela"])[0];
         document.body.append(loadzinTela);
         var query = "SELECT fb_token FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3", count = 0;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data = data.data
             token = data.data[0].fb_token;
             var query = "SELECT imagem_id FROM " + $rootScope.user.banco + ".fb_imagens";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 data = data.data
                 var ultimo = data.length, fim = 0;
                 data.forEach(function (v, i) {
@@ -225,10 +225,10 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                             data.data.forEach(function (v, i) {
                                 if (v.id) {
                                     var query = "INSERT IGNORE INTO " + $rootScope.user.banco + ".fb_comentarios (comentario,foto_id,comentario_id,usuario_id,verificado,usuario,created) values ('" + v.message + "'," + img + ",'" + v.id + "'," + v.from.id + ",0,'" + v.from.name + "','" + v.created_time + "');";
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                         if (fim == 1) {
                                             var queryData = "update " + $rootScope.user.banco + ".integracao set fb_coments = now() where integracao_tipo_id = 3"
-                                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryData.trim())).success(function (data) {
+                                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryData.trim())).success(function (data) {
                                                 $("#loadzinTela")[0].outerHTML = "";
                                                 g$.atualizarBloco("atualizarBloco ¦ 539 | 13765");
                                                 g$.carregaQuery("carregaQuery | SELECT DATE_FORMAT(fb_coments,'‰d-‰m-‰Y ‰T') FROM »user.banco».integracao where integracao_tipo_id = 3 | 13756");
@@ -256,7 +256,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
             prod = params[4].trim(),
             timeLine = params[5],
             query = "SELECT fb_token, fb_pageID FROM " + $rootScope.user.banco + ".integracao where integracao_tipo_id = 3";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var token = data.data[0].fb_token,
                 pag = data.data[0].fb_pageID
             if ($("[data-id=" + timeLine + "]")[0].checked == true) {
@@ -275,7 +275,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                 $http.get("/postarFotoFB/" + alb + "/" + img + "/" + desc + "/" + token).then(function (data) {
                     data = JSON.parse(data.data);
                     var query = "insert into " + $rootScope.user.banco + ".fb_imagens (descricao,album_id,imagem_id,produto_id) values ('" + desc + "'," + alb + "," + data.id + "," + prod + ")";
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         g$.alerta("Alerta!", "Foto Adicionada com Sucesso!");
                     })
                 })
@@ -287,12 +287,12 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
         g$.alerta("Aguarde!", "O Link será Enviado para o Comentário!");
         var idComent = event.target.parentElement.parentElement.firstElementChild.firstElementChild.textContent,
             query = "SELECT fb_token, comentario_id FROM " + $rootScope.user.banco + ".integracao inte,gui.fb_comentarios co where integracao_tipo_id = 3 and co.id = " + idComent;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var token = data.data[0].fb_token
             comentario = data.data[0].comentario_id;
             $http.post("https://graph.facebook.com/v2.10/" + comentario + "/comments?access_token=" + token + "&message=Para se cadastrar na Outlet, acesse esse link e finalize sua compra! http://dysweb.dys.com.br/sonhoadois").then(function (data) {
                 var query = "update " + $rootScope.user.banco + ".fb_comentarios set cliente_fornecedor_enviado = 1 where id = " + idComent;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     if (!data.error) {
                         g$.atualizarBloco("atualizarBloco ¦ 5963 | 13765");
                         g$.alerta("Sucesso!", "Link Enviado para o Comentário!");
@@ -310,29 +310,29 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
             quantidade = params[4];
         if (empresa || empresa != "" || empresa != "null") {
             var query = "select * from " + $rootScope.user.banco + ".fb_comentarios where id = " + idComentario;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 var comentario = data.data[0],
                     query = "select id from node.usuario where id_face ='" + comentario.usuario_id + "'";
                 if (comentario.pedido_id != null) {
                     return g$.alerta("Erro!", "Esse comentário já possui um Pedido Cadastrado!");
                 } else {
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (data.data.length == 0) {
                             var queryInsertNode = "insert into node.usuario (nome,banco,foto,id_face,projeto_id,customiza) values ('" + comentario.usuario + "','" + $rootScope.user.banco + "','https:½½graph.facebook.com½v2.10½" + comentario.usuario_id + "½picture','" + comentario.usuario_id + "'," + $rootScope.user.projeto_id + ",0)";
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertNode.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertNode.trim())).success(function (data) {
                                 if (data.data.insertId) {
                                     var queryInsertCliente = "insert into " + $rootScope.user.banco + ".cliente_fornecedor (cliente,fantasia,razao,facebook_id,node_usuario_id) values (1,'" + comentario.usuario + "','" + comentario.usuario + "','" + comentario.usuario_id + "'," + data.data.insertId + ")";
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertCliente.trim())).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertCliente.trim())).success(function (data) {
                                         if (data.data.insertId) {
                                             var queryInsertPedido = "INSERT INTO " + $rootScope.user.banco + ".pedido (cliente_fornecedor_id,empresa_id) values (" + data.data.insertId + "," + empresa + ")";
-                                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertPedido.trim())).success(function (data) {
+                                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertPedido.trim())).success(function (data) {
                                                 if (data.data.insertId) {
                                                     var newPedido = data.data.insertId
                                                     var queryInsertProduto = "INSERT INTO " + $rootScope.user.banco + ".pedido_produto (pedido_id,produto_id,quantidade) values (" + data.data.insertId + "," + produto + "," + quantidade + ")";
-                                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertProduto.trim())).success(function (data) {
+                                                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertProduto.trim())).success(function (data) {
                                                         if (data.data.insertId) {
                                                             var query = "update " + $rootScope.user.banco + ".fb_comentarios set pedido_id = " + newPedido + " where id = " + comentario.id;
-                                                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                                                 g$.atualizarBloco("atualizarBloco ¦ 5963 | 13765");
                                                                 g$.alerta("Sucesso!", "Pedido Criado com Sucesso!");
                                                                 g$.closeModal("closeModal | comentarioxpedido");
@@ -347,16 +347,16 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                             })
                         } else {
                             var query = "select id from " + $rootScope.user.banco + ".cliente_fornecedor where facebook_id = " + comentario.usuario_id;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 var queryInsertPedido = "INSERT INTO " + $rootScope.user.banco + ".pedido (cliente_fornecedor_id,empresa_id) values (" + data.data[0].id + "," + empresa + ")";
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertPedido.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertPedido.trim())).success(function (data) {
                                     if (data.data.insertId) {
                                         var newPedido = data.data.insertId
                                         var queryInsertProduto = "INSERT INTO " + $rootScope.user.banco + ".pedido_produto (pedido_id,produto_id,quantidade) values (" + data.data.insertId + "," + produto + "," + quantidade + ")";
-                                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertProduto.trim())).success(function (data) {
+                                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertProduto.trim())).success(function (data) {
                                             if (data.data.insertId) {
                                                 var query = "update " + $rootScope.user.banco + ".fb_comentarios set pedido_id = " + newPedido + " where id = " + comentario.id;
-                                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                                     g$.atualizarBloco("atualizarBloco ¦ 5963 | 13765");
                                                     g$.alerta("Sucesso!", "Pedido Criado com Sucesso!");
                                                     g$.closeModal("closeModal | comentarioxpedido");
@@ -377,7 +377,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
         var params = g$.alterSargentos(params),
             idComentario = params[1],
             query = "select * from " + $rootScope.user.banco + ".fb_comentarios where id = " + idComentario;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var coment = data.data[0];
             if (coment.pedido_id) {
                 var temp = "<div><div><img src='https://graph.facebook.com/v2.10/" + coment.usuario_id + "/picture'> <label style='color:black;margin-left:20px;'>" + coment.usuario + "</label><label style='color:black;margin-left:20px;'>" + coment.comentario + "</label></div><p style='color:red;'>Esse Comentário já possui um Pedido Número : " + data.data[0].pedido_id + "</p></div>"
@@ -391,7 +391,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
 
     g$.verificaProdutoIntegrações = function(params){
         var query = "select integracao,tipo from "+ $rootScope.user.banco +".integracao inte left join "+ $rootScope.user.banco +".integracao_tipo itp on itp.id = integracao_tipo_id where inte.ativo = 1;"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if(data.data.length > 0){
                 g$.openModal("openModal | Selecione a Integração | selInt | 826");
             }
@@ -399,7 +399,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
     }
     g$.showIntegracoes = function(params){
         var query = "select integracao,tipo from "+ $rootScope.user.banco +".integracao inte left join "+ $rootScope.user.banco +".integracao_tipo itp on itp.id = integracao_tipo_id where inte.ativo = 1;"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if(data.data.length > 0){
                 var inte = data.data;
                 $("[data-id=25676]")[0].innerHTML = "";
@@ -497,7 +497,7 @@ app.controller("integracaoFacebook", function ($scope, $http, $rootScope) {
                     if (tela == 'produto') {
                         var prodID = $("[data-id=2689]")[0].value;
                         var query = 'SELECT integracao_produto from ' + $rootScope.user.banco + '.produto where id = ' + prodID;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (response) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (response) {
                             if (!response.data.err) {
                                 if (response.data.length) {
                                     if (response.data[0].integracao_produto) {

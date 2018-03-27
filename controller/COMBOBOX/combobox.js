@@ -16,7 +16,7 @@ app.directive("comboBox", function () {
 
             query = elm.dataset.comboQuery;
 
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (response) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (response) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("Customizador", response)) return;;
 

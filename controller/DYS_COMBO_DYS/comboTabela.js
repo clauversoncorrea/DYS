@@ -36,7 +36,7 @@ app.directive("comboTabela", function () {
             var queryCount = g$.trataQuery(query);
             queryCount.sopmac.push("count(*) count");
 
-            $http.post(URL + "/jsonQuery/", queryCount).success(function (data) {
+            $http.post(URL + "jsonQuery/", queryCount).success(function (data) {
 
                 elmTabela = $("[data-id='" + elm.parentElement.dataset.pai + "']")[0];
 
@@ -47,7 +47,7 @@ app.directive("comboTabela", function () {
                     _initCombo(id, data, elm.dataset.nome, $scope.coluna, $scope.value, false, true, query);
                 }
                 else {
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                         if (g$.exceptionRequisicao("Combobox", data)) return;
                         id = elmTabela.dataset.nome + "_elemento | " + elm.parentElement.dataset.id;
@@ -60,7 +60,7 @@ app.directive("comboTabela", function () {
 
             });
 
-            // $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            // $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
             //     elmTabela = $("[data-id='" + elm.parentElement.dataset.pai + "']")[0];
 

@@ -31,14 +31,14 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         }
 
         g$.converteQuerySaas = function () {
-            $http.post(URL + "/leArquivo/", { arquivo: "DYS_TEMPLATE/trg.sql" }).success(function (data) {
+            $http.post(URL + "leArquivo/", { arquivo: "DYS_TEMPLATE/trg.sql" }).success(function (data) {
                 g$.extraiQuerys(data);
             });
         }
 
         g$.extraiQuerys = function (text) {
             var json = { texto: text }, querySaas = [], t, tables = [];
-            $http.post(URL + "/extraiQuery/", json).success(function (data) {
+            $http.post(URL + "extraiQuery/", json).success(function (data) {
                 if (data.tables[0]) {
                     data.tables[0].forEach(function (table, i) {
                         t = table.substring(table.indexOf('TABLE ') + 6, table.length);
@@ -80,7 +80,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                     caminho: "raiz",
                     nome: "querySaas.txt",
                 }
-                $http.post(URL + "/geraArquivo/", objSaas);
+                $http.post(URL + "geraArquivo/", objSaas);
 
                 // console.log(querySaas);
                 // console.log(text);
@@ -110,7 +110,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             }
             else query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas, 0) nao_saas FROM node.usuario u, node.projeto p WHERE u.projeto_id = p.id and u.projeto_id = " + $("[data-id='49346'] input")[0].dataset.value + " and u.customiza = 1 limit 1";
             // procura um usuario daquele projeto que tenha customizador(pra nao tirar o customizador), pra guardar os dados, ex: projeto_id, banco
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
 
                 g$.exceptionRequisicao("Update Projeto", data);
 
@@ -150,7 +150,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                         complete: function (val) {
                             if (val) {
                                 queryID_one = "UPDATE node.usuario SET id_one = '" + id_one + "' where id = " + g$.user.id;
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryID_one.trim()));
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(queryID_one.trim()));
                                 g$.user.id_one = id_one;
                                 g$.alerta("Alerta!", "Aparelho alterado com sucesso!");
                             }
@@ -167,7 +167,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             //     jsonp:false,
             //     success: function(data) {
             //         queryLogado = "UPDATE node.usuario SET ip = '" + data.ip + "', logado = 1 where id = " + user.id
-            //         $http.post(URL + "/jsonQuery/", g$.trataQuery(queryLogado.trim()))
+            //         $http.post(URL + "jsonQuery/", g$.trataQuery(queryLogado.trim()))
             //     }
             // }); 
 
@@ -182,7 +182,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             }
 
             var query = "select perf.id, perf.intervalo, perf.modal FROM " + g$.user.banco + ".cliente_fornecedor c LEFT JOIN " + g$.user.banco + ".perfil perf on perf.id = c.perfil_id WHERE c.node_usuario_id = " + g$.user.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if (g$.exceptionRequisicao("Query perfil - intervalo", data)) return;
                 g$.user.intervalo = data.data[0].intervalo;
                 g$.user.modal = data.data[0].modal;
@@ -202,7 +202,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
 
         $scope.logout = function () {
             query = "UPDATE node.usuario SET ip = null, logado = 0 where id = " + g$.user.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 delete localStorage.user;
                 window.location = window.location.href.split("/").splice(0, window.location.href.split("/").length-1).join("/");
             });
@@ -211,7 +211,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         g$.configSystem = function (projeto_id) {
             var query = "SELECT * FROM node.projeto WHERE id = " + projeto_id,
                 estilo = "", menu_bloco = "";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 g$.exceptionRequisicao("Config System", data);
 
@@ -525,7 +525,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         g$.createTelaMinhaConta = function () {
             var query = "SELECT m.id FROM node.menu m LEFT JOIN projeto_menu pm ON pm.menu_id = m.id WHERE pm.projeto_id = " + $rootScope.user.projeto_id + " AND m.menu = 'Minha Conta'";
 
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if (g$.exceptionRequisicao("Minha Conta", data)) return;
                 g$.criaTela("Minha Conta", data.data[0].id, "MinhaConta", true, true);
                 if (!$("#menutelas")[0].classList.contains("menu-ativo")) {
@@ -1062,7 +1062,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
 
         // Chama a proc que conta os alertas, mensagens e tarefas 
         var query = "call conta_alertas('" + JSON.parse(localStorage.user).logado.id + "')";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             g$.exceptionRequisicao("CONTA ALERTAS", data);
             $scope.numAlert = data.data[0][0].alerta;
@@ -1073,7 +1073,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         //Array de Alertas
         g$.openAlertas = function () {
             var query = "SELECT id,progresso,alerta FROM node.alerta where usuario_id = " + JSON.parse(localStorage.user).logado.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 g$.exceptionRequisicao("ARRAY ALERTA", data);
                 $scope.nodeAlerta = data.data;
@@ -1085,7 +1085,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             var query = "SELECT ms.id,ms.lido,ms.mensagem,ms.titulo,us.foto,us.nome FROM node.mensagem ms " +
                 "LEFT JOIN node.usuario us on us.id = ms.remetente " +
                 "where ms.usuario_id = " + JSON.parse(localStorage.user).logado.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 g$.exceptionRequisicao("ARRAY MENSAGEM", data);
                 $scope.nodeMensagem = data.data;
@@ -1095,7 +1095,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
         //Array de Tarefas
         g$.openTarefas = function () {
             var query = "SELECT id, tarefa, progresso FROM node.tarefa ta left join node.tarefa_usuario_notificicao tu on   ta.id = tu.tarefa_id where tu.usuario_notificado_id = " + JSON.parse(localStorage.user).logado.id + " or ta.usuario_id = " + JSON.parse(localStorage.user).logado.id + " order by ta.ordem, ta.inicio_p;";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 g$.exceptionRequisicao("ARRAY TAREFA", data);
                 $scope.nodeTarefa = data.data;
@@ -1112,10 +1112,10 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             var nm_arquivo = "view/" + nomeTela + ".html", popup;
 
             //  Verifica a tela no banco do cliente 
-            $http.post(URL + "/leArquivo/", { arquivo: "SAUDE/" + nm_arquivo }).success(function (data) {
+            $http.post(URL + "leArquivo/", { arquivo: "SAUDE/" + nm_arquivo }).success(function (data) {
                 if (data == "") {
                     // Se nao tiver, pega da raiz
-                    $http.post(URL + "/leArquivo/", { arquivo: nm_arquivo }).success(function (data) {
+                    $http.post(URL + "leArquivo/", { arquivo: nm_arquivo }).success(function (data) {
                         criaPopup(data, nomeTela);
                     });
                 }
@@ -1205,7 +1205,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 query_tarefa_user = "SELECT USU.id AS id, NOFA.descricao AS descricao, USU.nome AS nome FROM  node.usuario USU LEFT JOIN node.tarefa NOFA ON  USU.id = NOFA.usuario_id WHERE NOFA.id = " + data.tarefa_id;
 
             if (!data.user_id) {
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Notificação Tarefa", data)) return;
                     // so vai fazer se tiver alguem pra ser notificado pra aquela tarefa
@@ -1217,7 +1217,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
                 });
             }
             else {
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query_tarefa_user.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query_tarefa_user.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Notificação Tarefa", data)) return;
                     // so vai fazer se tiver alguem pra ser notificado pra aquela tarefa

@@ -302,7 +302,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         delete g$[elm.dataset.nome + "_elemento"];
         delete g$[elm.dataset.nome + "_array"];
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro)).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("ConsultaFiltro - Tabela", data)) return;
 
@@ -334,7 +334,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.vfyFuncaoDepois(idFuncao, isTela);
         };
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("ConsultaFiltro - Tabela", data)) return;
 
@@ -383,7 +383,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.vfyFuncaoDepois(idFuncao, isTela);
         }
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("ConsultaFiltro - Bloco", data)) return;
 
@@ -447,7 +447,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             array.forEach(function (v, i) {
                 if (v != "encontrado") {
                     queryLoadzin = query.trim() + array[i].trim();
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryLoadzin.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryLoadzin.trim())).success(function (data) {
                         data = data.data;
 
                         // Trata Excecao
@@ -530,7 +530,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         }
 
         tempInterval = setInterval(function () {
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                 // Trata Excecao
                 if (g$.exceptionRequisicao("LoadzinTela - Tela", data)) return;
@@ -626,7 +626,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         filtro = (params[3]) ? params[3].trim() : "";
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("ConsultaFiltro - LeTela", data)) return;
 
@@ -640,12 +640,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             });
 
             filtro = filtro.replace(/\%/g, "‰");
-            $http.get(URL + "/le/" + consultaID + "/" + $rootScope.user.banco + "/" + filtro + "/true/").success(function (data) {
+            $http.get(URL + "le/" + consultaID + "/" + $rootScope.user.banco + "/" + filtro + "/true/").success(function (data) {
 
                 if (g$.exceptionRequisicao("Proc le3 - LeTela", data)) return;
 
                 var consulta = (data.data[0][0].consulta.indexOf("»") > - 1) ? g$.alterSargentos(data.data[0][0].consulta).join("") : data.data[0][0].consulta;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(consulta)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(consulta)).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Consulta - LeTela", data)) return;
 
@@ -797,7 +797,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         // var queryConsulta = "SELECT * FROM consulta WHERE tela_id = " + view.children[0].dataset.menu_id;
 
-        // $http.get(URL + "/get/" + queryConsulta).success(function(data) {
+        // $http.get(URL + "get/" + queryConsulta).success(function(data) {
 
         //     data = data.data;
 
@@ -819,7 +819,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 query.script.tela_id = g$.tela_id;
                 query.script.elemento_id = elemento_id;
             }
-            $http.post(URL + "/jsonQuery/", query)
+            $http.post(URL + "jsonQuery/", query)
                 .then(function (data, status) {
                     var texto;
                     data = data.data;
@@ -849,7 +849,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     // pega id atravez do _id
                     if (JSON.parse(localStorage.user).nao_saas == 0) {
                         queryID = "SELECT id FROM " + banco + "." + tabela + " WHERE _id = " + data.data.insertId;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryID.trim()))
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryID.trim()))
                             .then(function (data) {
 
 
@@ -882,7 +882,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 query.script.tela_id = g$.tela_id;
                 query.script.elemento_id = elemento_id;
             }
-            $http.post(URL + "/jsonQuery/", query)
+            $http.post(URL + "jsonQuery/", query)
                 .then(function (data) {
                     var texto;
 
@@ -1381,7 +1381,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.vfyFuncaoDepois(idFuncao, isTela);
         };
 
-        $http.post(URL + "/jsonQuery/", query).success(function (data) {
+        $http.post(URL + "jsonQuery/", query).success(function (data) {
 
             // Trata Excecao
             g$.exceptionRequisicao("CarregaQuery - Tela", data);
@@ -1412,7 +1412,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 if (elms && elms.indexOf("insertID") > -1) {
                     if (JSON.parse(localStorage.user).nao_saas == 0) {
                         queryID = "SELECT id FROM " + tabela + " WHERE _id = " + data.insertId;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryID.trim()))
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryID.trim()))
                             .then(function (data) {
                                 insertId = data.data.data[0].id;
 
@@ -1661,7 +1661,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         banco = listagem.BANKACCTFROM.BANKID;
                         conta = listagem.BANKACCTFROM.ACCTID;
                         queryCarteira = "SELECT id FROM " + $rootScope.user.banco + ".carteira WHERE banco = '" + banco + "' AND conta = '" + conta + "'";
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryCarteira.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryCarteira.trim())).success(function (data) {
                             carteira = (data.data.length && data.data[0].id && data.data[0].id != "") ? data.data[0].id : carteira;
                             if (carteira && carteira != "") {
                                 transacoes = listagem.BANKTRANLIST.STMTTRN;
@@ -1680,7 +1680,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                                 // }
                                 insertExtrato = "INSERT INTO " + $rootScope.user.banco + ".extrato_bancario (data, historico, documento, valor, carteira_id) VALUES " + values.substring(0, values.lastIndexOf(","));
                                 insertExtrato = insertExtrato.replace(/''/g, "null").replaceAll("�", "?");
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(insertExtrato.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(insertExtrato.trim())).success(function (data) {
                                     if (!data.err) {
                                         g$.exceptionRequisicao("INSERT - Extrato_Bancario", data);
                                         g$.alerta("Alerta", "Extrato importado com sucesso!");
@@ -1736,7 +1736,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     insertExtrato = "INSERT INTO " + $rootScope.user.banco + ".extrato_bancario (data, historico, documento, valor, carteira_id) VALUES " + values.substring(0, values.lastIndexOf(","));
                     insertExtrato = insertExtrato.replace(/''/g, "null").replaceAll("�", "?");
 
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(insertExtrato.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(insertExtrato.trim())).success(function (data) {
                         if (!data.err) {
                             // g$.exceptionRequisicao("INSERT - Extrato_Bancario", data);
                             g$.alerta("Alerta", "Extrato importado com sucesso!");
@@ -1771,7 +1771,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         // "DYS_TEMPLATE/router.js"
 
-        $http.post(URL + "/leArquivo/", { arquivo: arquivo }).success(function (data) {
+        $http.post(URL + "leArquivo/", { arquivo: arquivo }).success(function (data) {
             var conteudo = data;
             // Se passar os elementos é porque tem um retorno
             if (elm && elm.trim() != "") {
@@ -1822,7 +1822,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 console.log(obj.caminho + "/" + obj.nome);
                 console.log(obj.arquivo);
                 console.log('--------------------------------------------------------');
-                $http.post(URL + "/geraArquivo/", obj).success(function (data) {
+                $http.post(URL + "geraArquivo/", obj).success(function (data) {
                     console.log(data);
                     if (acao && acao == "baixar")
                         g$.download('download ¦ ' + idFuncao + ' | ' + obj.caminho + "/" + obj.nome);
@@ -1850,7 +1850,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         semvalid = params[5].trim();
         origem = params[6].trim();
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryProduto.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryProduto.trim())).success(function (data) {
 
             // Trata Excecao
             if (g$.exceptionRequisicao("Gerar BarCode - QueryProduto", data)) return;
@@ -1888,7 +1888,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             height: obj.cod_alt
         });
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("estiloBarCode - Tela", data)) return;;
 
@@ -2063,7 +2063,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var query = "SELECT e.nome, ef.*, e.menu_id FROM elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and ef.elemento_id =  "
             + elemento_id + " and isnull(ef.depois) ORDER BY ef.ordem;",
             elm = $("[data-id='" + elemento_id + "'")[0];
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Elementos Click", data)) return;;
 
@@ -2428,7 +2428,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         ge = new GanttMaster();
         ge.set100OnClose = true;
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Query MS-Project", data)) return;
 
@@ -2476,7 +2476,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 if (val) {
                     g$.memo20 = "";
                     g$.NotificationTarefa(" | " + tarefa_id + " | O Usuário " + g$.user.nome + " deletou a tarefa " + nome_tarefa);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         $("[data-id='47773']")[0].click();
                     });
                 }
@@ -2494,7 +2494,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         ano = (data_ini[2].trim().length == "1") ? 0 + data_ini[2].trim() : data_ini[2].trim();
         g$.memoidproject = linha.querySelector("#tarefa_id input").value;
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery("select * from node.tarefa where id = " + g$.memoidproject)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery("select * from node.tarefa where id = " + g$.memoidproject)).success(function (data) {
             $("[data-id='47789']")[0].click();
             $("[data-id='47806'] input")[0].value = linha.querySelector("#recurso input").value;
             $("[data-id='47806'] input")[0].dataset.value = data.data[0].usuario_id;
@@ -2568,7 +2568,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         // data.tasks = data.tasks.filter(function (v) { return v.updateDate == true });
         data.tasks.forEach(function (v) {
             query = "UPDATE node.tarefa SET inicio_p = '" + g$.formataData(v.start) + "', fim_p = '" + g$.formataData(v.end) + "' where id = " + v.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if (g$.exceptionRequisicao("Atualiza Data Project", data)) return;
             });
         });
@@ -2641,7 +2641,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             duracao_em_dias_p + "', '" + duracao_em_horas_p + "', '" + horas_por_dia + "', '" + antecessor + "', '" + pai + "', '" + projeto_id + "', '" + criticidade + "', '" +
             filhos + "');";
         query = query.replace(/''/g, "null");
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (g$.exceptionRequisicao("Insert Data Project", data)) return;
             $("[data-id='47767']")[0].click();
         });
@@ -2869,7 +2869,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
                     rowCampos = $compile($("#rowCampos")[0])($scope)[0];
 
-                    $http.get(URL + "/").success(function () {
+                    $http.get(URL + "").success(function () {
                         tabela.innerHTML = rowCampos.outerHTML;
                         // -1 pra montar o cabecalho e comecar as linhas do zero
                         for (var i = -1; i < 50; i++) {
@@ -2912,7 +2912,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         data.tabela = $rootScope.user.banco + "." + g$.nome_tabela_excel;
         data.projeto = $rootScope.user.projeto;
 
-        $http.post(URL + "/importPlanilha/", data).success(function (data) {
+        $http.post(URL + "importPlanilha/", data).success(function (data) {
             console.log(data);
             if (data == 'ok') g$.alerta('Alerta', 'Importação finalizada!')
             else {
@@ -2998,9 +2998,9 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             return g$.alerta("Alerta", "Rastreio já Gerado!");
         }
         var query = "select * from " + $rootScope.user.banco + ".pedido where id= " + id.trim()
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var query = "select * from " + $rootScope.user.banco + ".embalagens emb left join " + $rootScope.user.banco + ".pacote pct on pct.id = emb.id where emb.id=" + emb
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 data = data.data;
                 var query = "SELECT p.id,p.integracao_pedido,p.rastreamento,p.dest_xNome,p.dest_xLgr,p.dest_nro, " +
                     "p.dest_xCpl,p.dest_xBairro,p.dest_CEP,p.dest_xMun,p.dest_UF,e.imagemLogo, " +
@@ -3012,7 +3012,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     "LEFT JOIN " + $rootScope.user.banco + ".embalagens em ON p.embalagem_id = em.id " +
                     "LEFT JOIN " + $rootScope.user.banco + ".pacote pac ON em.pacote_id = pac.id " +
                     "WHERE p.id = " + id;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // var data = data.data
                     if (!data.data[0].dest_xNome) return g$.alerta("Erro!", "Nome do Destinatário não informado!");
                     if (!data.data[0].dest_xLgr) return g$.alerta("Erro!", "Endereço de Destino não informado!");
@@ -3093,7 +3093,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 "anexo": anexos
             }
 
-            $http.post(URL + "/sendEmail/", obj).success(function (data) {
+            $http.post(URL + "sendEmail/", obj).success(function (data) {
                 if (data == "OK") g$.alerta("Alerta", "Enviado com Sucesso");
             });
         }
@@ -3106,7 +3106,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             pesquisa = params[2];
         elementos.forEach(function (v, i) {
             var query = "select * from " + $rootScope.user.banco + ".auto_usuarios where aus_codigo=" + v;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("SendEmailPesquisa", data)) return;
 
@@ -3128,7 +3128,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 queryFuncoesDepois = "SELECT * FROM node.tela_funcao ef WHERE " + name + " = '" + idFuncao.trim() + "' ORDER BY ef.ordem;";
             else
                 queryFuncoesDepois = "SELECT * FROM node.elemento_funcao ef WHERE " + name + " = '" + idFuncao.trim() + "' ORDER BY ef.ordem;";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryFuncoesDepois.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(queryFuncoesDepois.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("VfyDepois", data)) return;
 
@@ -3201,7 +3201,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         $http.get(urls).success(function (data) {
             if (data) {
                 var query = "update " + $rootScope.user.banco + ".pedido set plp = " + data.message + ",statusplp = 0 where statusplp = 1 and coalesce(rastreamento,'') <> '' AND rastreamento rlike '([A-Z]){2}([0-9]){9}([A-Z]){2}'";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     tela_impressao = window.open('about:blank');
                     tela_impressao.window.location.href = "http://" + g$.link + "/temp/plp/plp.html#plp=" + data.message + "&banco=" + $rootScope.user.banco + "&empresa=" + empresa.trim();
                 })
@@ -3479,7 +3479,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         else
             query = "SELECT * FROM tela_funcao ef WHERE evento='close' and tela_id='" + $("#view #" + id + " .popup")[0].id + "' and isnull(ef.depois) ORDER BY ordem";
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Close Modal", data)) return;
 
@@ -3520,7 +3520,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         arquivo = arquivo.substring(arquivo.indexOf("br") + 3, arquivo.length);
         arquivo = arquivo;
 
-        $http.post(URL + "/leArquivo/", { arquivo: arquivo }).success(function (data) {
+        $http.post(URL + "leArquivo/", { arquivo: arquivo }).success(function (data) {
             g$[memo] = data;
             g$[memo] = g$[memo].replace(/\|/g, "").replaceAll("'", "");
 
@@ -3554,21 +3554,21 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             modo = params[7]
         if (check == 1) {
             var queryIns = "INSERT INTO " + $rootScope.user.banco + ".itens_estoque (produto_id,lote,nSerie,estoque_id) values (" + produto + ",'" + lote + "','" + nSerie + "'," + estoque + ");"
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryIns.trim()))
+            $http.post(URL + "jsonQuery/", g$.trataQuery(queryIns.trim()))
         }
         qtd = (check == 1) ? 1 : qtd
         var query = "select saida from " + $rootScope.user.banco + ".natureza where id =" + modo;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var soma = (data.data[0].saida == 1) ? parseInt(qtd * -1) : qtd,
                 queryVer = "SELECT id from " + $rootScope.user.banco + ".empresa_produto_estoque where produto_id = " + produto + " and empresa_estoque_id = " + estoque
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryVer.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(queryVer.trim())).success(function (data) {
                 if (data.data.length == 0) {
                     var queryEst = "INSERT INTO " + $rootScope.user.banco + ".estoque_controle (estoque_id,produto_id,quantidade) values (" + estoque + "," + produto + "," + qtd + ");"
                 }
                 else {
                     var queryEst = "UPDATE " + $rootScope.user.banco + ".estoque_controle SET quantidade = quantidade + " + soma
                 }
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryEst.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(queryEst.trim())).success(function (data) {
                     g$.alerta("Alerta!", "Salvo com Sucesso!");
                 })
             })
@@ -3579,35 +3579,35 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var params = g$.alterSargentos(params),
             pedido = params[1];
         var query = "select desconto_quantidade from " + $rootScope.user.banco + ".empresa emp left join " + $rootScope.user.banco + ".pedido p on p.empresa_id = emp.id where p.id = " + pedido;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data[0].desconto_quantidade == 1) {
                 var query = "SELECT * from " + $rootScope.user.banco + ".pedido_produto where pedido_id = " + pedido;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     if (data.data.length != 0) {
                         var produtos = data.data,
                             ultimo = data.data.length
                         produtos.forEach(function (v, i) {
                             var query = "SELECT desconto_a_vista,desconto_a_prazo,de,ate,aPartir from " + $rootScope.user.banco + ".desconto_por_quantidade where produto_id = " + v.produto_id;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (data.data.length != 0) {
                                     data.data.forEach(function (k, l) {
                                         if (v.quantidade >= k.aPartir || (v.quantidade >= k.de && v.quantidade <= k.ate)) {
                                             var queryForma = "select fp.a_vista,fp.aplica_desconto from " + $rootScope.user.banco + ".forma_de_pagamento fp left join " + $rootScope.user.banco + ".financeiro fi on fi.forma_de_pagamento_id = fp.id where fi.pedido_id = " + pedido;
-                                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryForma.trim())).success(function (data) {
+                                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryForma.trim())).success(function (data) {
                                                 if (forma.data.data[0]) {
                                                     if (forma.data.data[0].aplica_desconto == 1) {
                                                         if (forma.data.data.length > 1) {
                                                             var queryDesconto = "UPDATE " + $rootScope.user.banco + ".pedido_produto SET desconto = " + parseFloat((v.total / 100) * k.desconto_a_prazo) + " where id =" + v.id
-                                                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDesconto.trim()));
+                                                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryDesconto.trim()));
                                                         }
                                                         else {
                                                             if (forma.data.data[0].a_vista == 1) {
                                                                 var queryDesconto = "UPDATE " + $rootScope.user.banco + ".pedido_produto SET desconto = " + parseFloat((v.total / 100) * k.desconto_a_vista) + " where id =" + v.id
-                                                                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDesconto.trim()));
+                                                                $http.post(URL + "jsonQuery/", g$.trataQuery(queryDesconto.trim()));
                                                             }
                                                             else {
                                                                 var queryDesconto = "UPDATE " + $rootScope.user.banco + ".pedido_produto SET desconto = " + parseFloat((v.total / 100) * k.desconto_a_prazo) + " where id =" + v.id
-                                                                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDesconto.trim()));
+                                                                $http.post(URL + "jsonQuery/", g$.trataQuery(queryDesconto.trim()));
                                                             }
                                                         }
                                                     }
@@ -3630,10 +3630,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var params = g$.alterSargentos(params),
             pedido = params[1],
             query = "select SUM(porcentagem) as soma from " + $rootScope.user.banco + ".rentabilidade"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var rent = parseInt(data.data[0].soma);
             var query = "select p.custo,p.id,pp.desconto,pp.valor,pp.quantidade from " + $rootScope.user.banco + ".pedido_produto pp left join " + $rootScope.user.banco + ".produto p on p.id = pp.produto_id where pp.pedido_id = " + pedido
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 data.data.forEach(function (v, i) {
                     var custoRent = parseFloat(v.custo) + ((parseFloat(v.custo) / 100) * rent);
                     newPreco = parseFloat(v.valor) - (parseFloat(v.desconto) / parseInt(v.quantidade));
@@ -3641,7 +3641,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         var percent = 1 - (custoRent / v.valor),
                             valorMax = v.valor * percent;
                         var query = "UPDATE " + $rootScope.user.banco + ".pedido_produto set desconto = 0 where pedido_id = " + pedido + " and produto_id = " + v.id
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             g$.atualizarTabela("atualizarTabela ¦ 402 | 1825");
                             g$.alerta("Alerta!", "Valor do Produto está abaixo da Rentabilidade Mínima!<br>O Desconto Máximo permitido é de " + (percent * 100).toFixed(2) + "% ou R$ " + valorMax.toFixed(2));
                         });
@@ -3654,7 +3654,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     g$.openModalTable = function (params) {
         var tabela = event.target.parentElement.parentElement.querySelector("table"),
             query = "select tbl_modal from node.elemento where id = " + tabela.dataset.id;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var modal = $("[data-id= " + data.data[0].tbl_modal + "]")[0];
             if (modal.id == "coluna" && tabela.id == "tabela") {
                 if (!modal.querySelector("#fecharModal")) {
@@ -3688,16 +3688,16 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             queryTabela = "CREATE TABLE NetoK." + tabela + " (`id` INT NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`))";
         var queryAlias = "select alias from node.tabela where alias = '" + alias.trim() + "'";
         $("[data-id=22247]")[0].innerHTML = '<div id="logTabela" style="text-align:center;"></div>'
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryAlias.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryAlias.trim())).success(function (data) {
             if (!data.data.length) {
                 if (crm == 1) {
                     var query = "select u.banco from node.projeto p left join node.usuario u on u.projeto_id = p.id where erp = 1 group by u.banco";
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         var k = data.data,
                             ultimo = data.data.length - 1;
                         k.forEach(function (v, i) {
                             var query = queryTabela.replace("NetoK", v.banco);
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (!data.error) {
                                     $("#logTabela")[0].innerHTML += '<p style="color:green;">' + v.banco + ' Criado com Sucesso!</p>'
                                 }
@@ -3707,7 +3707,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             })
                             if (i == ultimo) {
                                 var query = "insert into node.tabela (tabela,alias) VALUES ('" + tabela + "','" + alias + "')"
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     if (data.data.insertId) {
                                         $("#logTabela")[0].innerHTML += '<p style="color:green;">Criado com Sucesso na Node!</p>'
                                     } else {
@@ -3719,14 +3719,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     })
                 } else {
                     var query = queryTabela.replace("NetoK", $rootScope.user.banco);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (!data.error) {
                             var query = "insert into node.tabela (tabela,alias) VALUES ('" + tabela + "','" + alias + "')"
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (data.data.insertId) {
                                     $("#logTabela")[0].innerHTML += '<p style="color:green;">Tabela no ' + $rootScope.user.banco + ' Criada com Sucesso!</p>'
                                     var query = "insert into node.campo (campo,tabela_id) VALUES ('id'," + data.data.insertId + ")";
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                         if (data.data.insertId) {
                                             $("#logTabela")[0].innerHTML += '<p style="color:green;">Campo ID Criada com Sucesso no Node!</p>'
                                         }
@@ -3791,12 +3791,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         }
         if (ERP == 1) {
             var query = "select u.banco from node.projeto p left join node.usuario u on u.projeto_id = p.id where erp = 1 group by u.banco";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 var k = data.data,
                     ultimo = data.data.length - 1;
                 k.forEach(function (v, i) {
                     var query = queryColuna.replace("NetoK", v.banco);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (!data.error) {
                             if (coluna) {
                                 $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">' + v.banco + ' Alterado com Sucesso!</p>'
@@ -3812,7 +3812,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     if (i == ultimo) {
                         if (coluna) {
                             var query = "UPDATE node.campo SET campo = '" + newColuna + "',tabela_id=" + IDTabela + ",UN=" + (un == "") ? 0 : 1 + ",NN=" + (nn == "") ? 0 : 1 + ",UQ=" + (uq == "") ? 0 : 1 + ",tipo='" + tipo + "',DF='" + dafault + "' where id = " + IDColuna;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (!data.error) {
                                     $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Coluna Alterada a Tabela Node</p>'
                                 }
@@ -3822,7 +3822,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             })
                         } else {
                             var query = "INSERT INTO node.campo (campo,tabela_id,UN,NN,UQ,tipo,DF) values ('" + newColuna + "','" + IDTabela + "','" + un + "','" + nn + "','" + uq + "','" + tipo + "'," + dafault + ")";
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (!data.error) {
                                     $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Criado com Sucesso na Node!</p>'
                                 } else {
@@ -3836,12 +3836,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         }
         else {
             var query = queryColuna.replace("NetoK", $rootScope.user.banco);
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if (!data.error) {
                     if (coluna) {
                         $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Coluna Alterada no Banco' + $rootScope.user.banco + '</p>'
                         var query = "UPDATE node.campo SET campo = '" + newColuna + "',tabela_id=" + IDTabela + ",UN=" + un + ",NN=" + nn + ",UQ=" + uq + ",tipo='" + tipo + "',DF='" + dafault + "' where id = " + IDColuna;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             if (!data.error) {
                                 $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Coluna Alterada a Tabela Node</p>'
                             }
@@ -3852,7 +3852,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     } else {
                         $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Coluna Criada no Banco' + $rootScope.user.banco + '</p>'
                         var query = "INSERT INTO node.campo (campo,tabela_id,UN,NN,UQ,tipo,DF) values ('" + newColuna + "'," + IDTabela + "," + un + "," + nn + "," + uq + ",'" + tipo + "'," + dafault + ")";
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             if (!data.error) {
                                 $("[data-id=22320]")[0].innerHTML += '<p style="color:green;">Coluna Adicionada a Tabela Node</p>'
                             }
@@ -3889,7 +3889,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             adicionados = $("[data-id=22856]")[0].querySelector("tbody").children.length - 1,
             idFuncao = params.split("¦")[1],
             query = "select SUM(quantidade) as qtd,produto_id from " + $rootScope.user.banco + ".pedido_produto pp left join " + $rootScope.user.banco + ".produto pt on pt.id = pp.produto_id where pedido_id = " + $("[data-id=22865]")[0].children[0].dataset.value + " and pt.controle_nSerie_lote = 1";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data[0].qtd == (selecionados + adicionados)) {
                 return g$.vfyFuncaoDepois(idFuncao, isTela);
             } else {
@@ -4022,7 +4022,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             query = "SELECT c.id, c.inicio, c.horas, pd.hora_inicio, pd.hora_fim, TIMEDIFF(pd.hora_fim, pd.hora_inicio) horas_trabalhadas " +
                 "FROM node.consulta c, node.projeto_desenvolvedor pd " +
                 "WHERE c.id = " + consultaId + "pd.projeto_id = " + $rootScope.user.projeto_id;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var inicio = new Date(data.data[0].inicio),
                 horas = 0,
                 horas_trabalhadas = data.data[0].horas_trabalhadas,
@@ -4051,7 +4051,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 inicio = fim;
                 if (ultima == i) {
                     query = query + queryfim;
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim()))
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim()))
                 }
             });
         });
@@ -4097,7 +4097,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             "WHERE p.id = " + idPedido + " AND st.id = " + idStatus;
         // console.log(query);
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).then(function (data) {
             if (g$.exceptionRequisicao("TROCA_STATUS", data.data)) return;
             var statusAnterior = data.data.data[0].status_anterior,
                 idNaturezaOperacao = data.data.data[0].natureza_operacao_id,
@@ -4173,7 +4173,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //     "LEFT JOIN " + $rootScope.user.banco + ".empresa_estoque ee ON ee.empresa_id = p.empresa_id " +
                     //     "LEFT JOIN " + $rootScope.user.banco + ".empresa_produto_estoque ep ON ee.estoque_id = ep.estoque_id AND pp.produto_id = ep.produto_id " +
                     //     "WHERE p.id = " + idPedido + " GROUP BY pp.id ";
-                    // $http.get(URL + "/get/" + query).then(function (data) {
+                    // $http.get(URL + "get/" + query).then(function (data) {
                     //     if (g$.exceptionRequisicao("SemEstoque", data.data)) return;
                     //     var produtosEmFalta,
                     //         ultimo = data.data.data.length - 1;
@@ -4191,7 +4191,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //             queryInsereSumario = "INSERT INTO " + $rootScope.user.banco + ".sumario (produto_id, quantidade_reserva, quantidade, estoque_id, natureza_id, pedido_id, custo, reservado, pedido_produto_id) VALUES ";
 
                     //             var query = "SELECT id, produto_id, quantidade FROM " + $rootScope.user.banco + ".pedido_produto WHERE pedido_id = " + idPedido;
-                    //             $http.get(URL + "/get/" + query).then(function (data) {
+                    //             $http.get(URL + "get/" + query).then(function (data) {
                     //                 if (g$.exceptionRequisicao("PedidosProdutos", data.data)) return;
                     //                 var ultimo = data.data.data.length - 1;
                     //                 data.data.data.forEach(function (v, k) {
@@ -4210,7 +4210,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                     var query = "SELECT ep.estoque_id, ep.quantidade quantidadeEstoque FROM " + $rootScope.user.banco + ".empresa_produto_estoque ep " +
                     //                         "LEFT JOIN " + $rootScope.user.banco + ".empresa_estoque ee ON ee.estoque_id = ep.estoque_id " +
                     //                         "WHERE ee.empresa_id = " + idEmpresa + " AND ep.produto_id = " + idProduto + " AND ep.quantidade >0 ORDER BY ee.prioridade";
-                    //                     $http.get(URL + "/get/" + query).then(function (data) {
+                    //                     $http.get(URL + "get/" + query).then(function (data) {
                     //                         if (g$.exceptionRequisicao("QntEstoque", data.data)) return;
                     //                         //var i = 0;
                     //                         var ultimoEstoque = data.data.data.length - 1;
@@ -4253,7 +4253,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                                             // prepara inserçao: tira ultima virgula 
                     //                                             var query = queryInsereSumario.substr(0, (queryInsereSumario.length - 1));
                     //                                             //console.log(query);
-                    //                                             $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                             $http.get(URL + "get/" + query).then(function (data) {
                     //                                                 if (g$.exceptionRequisicao("Insert sumario", data.data)) return;
                     //                                                 // atualiza custo pedido_produto
                     //                                                 var query = "UPDATE " + $rootScope.user.banco + ".pedido_produto pp," +
@@ -4263,14 +4263,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                                                     "SET pp.preco_de_custo = soma / pp.quantidade WHERE s.pedido_produto_id = pp.id " +
                     //                                                     "AND pp.pedido_id =" + idPedido;
                     //                                                 // console.log(query);
-                    //                                                 $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                                 $http.get(URL + "get/" + query).then(function (data) {
                     //                                                     if (g$.exceptionRequisicao("Update custo", data.data)) return;
                     //                                                     fim += 2;
 
                     //                                                     if (fim == totalAcoes) {
                     //                                                         var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
                     //                                                         // console.log(query);
-                    //                                                         $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                                         $http.get(URL + "get/" + query).then(function (data) {
                     //                                                             if (g$.exceptionRequisicao("Update status", data.data)) return;
                     //                                                             g$.alerta("Alerta!", msg + msgFim);
                     //                                                             return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4289,7 +4289,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                                     var query = "SELECT id,quantidade_disponivel, custo," + faltandoEstoque + " faltandoEstoque FROM " + $rootScope.user.banco + ".estoque_custo_produto " +
                     //                                         "WHERE estoque_id = " + idEstoque + " AND produto_id = " + idProduto + " AND quantidade_disponivel > 0 " +
                     //                                         "ORDER BY id";
-                    //                                     $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                     $http.get(URL + "get/" + query).then(function (data) {
                     //                                         if (g$.exceptionRequisicao("CustoEstoque", data.data)) return;
                     //                                         // var j = 0;
                     //                                         // while (faltandoEstoque > 0) {
@@ -4325,7 +4325,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                                                         // prepara inserçao: tira ultima virgula 
                     //                                                         var query = queryInsereSumario.substr(0, (queryInsereSumario.length - 1));
                     //                                                         // console.log("Insert de reserva e/ou baixa do sumario: \n " + query);
-                    //                                                         $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                                         $http.get(URL + "get/" + query).then(function (data) {
                     //                                                             if (g$.exceptionRequisicao("Insert sumario", data.data)) return;
                     //                                                             // atualiza custo pedido_produto
                     //                                                             var query = "UPDATE " + $rootScope.user.banco + ".pedido_produto pp," +
@@ -4336,14 +4336,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //                                                                 "AND pp.pedido_id =" + idPedido;
                     //                                                             // console.log("Update do pedido produto setando media de custo \n " + query);
                     //                                                             var obj = { query: query.trim() };
-                    //                                                             $http.post(URL + "/jsonQuery/", obj).then(function (data) {
+                    //                                                             $http.post(URL + "jsonQuery/", obj).then(function (data) {
                     //                                                                 if (g$.exceptionRequisicao("Update custo", data.data)) return;
                     //                                                                 //  $http.get(URL+"/get/" + query).then(function (data) {
                     //                                                                 fim += 2;
                     //                                                                 if (fim == totalAcoes) {
                     //                                                                     var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
                     //                                                                     // console.log("Update do status do pedido \n " + query);
-                    //                                                                     $http.get(URL + "/get/" + query).then(function (data) {
+                    //                                                                     $http.get(URL + "get/" + query).then(function (data) {
                     //                                                                         if (g$.exceptionRequisicao("Update status", data.data)) return;
                     //                                                                         g$.alerta("Alerta!", msg + msgFim);
                     //                                                                         return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4375,7 +4375,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     if (reserva) {
                         (msgFim != "Nenhuma.") ? msgFim += ", Reserva de estoque" : msgFim = "Reserva de estoque";
                         var query = 'UPDATE ' + $rootScope.user.banco + '.pedido_produto set reserva = 1, cancelado = 0 where pedido_id = ' + idPedido;
-                        $http.post(URL + "//jsonQuery/", g$.trataQuery(query)).then(function (data) {
+                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
                             if (g$.exceptionRequisicao("Colocar Produtos na Reserva", data.data)) return;
                             fim += 2;
                             g$.msgFimStatus(idStatus, idPedido, msg, msgFim, fim);
@@ -4393,18 +4393,18 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         //     "SELECT produto_id, quantidade, empresa_id, estoque_id, natureza_id, pedido_id, custo, pedido_produto_id, 1 " +
                         //     "FROM " + $rootScope.user.banco + ".sumario WHERE pedido_id = " + idPedido + " AND COALESCE(estornado,0) = 0 AND COALESCE(reservado,0) = 0 AND COALESCE(estorno,0) <> 1";
                         // // console.log("Insert do estorno de estoque \n " + query);
-                        // $http.get(URL + "/get/" + query).then(function (data) {
+                        // $http.get(URL + "get/" + query).then(function (data) {
                         //     if (g$.exceptionRequisicao("Insert estorno", data.data)) return;
                         //     // atualiza custo(0) do pedido_produto
                         //     var query = "UPDATE " + $rootScope.user.banco + ".pedido_produto pp, " + $rootScope.user.banco + ".sumario s SET pp.preco_de_custo = 0, s.estornado=1 WHERE s.pedido_id = " + idPedido + " AND COALESCE(s.estorno,0) =0 AND COALESCE(s.reservado,0) = 0 AND pp.pedido_id = " + idPedido;
                         //     // console.log("Update do preço_de_custo do pedido_produto e seta 1 em estornado nos sumarios desse pedido \n " + query);
-                        //     $http.get(URL + "/get/" + query).then(function (data) {
+                        //     $http.get(URL + "get/" + query).then(function (data) {
                         //         if (g$.exceptionRequisicao("Update estorno", data.data)) return;
                         //         fim += 1;
                         //         if (fim == totalAcoes) {
                         //             var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
                         //             // console.log("Update do status do pedido \n " + query);
-                        //             $http.get(URL + "/get/" + query).then(function (data) {
+                        //             $http.get(URL + "get/" + query).then(function (data) {
                         //                 if (g$.exceptionRequisicao("Update status", data.data)) return;
                         //                 g$.alerta("Alerta!", msg + msgFim);
                         //                 return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4413,7 +4413,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         //     });
                         // });
                         var query = 'UPDATE ' + $rootScope.user.banco + '.pedido_produto set cancelado = 0 where pedido_id = ' + idPedido;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).then(function (data) {
                             if (g$.exceptionRequisicao("Cancelar Pedido", data.data)) return;
                             fim += 1;
                             g$.msgFimStatus(idStatus, idPedido, msg, msgFim, fim);
@@ -4427,17 +4427,17 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     //         "SELECT produto_id, quantidade_reserva, empresa_id, estoque_id, natureza_id, pedido_id, custo, pedido_produto_id, 1 " +
                     //         "FROM " + $rootScope.user.banco + ".sumario WHERE pedido_id = " + idPedido + " AND COALESCE(estornado,0) = 0 AND COALESCE(reservado,0) = 1 AND COALESCE(estorno,0) <> 1";
                     //     // console.log("Insert do estorno de reserva \n " + query);
-                    //     $http.get(URL + "/get/" + query).then(function (data) {
+                    //     $http.get(URL + "get/" + query).then(function (data) {
                     //         if (g$.exceptionRequisicao("Insert estorno reserva", data.data)) return;
                     //         var query = "UPDATE " + $rootScope.user.banco + ".sumario s SET s.estornado=1 WHERE s.pedido_id = " + idPedido + " AND COALESCE(s.estorno,0) =0 AND COALESCE(s.reservado,0) = 1";
                     //         // console.log("Update para setar 1 em estornado nos sumarios de reserva desse pedido \n " + query);
-                    //         $http.get(URL + "/get/" + query).then(function (data) {
+                    //         $http.get(URL + "get/" + query).then(function (data) {
                     //             if (g$.exceptionRequisicao("Update estorno reserva", data.data)) return;
                     //             fim += 2;
                     //             if (fim == totalAcoes) {
                     //                 var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
                     //                 // console.log("Update do status do pedido \n " + query);
-                    //                 $http.get(URL + "/get/" + query).then(function (data) {
+                    //                 $http.get(URL + "get/" + query).then(function (data) {
                     //                     if (g$.exceptionRequisicao("Update status", data.data)) return;
                     //                     g$.alerta("Alerta!", msg + msgFim);
                     //                     return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4452,7 +4452,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         (msgFim != "Nenhuma.") ? msgFim += ", Estorno de Reserva" : msgFim = "Estorno de Reserva";
 
                         var query = 'UPDATE ' + $rootScope.user.banco + '.pedido_produto set reserva = 0, cancelado = 0 where pedido_id = ' + idPedido;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).then(function (data) {
                             if (g$.exceptionRequisicao("Estornar Reserva", data.data)) return;
                             fim += 2;
                             g$.msgFimStatus(idStatus, idPedido, msg, msgFim, fim);
@@ -4464,7 +4464,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     if (cancelado) {
                         (msgFim != "Nenhuma.") ? msgFim += ", Pedido Cancelado" : msgFim = "Pedido Cancelado";
                         var query = 'UPDATE ' + $rootScope.user.banco + '.pedido_produto set estoque = 0 where pedido_id = ' + idPedido;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).then(function (data) {
                             if (g$.exceptionRequisicao("Cancelar Pedido", data.data)) return;
                             fim += 1;
                             g$.msgFimStatus(idStatus, idPedido, msg, msgFim, fim);
@@ -4573,7 +4573,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     g$.msgFimStatus(idStatus, idPedido, msg, msgFim, fim);
                     // var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
                     // // console.log("Update do status do pedido \n " + query);
-                    // $http.get(URL + "/get/" + query).then(function (data) {
+                    // $http.get(URL + "get/" + query).then(function (data) {
                     //     if (g$.exceptionRequisicao("Update status", data.data)) return;
                     //     g$.alerta("Alerta!", msg + msgFim);
                     //     return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4589,7 +4589,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         // if (fimCount == 22) {
         var query = "UPDATE " + $rootScope.user.banco + ".pedido SET status_id = " + idStatus + " WHERE id = " + idPedido;
         // console.log("Update do status do pedido \n " + query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).then(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).then(function (data) {
             if (g$.exceptionRequisicao("Update status", data.data)) return;
             g$.alerta("Alerta!", msg + msgFim);
             return g$.vfyFuncaoDepois(idFuncao, isTela);
@@ -4616,7 +4616,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             "COALESCE(st.gera_receber_pago,0) gera_receber_pago, COALESCE(st.nao_editar_pedido,0) nao_editar_pedido, COALESCE(st.emitir_nota_automatico,0) emitir_nota_automatico, COALESCE(st.pronto_para_emissao_nf,0) pronto_para_emissao_nf, COALESCE(st.estorna_receber_nao_pago,0) estorna_receber_nao_pago, COALESCE(st.atualiza_status_integracao,0) atualiza_status_integracao, " +
             "COALESCE(st.confirmado,0) confirmado, COALESCE(st.pago,0) pago, COALESCE(st.concluido,0) concluido, COALESCE(st.retira_reserva,0) retira_reserva, COALESCE(st.estorna_reserva,0) estorna_reserva, COALESCE(st.dasabilita_emissao_nf,0) dasabilita_emissao_nf, COALESCE(st.gera_comissao,0) gera_comissao, COALESCE(st.estorna_comissao,0) estorna_comissao, COALESCE(st.gera_previsao_receber,0) gera_previsao_receber " +
             "FROM " + $rootScope.user.banco + ".status st WHERE id = " + idStatus;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var rastreamento = data.data[0].rastreamento,
                 enviado = data.data[0].enviado,
                 separado = data.data[0].separado,
@@ -4688,7 +4688,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         idPedidoDevolucao = params[1].trim(),
             query = "SELECT pedido_original_id, produto_id FROM " + $rootScope.user.banco + ".pedido_devolucao WHERE NOT ISNULL(quantidade) AND NOT ISNULL(estoque_id) AND id = " + idPedidoDevolucao;
         // console.log(query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var idPedidoOriginal = data.data[0].pedido_original_id,
                 idProduto = data.data[0].produto_id;
             if (idPedidoOriginal) {
@@ -4697,18 +4697,18 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     "FROM " + $rootScope.user.banco + ".pedido_devolucao pd " +
                     "WHERE pd.produto_id = " + idProduto + " AND pd.pedido_original_id = " + idPedidoOriginal;
                 // console.log(query);
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     var quantidadeDisponivel = data.data[0].quantidadeDisponivel,
                         query = "UPDATE " + $rootScope.user.banco + ".pedido_devolucao " +
                             "SET quantidade_disponivel = " + quantidadeDisponivel +
                             " WHERE produto_id = " + idProduto + " AND pedido_original_id = " + idPedidoOriginal;
                     // console.log(query);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         var query = "INSERT INTO " + $rootScope.user.banco + ".pedido_devolucao (pedido_original_id, produto_id, quantidade_disponivel) " +
                             "VALUES (" + idPedidoOriginal + "," + idProduto + "," + quantidadeDisponivel + ")";
                         if (quantidadeDisponivel > 0) {
                             // console.log(query);
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 return g$.vfyFuncaoDepois(idFuncao, isTela);
                             });
                         } else {
@@ -4736,7 +4736,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         };
         query = "SELECT IF(NOT ISNULL(pedido_gerado_id),COUNT(id),0) linhasGeradas, IF(ISNULL(pedido_gerado_id),COUNT(id),0) linhasPreparadas FROM " + $rootScope.user.banco + ".pedido_devolucao WHERE pedido_original_id = " + idPedido;
         // console.log(query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var linhasGeradas = data.data[0].linhasGeradas,
                 linhasPreparadas = data.data[0].linhasPreparadas;
             // pedido de devolucao ja foi feito
@@ -4748,7 +4748,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 var query = "INSERT INTO " + $rootScope.user.banco + ".pedido_devolucao (pedido_original_id, produto_id, quantidade_disponivel) " +
                     "SELECT pedido_id,produto_id,quantidade FROM " + $rootScope.user.banco + ".pedido_produto WHERE pedido_id = " + idPedido;
                 // console.log(query);
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     return g$.vfyFuncaoDepois(idFuncao, isTela);
                 });
             }
@@ -4773,13 +4773,13 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         // verifica se pedido_devolucao tem registros com quantidade e estoque not null
         var query = "SELECT pedido_original_id, produto_id, quantidade, estoque_id FROM " + $rootScope.user.banco + ".pedido_devolucao WHERE pedido_original_id = " + idPedido +
             " AND NOT ISNULL(quantidade) AND NOT ISNULL(estoque_id)";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var pedidoProdutos = data.data;
             if (pedidoProdutos && pedidoProdutos[0]) {
                 // inserePedidoDevolucao
                 var query = "INSERT INTO " + $rootScope.user.banco + ".pedido (natureza_da_operacao_id,ide_finNFe, ide_NFref, cliente_fornecedor_id,empresa_id, vendedor_id) " +
                     "SELECT " + idNaturezaOperacao + " natureza_da_operacao_id, " + ide_finNFe + " ide_finNFe, chaveNFe, cliente_fornecedor_id, empresa_id, vendedor_id FROM " + $rootScope.user.banco + ".pedido WHERE id = " + idPedido;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                     // inserePedidosProdutosDevolucao
                     var idPedidoGerado = data.data.insertId,
@@ -4787,15 +4787,15 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             "SELECT pedido_original_id, produto_id, quantidade, estoque_id FROM " + $rootScope.user.banco + ".pedido_devolucao WHERE pedido_original_id = " + idPedido +
                             " AND NOT ISNULL(quantidade) AND NOT ISNULL(estoque_id)";
                     if (idPedidoGerado) {
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             // deleta pedido_devolucao sem quantidasde e estoque
                             var query = "DELETE FROM " + $rootScope.user.banco + ".pedido_devolucao WHERE pedido_original_id = " + idPedido +
                                 " AND (ISNULL(quantidade) OR ISNULL(estoque_id))";
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                                 // atualiza pedido_devolucao setando id do pedido gerado
                                 var query = "UPDATE " + $rootScope.user.banco + ".pedido_devolucao SET pedido_gerado_id = " + idPedidoGerado + " WHERE pedido_original_id = " + idPedido;
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     g$.alerta("Alerta", "Pedido de devolução gerado com sucesso!");
                                     return g$.vfyFuncaoDepois(idFuncao, isTela);
                                 });
@@ -4808,14 +4808,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     g$.converteQuerySaas = function () {
-        $http.post(URL + "/leArquivo/", { arquivo: "DYS_TEMPLATE/trg.sql" }).success(function (data) {
+        $http.post(URL + "leArquivo/", { arquivo: "DYS_TEMPLATE/trg.sql" }).success(function (data) {
             g$.extraiQuerys(data);
         });
     }
 
     g$.extraiQuerys = function (text) {
         var json = { texto: text }, querySaas = [], t, tables = [];
-        $http.post(URL + "/extraiQuery/", json).success(function (data) {
+        $http.post(URL + "extraiQuery/", json).success(function (data) {
             if (data.tables[0]) {
                 data.tables[0].forEach(function (table, i) {
                     t = table.substring(table.indexOf('TABLE ') + 6, table.length);
@@ -4845,7 +4845,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             dataFim = $("[data-id=" + params[2] + "]")[0].value;
         if (dataFim && dataInicio) {
             var query = "select id,login_chupa_cabra,senha_chupa_cabra from asago.cliente_fornecedor where node_usuario_id = " + $rootScope.user.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if (data.data[0].login_chupa_cabra && data.data[0].senha_chupa_cabra) {
                     dataInicio = dataInicio.split("-");
                     dataFim = dataFim.split("-");
@@ -4907,10 +4907,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         queryInsert = "INSERT INTO " + $rootScope.user.banco + ".sumario (produto_id,estoque_id,quantidade,natureza_id,usuario_id, custo, fornecedor_id, entrada) " +
                             "SELECT produto_id, " + estoque + ", quantidade, 0,  " + $rootScope.user.id + ", (total+COALESCE(ipi_vipi,0)) ½ (quantidade *COALESCE(multiplo,1)), " + fornecedor + ", 1 " +
                             "FROM " + $rootScope.user.banco + ".pedido_produto pp WHERE pp.id = " + idPP;
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryCall.trim())).success(function (data) {
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsert.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryCall.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsert.trim())).success(function (data) {
                             var queryUpdate = "update " + $rootScope.user.banco + ".pedido_produto set estoque_ok = 1 where id = " + idPP;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
                                 if (ultimo == i + 1) {
                                     g$.atualizarTabela("atualizarTabela | 11631");
                                     g$.alerta("Sucesso", "Sucesso!");
@@ -4922,16 +4922,16 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 } else {
                     if (v.e_11632) {
                         var query = "select estoque_ok from " + $rootScope.user.banco + ".pedido_produto where id = " + v.e_11632;
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             if (data.data[0].estoque_ok == "0") {
                                 var idPP = v.e_11632,
                                     descForne = v.e_11634,
                                     queryInsert = "INSERT INTO " + $rootScope.user.banco + ".sumario (produto_id,estoque_id,quantidade,natureza_id,usuario_id, custo, fornecedor_id, entrada) " +
                                         "SELECT produto_id, " + estoque + ", quantidade, 0,  " + $rootScope.user.id + ", (total+COALESCE(ipi_vipi,0)) ½ (quantidade *COALESCE(multiplo,1)), " + fornecedor + ", 1 " +
                                         "FROM " + $rootScope.user.banco + ".pedido_produto pp WHERE pp.id = " + idPP;
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsert.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsert.trim())).success(function (data) {
                                     var queryUpdate = "update " + $rootScope.user.banco + ".pedido_produto set estoque_ok = 1 where id = " + idPP;
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
                                         if (ultimo == i + 1) {
                                             g$.atualizarTabela("atualizarTabela | 11631");
                                             g$.alerta("Sucesso", "Sucesso!");
@@ -4951,7 +4951,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var destino = $("[data-id=40203]")[0]
         var produtoID = $("[data-id=2689]")[0].value
         var query = "SELECT * FROM " + $rootScope.user.banco + ".atributo"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var atributos = data.data;
             var ultimo = atributos.length
             atributos.forEach(function (v, i) {
@@ -4982,7 +4982,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     var query = "select * from " + $rootScope.user.banco + ".produto_atributo pa " +
                         "left join " + $rootScope.user.banco + ".atributo at on at.id = pa.atributo_id " +
                         "where produto_id = " + produtoID;
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (data.data.length > 0) {
                             var atr = data.data
                             atr.forEach(function (v, i) {
@@ -5032,7 +5032,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         } else {
             if (elm.tagName == "A" || elm.tagName == "SPAN" || (event.keyCode && event.keyCode == 120)) {
                 var query = "INSERT INTO " + $rootScope.user.banco + ".pedido_produto (pedido_id,produto_id,quantidade,ambiente_id) VALUES " + $("[data-id=40773]")[0].textContent;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     if (!data.err) {
                         g$.atualizarTabela("atualizarTabela | " + tabela);
                         g$.closeModal("closeModal | insrRap");
@@ -5066,7 +5066,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var destino = $("[data-id=40203]")[0]
         var produtoID = $("[data-id=2689]")[0].value
         var query = "SELECT * FROM " + $rootScope.user.banco + ".atributo"
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length > 0) {
                 var atr = data.data
                 var ultimo = data.data.length
@@ -5079,7 +5079,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                                 var valor = $("[data-id=40203] #" + v.id)[0].value;
                             }
                             var query = "update " + $rootScope.user.banco + ".produto_atributo set valor = '" + valor + "' where atributo_id = " + v.id + " and produto_id = " + produtoID;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (ultimo == i + 1) {
                                     g$.closeModal("closeModal | atributoProduto");
                                 }
@@ -5093,7 +5093,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             if (valor && valor != "") {
                                 var query = "insert into " + $rootScope.user.banco + ".produto_atributo (produto_id,atributo_id,valor) " +
                                     "VALUES (" + produtoID + "," + v.id + ",'" + valor + "')";
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     if (ultimo == i + 1) {
                                         g$.closeModal("closeModal | atributoProduto");
 
@@ -5121,7 +5121,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         var params = alterSargentos(params),
             id = params[1];
         var query = "SELECT * FROM " + $rootScope.user.banco + ".pedido_produto pp LEFT JOIN " + $rootScope.user.banco + ".pedido pd ON pp.pedido_id = pd.id LEFT JOIN " + $rootScope.user.banco + ".empresa em ON em.id = pd.empresa_id where pd.id =  " + id;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             var result = data[0];
             result.forEach(function (v, i) {
                 if (v.ncm.length != 8) {
@@ -5171,14 +5171,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     function teste(id) {
         if ($(".popup[data-tela='1054']")[0]) {
             var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND f.id = " + id + " AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT 1");
-            $http.post(URL + "/jsonQuery/", query).success(function (primeiro_bloco) {
+            $http.post(URL + "jsonQuery/", query).success(function (primeiro_bloco) {
                 if (primeiro_bloco.data[0] && g$.memo43 != primeiro_bloco.data[0].ordem) {
                     g$.memo43 = primeiro_bloco.data[0].ordem;
                     // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length] = { primeiro_bloco: data.data[0] }
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery("SELECT ordem FROM saude.fila_chamada where id = " + id)).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery("SELECT ordem FROM saude.fila_chamada where id = " + id)).success(function (data) {
                         var ordem = data.data[0].ordem;
                         var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 AND ordem < " + ordem + " order by ordem desc limit 3;");
-                        $http.post(URL + "/jsonQuery/", query).success(function (segundo_bloco) {
+                        $http.post(URL + "jsonQuery/", query).success(function (segundo_bloco) {
                             // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length - 1].segundo_bloco = data.data;
                             $("[data-id='53453'")[0].innerHTML = primeiro_bloco.data[0].descricao_chamada;
                             $("[data-id='53451'")[0].innerHTML = primeiro_bloco.data[0].senha;
@@ -5338,7 +5338,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     g$.etiquetasNF = function (params) {
         var query = 'select produto_id, sum(quantidade) from ' + $rootScope.user.banco + '.pedido_produto where pedido_id = ' + $("[data-id=11593]")[0].value;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (!data.err) {
                 var prods = data.data;
                 // prods.forEach(function(v,i){})
@@ -5366,7 +5366,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             nome: nome
         };
         var query = "select date_format(DataEmissao, '%d/%m/%Y %H:%i:%s') data_hora,date_format(DataEmissao, '%d/%m/%Y') data, r.* FROM " + banco + ".nfse_rps r where id = " + id + " LIMIT 1";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
             if (g$.exceptionRequisicao("Query Template", data)) return;
             if (data.data.length > 0) {
                 $scope.rps = data.data[0];
@@ -5405,7 +5405,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
                 objTela.arquivo = objTela.arquivo.replace("{{rps.verificacao}}", ($scope.rps.verificacao) ? $scope.rps.verificacao : " -- ");
                 var query7 = "select * from " + banco + ".empresa where id =  " + $scope.rps.empresa_id + " LIMIT 1";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query7)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query7)).success(function (data) {
                     if (g$.exceptionRequisicao("Query Template", data)) return;
                     if (data.data.length > 0) {
                         $scope.empresa = data.data[0];
@@ -5419,7 +5419,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                         objTela.arquivo = objTela.arquivo.replace("{{empresa.cidade}}", ($scope.empresa.cidade) ? $scope.empresa.cidade : " -- ");
                         objTela.arquivo = objTela.arquivo.replace("{{empresa.uf}}", ($scope.empresa.uf) ? $scope.empresa.uf : " -- ");
                     }
-                    $http.post(URL + "/geraArquivoPDF/", objTela).success(function (data) {
+                    $http.post(URL + "geraArquivoPDF/", objTela).success(function (data) {
                         if (data == "OK") {
                             // envia por email
                             // ...
@@ -5439,7 +5439,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         contInterval = 0;
 
         tempInterval = setInterval(function () {
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("LoadzinTabela - Tela", data.data)) return;;
                 if (data.data.length) {
@@ -5451,7 +5451,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
                     g$.geraPDFNFSe("geraPDFNFSe | " + $rootScope.user.projeto + "_" + emissao + "_" + numero + " | " + $rootScope.user.banco + " | " + id);
                     queryUpdate = "UPDATE " + $rootScope.user.banco + ".nfse_rps SET link_pdf = '" + $rootScope.user.projeto + "_" + emissao + "_" + numero + ".pdf', robo_pdf = 0 WHERE id = " + id;
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryUpdate.trim())).success(function (data) {
 
                     });
                 }
@@ -5552,7 +5552,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     "LEFT JOIN " + $rootScope.user.banco + ".cliente_fornecedor c ON c.id = f.cliente_fornecedor_id  " +
                     "LEFT JOIN " + $rootScope.user.banco + ".carteira cart on cart.id = f.carteira_id " +
                     "WHERE n.nf = " + v.nf;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDados.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(queryDados.trim())).success(function (data) {
                     finId = data.data[0].id;
                     boleto = {
                         banco: data.data[0].banco,
@@ -5598,7 +5598,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                             var query = "UPDATE saas.financeiro F " +
                                 "SET F.nosso_numero = " + v.nosso_num + ", boleto_pdf = '" + boleto.caminho.split('/')[1] + "'" +
                                 " WHERE F.id = " + finId;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 if (!data.err) {
                                     console.log(data.query);
                                     $("#porcentualPB")[0].textContent = parseFloat(parseFloat($("#porcentualPB")[0].textContent.replace("%", "")) + parseFloat(porcent)).toFixed(2) + '%';
@@ -5682,7 +5682,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             r = registros[i];
             if (r.substring(0, 1) == '1') {
                 // queryFinID = "SELECT '" + i + "' indice ,f.id, n.nf FROM saas.nfse_rps n LEFT JOIN saas.financeiro f ON n.numeroRps = f.nr_rps WHERE n.nf ='" + r.substring(116, 126).trim() + "' LIMIT 1;";
-                // $http.post(URL + "/jsonQuery/", g$.trataQuery(queryFinID.trim())).success(function (data) {
+                // $http.post(URL + "jsonQuery/", g$.trataQuery(queryFinID.trim())).success(function (data) {
                 // if (!data.err) {
                 // if (data.data.length > 0) {
                 obj.push({
@@ -5733,7 +5733,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         var query = "SELECT r.registro,e.plano_de_contas_saida_id, e.carteira_id, e.id FROM " + $rootScope.user.banco + ".rps r, " + $rootScope.user.banco + ".empresa e  WHERE r.id = " + rps_id + " LIMIT 1";
         console.log(query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             registro = data.data[0].registro;
             plano_de_contas_saida_id = data.data[0].plano_de_contas_saida_id;
             empresa_id = data.data[0].id;
@@ -5797,11 +5797,11 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     console.log(resposta);
                     var queryInsertFin = ("INSERT INTO " + $rootScope.user.banco + ".financeiro (documento,cliente_fornecedor_id,emissao,vencimento,valorOriginal, acrescimo,despesa,valor,forma_de_pagamento_id,carteira_id,empresa_id, plano_de_contas_id,usuario_id,rps_id,nr_rps ) VALUES ('RPS" + nr_rps + "','" + resposta + "',CURDATE(),DATE_ADD(CURDATE(),INTERVAL 14 DAY),'" + valor_dos_servicos + "','" + 0 + "','" + 0 + "','" + valor_dos_servicos + "','" + 1 + "','" + carteira_id + "','" + empresa_id + "','" + plano_de_contas_saida_id + "','" + 2 + "','" + rps_id + "','" + nr_rps + "')").replaceAll("'null'", "null").replaceAll("''", "null");
                     console.log(queryInsertRPS);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertRPS.trim().replaceAll("'null'", "null"))).then(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertRPS.trim().replaceAll("'null'", "null"))).then(function (data) {
                         if (!data.err) {
                             var queryInsertFin = ("INSERT INTO " + $rootScope.user.banco + ".financeiro (documento,cliente_fornecedor_id,emissao,vencimento,valorOriginal, acrescimo,despesa,valor,forma_de_pagamento_id,carteira_id,empresa_id, plano_de_contas_id,usuario_id,rps_id,nr_rps ) VALUES ('RPS" + nr_rps + "','" + resposta + "',CURDATE(),DATE_ADD(CURDATE(),INTERVAL 14 DAY),'" + valor_dos_servicos + "','" + 0 + "','" + 0 + "','" + valor_dos_servicos + "','" + 1 + "','" + carteira_id + "','" + empresa_id + "','" + plano_de_contas_saida_id + "','" + 2 + "','" + rps_id + "','" + nr_rps + "')").replaceAll("'null'", "null").replaceAll("''", "null");
                             console.log(queryInsertFin);
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryInsertFin.trim().replaceAll("'null'", "null"))).then(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryInsertFin.trim().replaceAll("'null'", "null"))).then(function (data) {
                                 if (!data.err) {
                                     obj.splice(0, 1);
                                     console.log("Faltam " + obj.length);
@@ -5845,7 +5845,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     function achaCliente(razao, email, cpf, cnpj, ie, im, razao, cpf, cnpj, endereco, bairro, cidade, uf, nr, complemento, cep, email, razao, cpf, cnpj, ie, endereco, bairro, cidade, uf, nr, complemento, cep, email, plano_de_contas_saida_id, callback) {
         var insertCliente, queryCliente = "SELECT id FROM " + $rootScope.user.banco + '.cliente_fornecedor WHERE razao LIKE "' + razao + '"';
         console.log(queryCliente);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryCliente.trim())).then(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryCliente.trim())).then(function (data) {
             if (data.data.data) {
                 if (data.data.data.length > 0) {
                     // return data.data[0].id;
@@ -5857,12 +5857,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                     console.log(data.query);
                     insertCliente = "INSERT IGNORE INTO " + $rootScope.user.banco + ".cliente_fornecedor (cliente,fantasia,razao,email,cpf,cnpj,inscricaoEstadual, inscricaoMunicipal,dataCadastro, cbrNome,cbrCpf,cbrCnpj,cbrEndereco,cbrBairro,cbrCidade,cbrUf,cbrNumero,cbrComplemento,cbrCep,cbrEmail, entrNome,entrCpf,entrCnpj,entrInscrEstadual,entrEndereco,entrBairro,entrCidade,entrUf,entrNumero, entrComplemento,entrCep,entrEmail,plano_de_contas_pk, created_at) VALUES (1,\"" + razao + "\",\"" + razao + "\",'" + email + "','" + cpf + "','" + cnpj + "','" + ie + "','" + im + "',CURDATE(),\"" + razao + "\",'" + cpf + "','" + cnpj + "','" + endereco + "','" + bairro + "','" + cidade + "','" + uf + "','" + nr + "','" + complemento + "','" + cep + "','" + email + "',\"" + razao + "\",'" + cpf + "','" + cnpj + "','" + ie + "','" + endereco + "','" + bairro + "','" + cidade + "','" + uf + "','" + nr + "','" + complemento + "','" + cep + "','" + email + "','" + plano_de_contas_saida_id + "',CURDATE())";
                     console.log(insertCliente);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(insertCliente.trim().replaceAll("'null'", "null"))).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(insertCliente.trim().replaceAll("'null'", "null"))).success(function (data) {
                         // return data.data.insertId;
                         console.log("nao Existe");
                         if (JSON.parse(localStorage.user).nao_saas == 0) {
                             queryID = "SELECT id FROM " + $rootScope.user.banco + ".cliente_fornecedor WHERE _id = " + data.data.insertId;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryID.trim()))
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryID.trim()))
                                 .then(function (data) {
                                     ko = data.data.data[0].id
                                     callback(ko);
@@ -5883,7 +5883,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             query = "SELECT COUNT(*) total, SUM(IF(COALESCE(etapa,'')='emitindo',0,1)) concluido  FROM " +
                 $rootScope.user.banco + ".nfse_rps WHERE rps_id = " + idRPS;
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (!data.err) {
                 console.log(data.query);
                 $("#totalPN")[0].textContent = "/" + data.data[0].total;
@@ -5893,7 +5893,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 $("#concluidoPN")[0].textContent = data.data[0].concluido;
 
                 tempInterval = setInterval(function () {
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         // console.log('-------ooooooo---------' + data.query + '----------oooooooo------');
                         total = data.data[0].total;
                         concluido = data.data[0].concluido;
@@ -5926,10 +5926,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         // PEGA IDS DO FINANCEIRO GERADOS POR ESTE RPS
         query = "SELECT GROUP_CONCAT(f.id) ids, COALESCE(c.carteira_cnab,'') convenio, COALESCE(c.jurosDia,'') juros, COALESCE(c.conta,'') conta FROM " + $rootScope.user.banco + ".financeiro f LEFT JOIN " + $rootScope.user.banco + ".carteira c ON c.id = f.carteira_id WHERE f.rps_id = " + idRPS;
         console.log(query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // console.log(data);
             // proc = "CALL " + $rootScope.user.banco + ".CNAB_deutscheBank('" + data.data[0].ids + "', " + idRPS + ")";
-            // $http.post(URL + "/jsonQuery/", g$.trataQuery(proc.trim())).success(function (data) {
+            // $http.post(URL + "jsonQuery/", g$.trataQuery(proc.trim())).success(function (data) {
             //     console.log(data);
             //     g$.alerta("Alerta","Finalizado!");
             //     console.log("Finalizado!")
@@ -5949,7 +5949,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 // PEGA QUANTIDADE DE CNABs GERADOS
                 query = "SELECT COUNT(id) sequencial, coalesce(sum(if (data = CURDATE(), 1,0)),0) sequencia_hoje FROM " + $rootScope.user.banco + ".cnab WHERE banco = 487";
                 console.log(query);
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     if (!data.err) {
                         sequencial = data.data[0].sequencial;
                         sequencia_hoje = data.data[0].sequencia_hoje
@@ -5960,7 +5960,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
                         query = "SELECT COALESCE(cnpj,'') cnpj, COALESCE(razao,'') razao, COALESCE(mensagem1,'') mensagem1, COALESCE(mensagem2,'') mensagem2, COALESCE(mora,'') mora, '" + convenio + "' convenio, '" + juros + "' juros,'" + sequencial + "' sequencial,'" + conta + "' conta  FROM " + $rootScope.user.banco + ".empresa LIMIT 1";
                         console.log(query);
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             if (!data.err) {
                                 empresa = data.data[0];
                                 console.log(sequencial);
@@ -5969,7 +5969,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                                 $("#concluidoPC")[0].textContent = parseInt($("#concluidoPC")[0].textContent) + 1;
                                 query = "SELECT f.id id, COALESCE(f.documento,'') documento, COALESCE(f.vencimento,'') vencimento,COALESCE(f.valor,0) valor ,COALESCE(IF(ISNULL(cpf),cnpj,cpf),'') cnpj, IF(ISNULL(cpf),2,1) tipo_insc, removeacentos(razao) nome,removeacentos(COALESCE(entrbairro,'')) bairro, removeacentos(CONCAT(COALESCE(entrendereco,''),' ',COALESCE(entrnumero,''),' ',COALESCE(entrcomplemento,''))) endereco, removeacentos(COALESCE(entrcidade,'')) cidade, removeacentos(COALESCE(entruf,'')) uf,replace(COALESCE(entrCep),'-','') cep FROM " + $rootScope.user.banco + ".financeiro f LEFT JOIN " + $rootScope.user.banco + ".cliente_fornecedor c ON f.cliente_fornecedor_id = c.id WHERE f.id in (" + ids + ")";
                                 console.log(query);
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     if (!data.err) {
                                         registros = data.data;
                                         cnab = { empresa, registros };
@@ -5983,7 +5983,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                                         arquivo = '000' + leftPad(conta, 10) + "_CN" + hoje + leftPad(sequencia_hoje, 3) + ".rem";
                                         query = "INSERT INTO " + $rootScope.user.banco + ".cnab(arquivo, cnab, banco, data, rps_id) VALUES ('" + arquivo + "','" + conteudo + "', 487, CURDATE(),'" + idRPS + "');";
                                         console.log(query);
-                                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                             if (!data.err) {
                                                 $("#porcentualPC")[0].textContent = '100%';
                                                 $("#progressBarPC")[0].style.width = parseFloat($("#progressBarPC")[0].style.width.replace("%", "")) + parseFloat(porcentPC) + '%'
@@ -5992,7 +5992,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                                                 $("#iconePC")[0].classList.add("fa-check-square");;
                                                 query = "UPDATE " + $rootScope.user.banco + ".rps SET arquivo_cnab = '" + arquivo + "' WHERE id ='" + idRPS + "' ;";
                                                 console.log(query);
-                                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                                     if (!data.err) {
                                                         g$.geraArquivo("geraArquivo ¦" + idFuncao + " | " + $rootScope.user.projeto + " | " + arquivo + " | " + conteudo + " | baixar");
 
@@ -6310,10 +6310,10 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         query = "SELECT GROUP_CONCAT(f.id) ids, COALESCE(c.carteira_cnab,'') convenio, COALESCE(c.jurosDia,'') juros, COALESCE(c.conta,'') conta FROM " + "saas" + ".financeiro f LEFT JOIN saas.carteira c ON c.id = f.carteira_id WHERE f.rps_id = 1 AND f.emissao = '2018-02-14'";
         console.log(query);
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // console.log(data);
             // proc = "CALL " + $rootScope.user.banco + ".CNAB_deutscheBank('" + data.data[0].ids + "', " + idRPS + ")";
-            // $http.post(URL + "/jsonQuery/", g$.trataQuery(proc.trim())).success(function (data) {
+            // $http.post(URL + "jsonQuery/", g$.trataQuery(proc.trim())).success(function (data) {
             //     console.log(data);
             //     g$.alerta("Alerta","Finalizado!");
             //     console.log("Finalizado!")
@@ -6325,7 +6325,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 conta = data.data[0].conta;
                 query = "SELECT COUNT(id) sequencial, coalesce(sum(if (data = CURDATE(), 1,0)),0) sequencia_hoje FROM " + $rootScope.user.banco + ".cnab WHERE banco = 487";
                 console.log(query);
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     if (!data.err) {
                         sequencial = data.data[0].sequencial;
                         sequencia_hoje = data.data[0].sequencia_hoje
@@ -6333,14 +6333,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
                         query = "SELECT COALESCE(cnpj,'') cnpj, COALESCE(razao,'') razao, COALESCE(mensagem1,'') mensagem1, COALESCE(mensagem2,'') mensagem2, COALESCE(mora,'') mora, '" + convenio + "' convenio, '" + juros + "' juros,'" + sequencial + "' sequencial,'" + conta + "' conta  FROM " + $rootScope.user.banco + ".empresa LIMIT 1";
                         console.log(query);
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             if (!data.err) {
                                 empresa = data.data[0];
                                 console.log(sequencial);
 
                                 query = "SELECT f.id id, COALESCE(f.documento,'') documento, COALESCE(f.vencimento,'') vencimento,COALESCE(f.valor,0) valor ,COALESCE(IF(ISNULL(cpf),cnpj,cpf),'') cnpj, IF(ISNULL(cpf),2,1) tipo_insc, removeacentos(razao) nome,removeacentos(COALESCE(entrbairro,'')) bairro, removeacentos(CONCAT(COALESCE(entrendereco,''),' ',COALESCE(entrnumero,''),' ',COALESCE(entrcomplemento,''))) endereco, removeacentos(COALESCE(entrcidade,'')) cidade, removeacentos(COALESCE(entruf,'')) uf,replace(COALESCE(entrCep),'-','') cep FROM " + $rootScope.user.banco + ".financeiro f LEFT JOIN " + $rootScope.user.banco + ".cliente_fornecedor c ON f.cliente_fornecedor_id = c.id WHERE f.id in (" + ids + ")";
                                 console.log(query);
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                     if (!data.err) {
                                         registros = data.data;
                                         cnab = { empresa, registros };
@@ -6383,7 +6383,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             + " LEFT JOIN saude.local l ON l.id = f.local_id "
             + " WHERE f.id = " + senha_id;
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Dados da senha", data)) return;
             data.data = data.data[0]

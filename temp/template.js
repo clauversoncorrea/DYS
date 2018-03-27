@@ -17,7 +17,7 @@ app.controller("inicial", function ($scope, $http, $rootScope) {
 
     g$.queryTemplate = function (query, callback) {
         var query = query.trim();
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             
             if(query.indexOf("call") > -1){
                 data = data.data[0];

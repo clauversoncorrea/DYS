@@ -9,7 +9,7 @@ app.directive("menuTelas", function () {
                 //Request da consulta dos itens do menu
                 var query = "call node.montaMenuProjeto_novo('" + projeto_id + "', '" + $rootScope.user.id + "')";
                 // var query = "node.montaMenuProjeto('" + projeto_id + "')";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     g$.exceptionRequisicao("Monta Menu", data);
                     createMenuTelas(data.data[0]);
                 });

@@ -45,7 +45,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         delete g$[elm.dataset.nome + "ID"];
         delete g$[elm.dataset.nome];
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro)).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Tela", data)) return;
 
@@ -70,7 +70,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         delete g$[elm.dataset.nome + "ID"];
         delete g$[elm.dataset.nome];
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Tela", data)) return;
 
@@ -201,7 +201,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                     nomeProc = "call " + nome_procedure + '(' + elm.dataset.tabela_consulta_id + ',"' + $rootScope.user.banco + '", "' + filtro + '")';
                 }
             }
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(nomeProc)).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(nomeProc)).success(function (data) {
                 // Executa a proc passada por parametro
                 if (g$.exceptionRequisicao("ProcLe - Tabela", data)) return;
 
@@ -241,10 +241,10 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         else {
             filtro = (filtro == "") ? "0=0" : filtro;
             filtro = filtro.replace(/\%/g, "‰").replace(/\//g, "½");
-            $http.get(URL + "/le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
+            $http.get(URL + "le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
                 if (g$.exceptionRequisicao("ProcLe - TABELA", data)) return;
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(g$.alterSargentos(data.data[0][0].consulta)[0])).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(g$.alterSargentos(data.data[0][0].consulta)[0])).success(function (data) {
 
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Query - Tabela", data)) return;
@@ -287,7 +287,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
     $scope.dataTable = function (elm, nome) {
         var query = "SELECT coluna_id, visivel FROM node.elemento_nao_visivel WHERE tabela_id = " + elm.dataset.id + " AND user_id = " + g$.user.id;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
             data.data.forEach(function (v) {
                 var tds = $("[data-id='" + v.coluna_id + "']"),
@@ -459,7 +459,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elmTabela.dataset.menu_id + " AND evento_tabela='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryEventsTabela.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsTabela.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Eventos - Tabela", data)) return;
 
@@ -566,7 +566,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         var table = $(elmTabela).DataTable();
         table.row(row).remove().draw();
 
-        // $http.get(URL + "/get/" + queryBanco).success(function(data) {
+        // $http.get(URL + "get/" + queryBanco).success(function(data) {
         //     // Trata Excecao
         //     if (g$.exceptionRequisicao("Delete Linha - Tabela", data)) return;;
 
@@ -584,7 +584,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         queryResult.script.elemento_id = "Tabela";
 
         // Insere 
-        $http.post(URL + "/jsonQuery/", queryResult)
+        $http.post(URL + "jsonQuery/", queryResult)
             .success(function (data) {
                 // data = data.data;
 
@@ -596,7 +596,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                 //depoisDeExcluir
                 var query = "SELECT * FROM node.elemento_funcao WHERE elemento_id = " + elmTabela.dataset.id +
                     " AND evento = 'depoisDeExcluir' and isnull(depois) order by ordem";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Tabela", data)) return;
 
@@ -1033,7 +1033,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             query = "select * from elemento_funcao where elemento_id = " + row.parentElement.parentElement.dataset.id,
             queryBanco = "SELECT * FROM consulta WHERE tela_id = " + $scope.getIDMenuItem();
 
-        // $http.get(URL + "/get/" + queryBanco).success(function (data) {
+        // $http.get(URL + "get/" + queryBanco).success(function (data) {
         //     // Trata Excecao
         //     if (g$.exceptionRequisicao("Tabela", data)) return;;
 
@@ -1043,7 +1043,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         var banco = $rootScope.user.banco, script;
 
         // Coloca as colunas invisíveis no objeto
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (g$.exceptionRequisicao("gravanaTabela - Tabela", data)) return;
 
             if (data.data.length) {
@@ -1067,7 +1067,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             // Procura se tem algum evento antes de inserir
             query = "SELECT * FROM node.elemento_funcao WHERE elemento_id = " + row.parentElement.parentElement.dataset.id +
                 " AND evento = 'antesDeGravar' AND isnull(depois) order by ordem";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("AntesDeGravar - Tabela", data)) return;
 
@@ -1097,8 +1097,8 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                 queryInsert.script.tela_id = g$.tela_id;
                 queryInsert.script.elemento_id = "Tabela";
 
-                $http.post(URL + "/jsonQuery/", queryInsert)
-                    // $http.post(URL + "/post/" + grava_tabela + "/", obj)
+                $http.post(URL + "jsonQuery/", queryInsert)
+                    // $http.post(URL + "post/" + grava_tabela + "/", obj)
                     .then(function (data) {
                         data = data.data;
 
@@ -1124,7 +1124,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                         //depoisDeGravar
                         query = "SELECT * FROM node.elemento_funcao WHERE elemento_id = " + row.parentElement.parentElement.dataset.id +
                             " AND evento = 'depoisDeGravar' AND isnull(depois) order by ordem";
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             // Trata Excecao
                             if (g$.exceptionRequisicao("DepoisDeGravar - Tabela", data)) return;;
 
@@ -1137,7 +1137,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
                             var filtro = (filtro) ? filtro : "",
                                 queryConsultaFiltro = "select c.id, f.id as id_filtro, f.filtro from node.consulta c LEFT JOIN node.consulta_filtro f ON c.id = f.consulta_id where f.consulta_id = " + elementoTabela.dataset.consulta_id;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryConsultaFiltro.trim())).success(function (data) {
                                 // Trata Excecao
                                 if (g$.exceptionRequisicao("Tela", data)) return;
 
@@ -1159,11 +1159,11 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                                 filtro += (filtro && filtro != "") ? " AND " + filtro2 : filtro2;
                                 nomeProc = 'node.le(' + elementoTabela.dataset.consulta_id + ',"' + $rootScope.user.banco + '", "' + filtro + '")';
 
-                                $http.get(URL + "/proc/" + nomeProc).success(function (response) {
+                                $http.get(URL + "proc/" + nomeProc).success(function (response) {
                                     if (g$.exceptionRequisicao("ProcLe - Tabela", response)) return;;
 
                                     var consulta = response.data[0][0].consulta;
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(consulta.trim())).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(consulta.trim())).success(function (data) {
                                         // Trata Excecao
                                         if (g$.exceptionRequisicao("Query - Tabela", data)) return;
 
@@ -1202,7 +1202,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             query = "select * from elemento_funcao where elemento_id = " + row.parentElement.parentElement.dataset.id,
             queryBanco = "SELECT * FROM consulta WHERE tela_id = " + $scope.getIDMenuItem();
 
-        // $http.get(URL + "/get/" + queryBanco).success(function (data) {
+        // $http.get(URL + "get/" + queryBanco).success(function (data) {
         //     // Trata Excecao
         //     if (g$.exceptionRequisicao("Tabela", data)) return;;
 
@@ -1212,7 +1212,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         var banco = $rootScope.user.banco, script;
 
         // Coloca as colunas invisíveis no objeto
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("gravanaTabela - Tabela", data)) return;
 
@@ -1236,7 +1236,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             // Procura se tem algum evento antes de inserir
             query = "SELECT * FROM node.elemento_funcao WHERE elemento_id = " + row.parentElement.parentElement.dataset.id +
                 " AND evento = 'antesDeGravar' AND isnull(depois) order by ordem";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("AntesDeGravar - Tabela", data)) return;
 
@@ -1266,7 +1266,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                 queryUpdate.script.tela_id = g$.tela_id;
                 queryUpdate.script.elemento_id = "Tabela";
 
-                $http.post(URL + "/jsonQuery/", queryUpdate)
+                $http.post(URL + "jsonQuery/", queryUpdate)
                     .then(function (data) {
                         data = data.data;
 
@@ -1291,7 +1291,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                         //depoisDeGravar
                         var query = "SELECT * FROM node.elemento_funcao WHERE elemento_id = " + row.parentElement.parentElement.dataset.id +
                             " AND evento = 'depoisDeGravar' and isnull(depois) order by ordem";
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                             // Trata Excecao
                             if (g$.exceptionRequisicao("DepoisDeGravar - Tabela", data)) return;;
 
@@ -1306,11 +1306,11 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                                 filtro = alias + "." + campo + " = " + g$.idDaLinha,
                                 nomeProc = 'call node.le(' + elementoTabela.dataset.consulta_id + ',"' + $rootScope.user.banco + '", "' + filtro + '")';
 
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(nomeProc.trim(), 1)).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(nomeProc.trim(), 1)).success(function (data) {
                                 if (g$.exceptionRequisicao("ProcLe - Tabela", data)) return;;
 
                                 var consulta = data.data[0][0].consulta;
-                                $http.post(URL + "/jsonQuery/", g$.trataQuery(consulta.trim())).success(function (data) {
+                                $http.post(URL + "jsonQuery/", g$.trataQuery(consulta.trim())).success(function (data) {
                                     // Trata Excecao
                                     if (g$.exceptionRequisicao("Query - Tabela", data)) return;;
 
@@ -1332,7 +1332,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elmTabela.dataset.menu_id + " AND evento_tabela='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
-        $http.get(URL + "/get/" + queryEventsTabela).success(function (data) {
+        $http.get(URL + "get/" + queryEventsTabela).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Eventos - Tabela", data)) return;
 

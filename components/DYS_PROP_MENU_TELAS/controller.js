@@ -27,7 +27,7 @@ app.directive("menutelasprop", function() {
 
                 if ($scope.btDeleteMenuTelaDisabled) return;
                 if (confirm("Tem certeza que deseja excluir o item menu " + $scope.dadosMenuTela.menu + "?")) {
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryProjetoMenu.trim())).success(function(data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryProjetoMenu.trim())).success(function(data) {
                         // Trata Excecao
                         g$.exceptionRequisicao("Menu", data);
                         data = data.data;

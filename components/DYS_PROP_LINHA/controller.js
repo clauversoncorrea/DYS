@@ -17,7 +17,7 @@ app.directive("linhaprop", function () {
                 var query = ($scope.customizador.isCliente) ? g$.selectElementosCliente($scope.getIDMenuItem()) : g$.selectElementosNode($scope.getIDMenuItem());
 
                 $scope.search = { id: "" };
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Customizador", data)) return;
 
@@ -109,7 +109,7 @@ app.directive("linhaprop", function () {
                     cell.dataset.valor = cell.innerHTML.trim();
                     cell.innerHTML = "";
                     cell.append($compile(angular.element(combo)[0])($scope)[0]);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(cell.dataset.query)).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(cell.dataset.query)).success(function (data) {
                         // Trata Excecao
                         if (g$.exceptionRequisicao("Customizador", data)) return;;
 
@@ -124,7 +124,7 @@ app.directive("linhaprop", function () {
                     cell.innerHTML = "";
                     query = cell.dataset.query.split("»")[0] + "'" + row.querySelector("td[data-nome='" + cell.dataset.query.split("»")[1] + "']").innerHTML.trim() + "'";
                     cell.append($compile(angular.element(combo)[0])($scope)[0]);
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                         // Trata Excecao
                         if (g$.exceptionRequisicao("Customizador", data)) return;;
 
@@ -191,13 +191,13 @@ app.directive("linhaprop", function () {
                 var camposCli = ($rootScope.user.nao_saas) ? " e.*" : " null, " + $rootScope.user.projeto_id + ", 0, e.*",
                     queryClienteInsert = "INSERT IGNORE INTO " + $rootScope.user.banco + ".elemento SELECT " + camposCli + " FROM node.elemento e WHERE id = '" + obj.id + "'";
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryClienteInsert, 1)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(queryClienteInsert, 1)).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Customizador", data)) return;
 
                     if(JSON.parse(localStorage.user).nao_saas == 0) obj.id_projeto = JSON.parse(localStorage.user).projeto_id;
 
-                    $http.put(URL + "/put/" + tabela, obj).then(function (data) {
+                    $http.put(URL + "put/" + tabela, obj).then(function (data) {
                         data = data.data;
 
                         // Trata Excecao
@@ -212,7 +212,7 @@ app.directive("linhaprop", function () {
                             cell.innerHTML = texto;
                             cell.classList.add("border-cell-table");
                             cell.focus();
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                                 // Trata Excecao
                                 if (g$.exceptionRequisicao("Customizador", data)) return;
 
@@ -224,7 +224,7 @@ app.directive("linhaprop", function () {
             }
 
             $scope.salvarElementoNode = function (query, tabela, obj, cell, elm) {
-                $http.put(URL + "/put/" + tabela, obj).then(function (data) {
+                $http.put(URL + "put/" + tabela, obj).then(function (data) {
                     data = data.data;
 
                     // Trata Excecao
@@ -239,7 +239,7 @@ app.directive("linhaprop", function () {
                         cell.innerHTML = texto;
                         cell.classList.add("border-cell-table");
                         cell.focus();
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                             // Trata Excecao
                             if (g$.exceptionRequisicao("Customizador", data)) return;
 
@@ -313,7 +313,7 @@ app.directive("linhaprop", function () {
                     from: 'left', //slide from left		
                     complete: function (val) {
                         if (val) {
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDelete)).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(queryDelete)).success(function (data) {
                                 // Trata Excecao
                                 if (g$.exceptionRequisicao("Customizador", data)) return;
 
@@ -335,7 +335,7 @@ app.directive("linhaprop", function () {
                     elm = $("#view [data-id='" + propriedadeID + "']")[0],
                     queryElementos = g$.selectElementosNode(elm.dataset.menu_id);
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Customizador", data)) return;;
 
@@ -347,9 +347,9 @@ app.directive("linhaprop", function () {
                             from: 'left', //slide from left		
                             complete: function (val) {
                                 if (val) {
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryProc, 1)).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryProc, 1)).success(function (data) {
                                         $scope.search = { id: "" };
-                                        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryElementos)).success(function (data) {
+                                        $http.post(URL + "jsonQuery/", g$.trataQuery(queryElementos)).success(function (data) {
                                             // Trata Excecao
                                             if (g$.exceptionRequisicao("Customizador", data)) return;;
 
@@ -371,7 +371,7 @@ app.directive("linhaprop", function () {
                             from: 'left', //slide from left		
                             complete: function (val) {
                                 if (val) {
-                                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryDelete)).success(function (data) {
+                                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryDelete)).success(function (data) {
                                         // Trata Excecao
                                         if (g$.exceptionRequisicao("Customizador", data)) return;;
 
@@ -393,7 +393,7 @@ app.directive("linhaprop", function () {
                 tabela = $("[data-name-combo='le_da_tabela'] #selectbox option[value='" + elm.dataset.link_tabela + "']")[0].innerHTML.trim();
                 campo = $("[data-name-combo='le_do_campo'] #selectbox option[value='" + elm.dataset.link_campo + "']")[0].innerHTML.trim();
                 query = "SELECT " + campo + " FROM " + $rootScope.user.banco + "." + tabela + " WHERE id = " + obj["e_" + view.querySelector("[data-nome='txt_id']").dataset.id];
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Customizador", data)) return;;
 

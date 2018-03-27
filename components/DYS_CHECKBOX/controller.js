@@ -43,10 +43,10 @@ app.controller("checkbox", function ($scope, $http, $rootScope, $compile) {
             filtro = (filtro) ? filtro : "";
         
         filtro = filtro.replace(/\%/g, "‰");
-        $http.get(URL + "/le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
+        $http.get(URL + "le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
             if (g$.exceptionRequisicao("ProcLe - CheckBox", data)) return;;
 
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {
 
                 // Trata Excecao
                 if (g$.exceptionRequisicao("Query CheckBox - CheckBox", data)) return;
@@ -93,7 +93,7 @@ app.controller("checkbox", function ($scope, $http, $rootScope, $compile) {
         var queryEventsCheck = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elm.dataset.menu_id + " AND evento_check='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryEventsCheck)).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsCheck)).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Eventos Bloco - Bloco", data)) return;;
 

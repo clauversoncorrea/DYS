@@ -97,7 +97,7 @@ app.directive("view", function () {
                     $("#container-menu")[0].style.display = "none";
                 }
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Monta Tela", data)) return;
 
@@ -140,7 +140,7 @@ app.directive("view", function () {
                     // $("#loadzinTela")[0].id = "loadzinTelaf"
                     queryEventosElm = "SELECT e.nome, ef.*, e.menu_id FROM elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and " +
                         "e.menu_id = " + tela + " and coalesce(evento_bloco, '0') <> '1' and coalesce(evento_check, '0') <> '1' and coalesce(evento_tabela, '0') <> '1' and isnull(ef.depois) ORDER BY ef.ordem;";
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryEventosElm.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventosElm.trim())).success(function (data) {
                         // Trata Excecao
                         if (g$.exceptionRequisicao("Eventos elementos", data)) return;;
 
@@ -176,7 +176,7 @@ app.directive("view", function () {
 
             $scope.consultas_filtros = function (tela) {
                 var query = "select c.id, f.id as id_filtro, f.filtro from consulta c LEFT JOIN consulta_filtro f ON c.id = f.consulta_id where c.tela_id = " + tela;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Tela", data)) return;;
 
@@ -659,7 +659,7 @@ app.directive("view", function () {
             $scope.addEventosPopup = function (tela, isModal) {
                 var popup = $("#" + tela)[0];
                 query = "SELECT * FROM tela_funcao WHERE isnull(depois) and tela_id=" + tela + " ORDER BY ordem";
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                     g$.displayTab(null, popup.dataset.nome);
 
@@ -693,7 +693,7 @@ app.directive("view", function () {
                         $timeout(function () {
                             var query = "SELECT * FROM tela_funcao ef WHERE evento='close' and tela_id='" + modal.split("|")[0] + "' and isnull(ef.depois) ORDER BY ordem";
 
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                                 // Trata Excecao
                                 if (g$.exceptionRequisicao("Close Modal", data)) return;
 

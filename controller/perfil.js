@@ -18,7 +18,7 @@ app.controller("perfil", function($scope, $http, $rootScope) {
     $scope.salvarDadosPerfil = function() {
         if ($scope.alterarSenha == 1 || $scope.alterarSenha == "1") {
             var query = "SELECT senha FROM node.usuario WHERE id = " + $rootScope.user.id;
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                 if (g$.exceptionRequisicao("Verificando Senha Antiga", data)) return;
 
@@ -44,17 +44,17 @@ app.controller("perfil", function($scope, $http, $rootScope) {
 
         if ($scope.alterarSenha == 1 || $scope.alterarSenha == "1") obj.senha = $("#novaSenha")[0].value.trim();
         
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryFornecedor.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryFornecedor.trim())).success(function (data) {
             if (g$.exceptionRequisicao("Procurando Usuário", data)) return;
             if (data.data.length) return g$.alerta("Error", "Esse login já existe!!");
 
-            $http.put(URL + "/put/node.usuario", obj).success(function(data) {
+            $http.put(URL + "put/node.usuario", obj).success(function(data) {
                 if (g$.exceptionRequisicao("Alterando Usuário", data)) return;
 
                 if (data.err) return g$.alerta("Error", "Esse login já existe!!");
                 else {
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(queryUpdateFornecedor.trim()))
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(queryUpdateFornecedor.trim()))
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         if (g$.exceptionRequisicao("Buscando Dados Usuário", data)) return;
                         $(".user-image")[0].src = $(".logo-user")[0].src = data.data[0].foto;
                         localStorage.user = JSON.stringify(data.data[0]);

@@ -59,7 +59,7 @@ app.directive("teste", function () {
                 var queryCount = g$.trataQuery(query);
                 queryCount.sopmac.push("count(*) count");
 
-                $http.post(URL + "/jsonQuery/", queryCount).success(function (data) {
+                $http.post(URL + "jsonQuery/", queryCount).success(function (data) {
 
                     if (g$.exceptionRequisicao("Count Combobox", data)) return;
 
@@ -68,7 +68,7 @@ app.directive("teste", function () {
                         _initCombo(id, data, elm.dataset.nome, coluna, value, true, true, query);
                     }
                     else {
-                        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                             if (g$.exceptionRequisicao("Combobox", data)) return;
                             id = elm.dataset.id;
@@ -95,7 +95,7 @@ app.directive("teste", function () {
                 // Chama todas as funcoes change
                 var queryElementoChange = "SELECT funcao FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and ef.elemento_id = " +
                     id + " and evento = 'change' and isnull(ef.depois) ORDER BY ef.ordem;"
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(queryElementoChange.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(queryElementoChange.trim())).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Tela", data)) return;;
 
@@ -121,7 +121,7 @@ app.directive("teste", function () {
 
                 query = "SELECT " + campo + " FROM " + banco_tabela + " WHERE " + chave + " = '" + valor + "'";
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
                     if (g$.exceptionRequisicao("Combobox", data)) return;
                     data = data.data;

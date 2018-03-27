@@ -4,7 +4,7 @@ app.controller("integracaoMagento", function ($scope, $http, $rootScope) {
         var loja, increment, bc, empresa;
         $scope.integraPed = function (e) {
             var query = "Select * FROM node.magento WHERE ativo=1 AND banco='" + $rootScope.user.banco + "'"
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 if(data.data.length > 0){
                     $scope.preparaEmpresa(data);
                 }else{
@@ -44,7 +44,7 @@ app.controller("integracaoMagento", function ($scope, $http, $rootScope) {
                 pedStatus = order.status
                 $http.post("/integraPedido/" + bc + "/", order).success(function (data) {
                     var query = "SELECT id FROM "+$rootScope.user.banco+".pedido WHERE integracao_pedido = "+ped;
-                    $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+                    $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                         var k = data;
                         if (!data.data.err) {
                             g$.atualizaStatusPedidoERP("atualizaStatusPedidoERP | "+ data.data[0].id + " | " + pedStatus);

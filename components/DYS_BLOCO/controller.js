@@ -165,7 +165,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
                 }
             }
 
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(nomeProc)).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(nomeProc)).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("ProcLe - Bloco", data)) return;;
 
@@ -201,10 +201,10 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
         else {
             filtro = (filtro == "") ? "0=0" : filtro;
             filtro = filtro.replace(/\%/g, "‰");
-            $http.get(URL + "/le/" + elm.children[0].dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
+            $http.get(URL + "le/" + elm.children[0].dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
                 if (g$.exceptionRequisicao("ProcLe - Bloco", data)) return;;
 
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {
+                $http.post(URL + "jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Query Bloco - Bloco", data)) return;
 
@@ -243,7 +243,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
         var queryEventsBlocos = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elm.dataset.menu_id + " AND evento_bloco='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(queryEventsBlocos.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsBlocos.trim())).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Eventos Bloco - Bloco", data)) return;
 
@@ -332,7 +332,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
                             campoBloco = g$.filterCampo(v.querySelector("[data-nome='bloco_id']").dataset.le_do_campo);
 
                             query = "SELECT " + campo + " FROM " + $rootScope.user.banco + "." + tabela + " WHERE " + campoBloco + " = " + v.querySelector("[data-nome='bloco_id']").innerHTML;
-                            $http.post(URL + "/jsonQuery/", g$.trataQuery(query)).success(function (data) {
+                            $http.post(URL + "jsonQuery/", g$.trataQuery(query)).success(function (data) {
                                 // Trata Excecao
                                 if (g$.exceptionRequisicao("Query Links - Bloco", data)) return;
 

@@ -136,14 +136,14 @@ app.controller('customizador', function ($scope, $compile, $http) {
 
         var post = JSON.stringify(elm.dataset);
         post = g$.omitirPropriedade(post);
-        $http.post(URL + "/post/elemento/", post).success(function (data) {
+        $http.post(URL + "post/elemento/", post).success(function (data) {
             // Trata Excecao
             if (g$.exceptionRequisicao("Customizador", data)) return;;
 
             data = data.data;
             var query = "SELECT * FROM elemento WHERE id = " + data.insertId;
             elm.setAttribute("title", data.insertId + " - " + elm.dataset.tag);
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 // Trata Excecao
                 if (g$.exceptionRequisicao("Customizador", data)) return;;
 

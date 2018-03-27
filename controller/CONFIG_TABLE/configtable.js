@@ -39,7 +39,7 @@ app.controller("configtable", function ($scope, $http, $rootScope) {
             }
         }
         var query = "SELECT coluna_id, visivel FROM node.elemento_nao_visivel WHERE tabela_id = " + elm.dataset.id + " AND user_id = " + g$.user.id;
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             data.data.forEach(function (coluna, i) {
                 for (var i = 0; i < teste.length; i++) {
                     if (coluna.coluna_id == teste[i].coluna_id) {
@@ -52,7 +52,7 @@ app.controller("configtable", function ($scope, $http, $rootScope) {
         });
         $scope.coluna = "";
 
-        $http.get(URL + "/").success(function () {
+        $http.get(URL + "").success(function () {
             $('#popconfigtable [data-tipo="date"]').datepicker({
                 orientation: "auto left",
                 format: "dd/mm/yyyy",
@@ -69,7 +69,7 @@ app.controller("configtable", function ($scope, $http, $rootScope) {
     }
 
     $scope.carregaData = function () {
-        $http.get(URL + "/").success(function () {
+        $http.get(URL + "").success(function () {
             $('#popconfigtable [data-tipo="date"]').datepicker({
                 orientation: "auto left",
                 format: "dd/mm/yyyy",
@@ -168,9 +168,9 @@ app.controller("configtable", function ($scope, $http, $rootScope) {
 
         $scope.configtables.forEach(function (v, i) {
             var query = "INSERT INTO node.elemento_nao_visivel (tabela_id, coluna_id, visivel, user_id) VALUES (" + $scope.configtables[i].tabela_id + ", " + $scope.configtables[i].coluna_id + " , " + $scope.configtables[i].visivel + " , " + g$.user.id + ");";
-            $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+            $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 query = "UPDATE node.elemento_nao_visivel SET tabela_id = " + $scope.configtables[i].tabela_id + ", coluna_id = " + $scope.configtables[i].coluna_id + " , visivel = " + $scope.configtables[i].visivel + " , visivel = " + $scope.configtables[i].visivel + " , user_id = " + g$.user.id + " WHERE user_id = " + g$.user.id + " AND coluna_id = " + $scope.configtables[i].coluna_id;
-                $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim()));
+                $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim()));
             });
         });
     }

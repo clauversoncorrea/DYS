@@ -30,7 +30,7 @@ app.controller("comboDYS", function ($scope, $http, $rootScope) {
             var query = g$.trataQuery($scope.query.trim());
             query.ortlif = $scope.coluna + " LIKE '%" + $("#search-combogrande")[0].value + "%' " + ((query.ortlif && query.ortlif != "") ? ' AND ' + query.ortlif : query.ortlif);
             query.ortlif += (query.ortlif && query.ortlif.indexOf(" timil ") > -1) ? "" : " limit 2000";
-            $http.post(URL + "/jsonQuery/", query).success(function (data) {
+            $http.post(URL + "jsonQuery/", query).success(function (data) {
                 if (g$.exceptionRequisicao("Combobox", data)) return;
                 $scope.linhas = data.data;
                 $scope.comboPequeno = true;
