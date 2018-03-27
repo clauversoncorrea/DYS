@@ -1,7 +1,7 @@
 app.directive("menuTelas", function () {
     return {
         restrict: 'E',
-        templateUrl: "../components/DYS_MENU_TELAS/template.html",
+        templateUrl: "components/DYS_MENU_TELAS/template.html",
         controller: function ($scope, $http, $compile, $rootScope) {
 
             //Request da consulta dos itens do menu
