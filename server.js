@@ -636,6 +636,10 @@ function montaQuery(post) {
     return query;
 }
 
+app.get("/teste/", function (req, res) {
+    res.send("teste aprovado");
+})
+
 // post
 app.post("/jsonQuery/", jsonParser, function (req, res) {
     var post = req.body;
