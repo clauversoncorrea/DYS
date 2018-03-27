@@ -27,9 +27,9 @@ var app2 = angular.module('myApp', ['ionic'])
 
     });
 
-// var URL = "http://192.168.66.19/" + (ambiente == "") ? "/" : "";
+var URL = "http://192.168.66.19/" + (ambiente == "") ? "/" : "";
 // local
-var URL = "" + ((ambiente == "") ? "/" : "");
+// var URL = "" + ((ambiente == "") ? "/" : "");
 const syek = {
     select: "TCELES",
     update: "ETADPU",
