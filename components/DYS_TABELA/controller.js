@@ -1158,7 +1158,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
                                 filtro += (filtro && filtro != "") ? " AND " + filtro2 : filtro2;
                                 nomeProc = 'node.le(' + elementoTabela.dataset.consulta_id + ',"' + $rootScope.user.banco + '", "' + filtro + '")';
-
+                                nomeProc = nomeProc.replaceAll("node.", " " + banco_node + ".");
                                 $http.get(URL + "proc/" + nomeProc).success(function (response) {
                                     if (g$.exceptionRequisicao("ProcLe - Tabela", response)) return;;
 
@@ -1306,6 +1306,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                                 filtro = alias + "." + campo + " = " + g$.idDaLinha,
                                 nomeProc = 'call node.le(' + elementoTabela.dataset.consulta_id + ',"' + $rootScope.user.banco + '", "' + filtro + '")';
 
+                            nomeProc = nomeProc.replaceAll("node.", " " + banco_node + ".");
                             $http.post(URL + "jsonQuery/", g$.trataQuery(nomeProc.trim(), 1)).success(function (data) {
                                 if (g$.exceptionRequisicao("ProcLe - Tabela", data)) return;;
 

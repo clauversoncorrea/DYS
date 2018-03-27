@@ -1,6 +1,6 @@
 var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (location.href.indexOf("homologacao") > -1) ? "homologacao" : "");
-var banco_node = "node_" + ambiente;
-var banco_saude = "saude_" + ambiente;
+var banco_node = (ambiente == "") ? "node" : "node_" + ambiente;
+var banco_saude = (ambiente == "") ? "saude" : "saude_" + ambiente;
 
 var app2 = angular.module('myApp', ['ionic'])
 
@@ -27,8 +27,9 @@ var app2 = angular.module('myApp', ['ionic'])
 
     });
 
-var URL = "http://192.168.66.19/" + ambiente;
-// const URL = "http://dys.net.br";
+// var URL = "http://192.168.66.19/" + (ambiente == "") ? "/" : "";
+// local
+var URL = "" + ((ambiente == "") ? "/" : "");
 const syek = {
     select: "TCELES",
     update: "ETADPU",
