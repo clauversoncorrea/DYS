@@ -53,7 +53,7 @@ connection.on('error', function (err) {
 // create application/json parser
 var jsonParser = bodyParser.json()
 
-app.use(express.static(__dirname));
+app.use(express.static("./"));
 
 console.log(__dirname);
 
@@ -636,7 +636,7 @@ function montaQuery(post) {
     return query;
 }
 
-app.get("teste/", function (req, res) {
+app.get("/teste/", function (req, res) {
     res.send("teste aprovado");
 })
 
