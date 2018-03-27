@@ -20,7 +20,7 @@ app2.controller("autenticacao", function ($scope, $http, $rootScope) {
             senha = $("#senha")[0],
             dir,
             query = "SELECT u.*, UPPER(p.projeto) projeto, COALESCE(p.nao_saas,0) nao_saas  FROM " + banco_node + ".usuario u, projeto p WHERE u.projeto_id = p.id AND u.email = '" + email.value + "' AND u.senha = '" + senha.value + "'";
-        $http.post(URL + "/jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
+        $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
             if (data.data.length) {
                 $scope.user = data.data[0];
                 if ($scope.user.bloqueado == 1) return Materialize.toast("Usuário Bloqueado, entrar em contato!", 4000, 'red darken-1');
