@@ -1,7 +1,7 @@
 app.directive("teste", function () {
     return {
         restrict: 'E',
-        templateUrl: "../controller/DYS_COMBO_DYS/template.html",
+        templateUrl: "controller/DYS_COMBO_DYS/template.html",
         scope: {},
 
         controller: function ($scope, $element, $http, $compile, $rootScope) {
