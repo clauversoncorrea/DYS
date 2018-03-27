@@ -306,8 +306,8 @@ g$.tiraVirgulaEntreAspas = function (query) {
 
 g$.trataQuery = function (query, semFiltro) {
 
-    if(query.indexOf("node.usuario") > -1) query = query.replaceAll("node.", " " + banco_node + ".");
-    var query = query.replaceAll("saude.", " " + banco_saude + "."),
+    var query = query.replaceAll("node.", " " + banco_node + "."),
+        query = query.replaceAll("saude.", " " + banco_saude + "."),
         query = g$.tiraVirgulaEntreAspas(g$.keyWords(query).replace(/\%/g, "‰"))
     var queryTemp, tipo, sopmac, morf, morf_posicao, ortlif, arrmorf = [], arrfiltro = [], arrsopmac = [];
 
