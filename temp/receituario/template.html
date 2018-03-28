@@ -7,6 +7,7 @@
 label{
 	font-size: 20px;
 	size: 20px;
+  float: center;
 }
 	td {
     
@@ -28,9 +29,16 @@ h1{
 
 .c{
   margin: -10px 0px 0px 0px;
-  float: right;
+  
 }
-
+.d{
+  margin: 0px 0px 0px -100px;
+  
+}
+.imag{
+  margin: 0px 0px 0px 30px;
+  
+}
 </style>
 </head>
 
@@ -39,41 +47,67 @@ h1{
     <div class="divisor">
       <table border='1px' align="center" style="  width:100%;border-color: #FFF;border:0px;" >
 <tr>
-  <td border='1px' style="  width:75%;">
+  <td border='1px' style="  width:80%;">
 <br>
-<img src="sus.png" height="45px"
-  width="90px" />
+
 <center>
-  <h1 class="c"> Prefeitura Municipal da Estância Balneária de Caraguatatuba<br> Estado de São Paulo<br> Secretaria Municipal de Saúde</h1>
+
+
+  <h1 class="c"> Prefeitura Municipal da Estância Balneária de Caraguatatuba</h1><br>
+  <img class="imag" style="float: left;" src="https://dys.net.br/temp/receituario/sus.png"   width="10%" /><br>
+  <h1  class="d"> Estado de São Paulo<br><br> Secretaria Municipal de Saúde</h1>
 </center>
 </td>
-<td style="  width:25%;" >
+<td style="  width:20%;" >
+
 <center>
-  <img style="opacity: 1;background-repeat: no-repeat;    " src="cidade.png" height="90px" width="75px"></center>
+  <img style="opacity: 1;background-repeat: no-repeat;    " src="https://dys.net.br/temp/receituario/cidade.png" width="50%" ></center>
 <center>
   <h1>Unidade<br>Tinga</h1>
 </center>
 </td>
 </tr>
 </table>
-<table style="height: 800px;border: 1px solid #000;border-radius: 10px;width: 100%;">
+<table style="border: 1px solid #000;border-radius: 10px;width: 100%;height: 100px;">
+<tr>
+    <td colspan="3">&nbsp;<label style="float:left"><b>Paciente:</b>{{(nome.paciente)?nome.paciente:' '}}</label></td>
+  </tr>
+
+  <tr>
+    <td style="width:60%"><br>&nbsp;<label><b>Médico:</b>{{(nome.medico)?nome.medico:' '}}</label></td>
+    <td style="width:40%">&nbsp;<label><b>CRM:</b>{{(nome.crm)?nome.crm:' '}}</label></td>
+    
+  </tr>
+  <tr>
+    <td colspan="3"><br>&nbsp;<label ><b>Especialidade:</b>{{(nome.especialidade)?nome.especialidade:' '}}</label></td>
+  </tr>
+</table>
+<table style="height: 550px;border: 1px solid #000;border-radius: 10px;width: 100%;">
 <tbody>
-<tr ng-repeat="receita in receituario" style="height: 20px !important;display: block;">
-  <td colspan="2" id="a" style="font-size: 15px;border:0px;"> {{receita.receita}}</td>
+<tr>
+  <td colspan="2"></td>
 </tr>
+<tr ng-repeat="receita in receituario" style="height: 20px !important;display: block;">
+  <td colspan="2" id="a" style="border:0px;"> <br><br><label style="font-size: 15px;">{{(receita.receita)?receita.receita:' '}}</label></td>
+</tr>
+
 </tbody>
 </table>
 
-<table style="border: 1px solid #000;border-radius: 10px;width: 100%;">
-<tr>
-  <td colspan="2">
-    <label>
-  	Data:  _________/_____________/___________ </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-    <label><b>Assinatura e Carimbo: </b></label></td>
-
+<table style="border: 0px solid #DDD;border-radius: 10px;width: 100%;height: 150px;">
+  <tr style="float: bottom">
+  <td><br><br><br><br><br><br>
+    <label style="float:bottom ">
+      <center>______/______/__________ </center></label>
+<br>
+ <label style="float:bottom "><b><center>Data </center> </b></label>
+    </td>
+<td><br><br><br><br><br><br><label style="float:bottom "><center>___________________________________</center></label><br>
+ <center><label style="float:bottom "><b>Assinatura e Carimbo  </b></label></center></td>
 </tr>
 </table>
+
+
 </div>
 </div>
 

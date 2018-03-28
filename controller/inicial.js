@@ -204,7 +204,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             query = "UPDATE node.usuario SET ip = null, logado = 0 where id = " + g$.user.id;
             $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
                 delete localStorage.user;
-                window.location = window.location.href.split("/").splice(0, window.location.href.split("/").length - 1).join("/");
+                window.location = window.location.href.split("/").splice(0, window.location.href.split("/").length - 1).join("/") + "/";
             });
         }
 

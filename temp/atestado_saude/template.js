@@ -12,6 +12,19 @@ app.controller("template", function ($scope, $http, $rootScope) {
     g$.queryTemplate(query, function (data) {
         if (data.length > 0) {
             $scope.atestado = data[0];
+
+            if($scope.atestado.data) {
+                $scope.atestado.data = $scope.atestado.data.split("T")[0]
+                $scope.atestado.dia = $scope.atestado.data.split('-')[2]
+                $scope.atestado.mes = $scope.nomeMes[parseInt($scope.atestado.data.split('-')[1]) - 1]; 
+                $scope.atestado.ano = $scope.atestado.data.split('-')[0];
+            }
+            else {
+                $scope.atestado.dia = "_________"
+                $scope.atestado.mes = "_________"
+                $scope.atestado.ano = "20_____"
+            }
+
             if(data[0].data && data[0].data != "") {
                 PreencherData.classList.add("play-none");
                 dataFormatada.classList.remove("play-none");
@@ -30,6 +43,6 @@ app.controller("template", function ($scope, $http, $rootScope) {
 
     });
 
-    $scope.nomeMes = new Array(12), $scope.nomeMes[0] = "Janeiro", $scope.nomeMes[1] = "Fevereiro", $scope.nomeMes[2] = "Março", $scope.nomeMes[3] = "Abril", $scope.nomeMes[4] = "Maio", $scope.nomeMes[5] = "Junho", $scope.nomeMes[6] = "Julho", $scope.nomeMes[7] = "Agosto", $scope.nomeMes[8] = "Setembro", $scope.nomeMes[9] = "Outubro", $scope.nomeMes[10] = "Novembro", $scope.nomeMes[11] = "Dezembro"
+    $scope.nomeMes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
 });

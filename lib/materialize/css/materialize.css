@@ -9295,3 +9295,12 @@ td, th {
   float: right;
   left: 10px;
 }
+
+.quebra-texto {
+  word-wrap: break-word;
+  white-space: initial;
+}
+
+.tamanho_botao_totem {
+  height: 222px !important;
+}
