@@ -43,7 +43,7 @@ app.controller("checkbox", function ($scope, $http, $rootScope, $compile) {
             filtro = (filtro) ? filtro : "";
         
         filtro = filtro.replace(/\%/g, "‰");
-        $http.get(URL + "le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
+        $http.get(URL + "le/" + elm.dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/" + ((ambiente == "") ? true : ambiente) + "/").success(function (data) {
             if (g$.exceptionRequisicao("ProcLe - CheckBox", data)) return;;
 
             $http.post(URL + "jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {

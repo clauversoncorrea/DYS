@@ -201,7 +201,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
         else {
             filtro = (filtro == "") ? "0=0" : filtro;
             filtro = filtro.replace(/\%/g, "‰");
-            $http.get(URL + "le/" + elm.children[0].dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/").success(function (data) {
+            $http.get(URL + "le/" + elm.children[0].dataset.consulta_id + "/" + $rootScope.user.banco + "/" + filtro + "/false/" + ((ambiente == "") ? true : ambiente) + "/").success(function (data) {
                 if (g$.exceptionRequisicao("ProcLe - Bloco", data)) return;;
 
                 $http.post(URL + "jsonQuery/", g$.trataQuery(data.data[0][0].consulta)).success(function (data) {

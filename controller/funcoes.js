@@ -640,7 +640,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             });
 
             filtro = filtro.replace(/\%/g, "‰");
-            $http.get(URL + "le/" + consultaID + "/" + $rootScope.user.banco + "/" + filtro + "/true/").success(function (data) {
+            $http.get(URL + "le/" + consultaID + "/" + $rootScope.user.banco + "/" + filtro + "/true/" + ((ambiente == "") ? true : ambiente) + "/").success(function (data) {
 
                 if (g$.exceptionRequisicao("Proc le3 - LeTela", data)) return;
 

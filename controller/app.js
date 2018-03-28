@@ -375,7 +375,9 @@ g$.trataQuery = function (query, semFiltro) {
     else if (query.indexOf("call ") > -1) {
         tipo = syek["call"];
         morf = query.substring(query.indexOf(" call ") + 6, query.indexOf("("));
-        morf = (semFiltro && (morf.indexOf("node.") > -1 || morf.indexOf("node_homologacao.") > -1 || morf.indexOf("node_treinamento.") > -1 || morf.indexOf(".") == -1)) ? "node._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
+        morf = (semFiltro && (morf.indexOf("node.") > -1 || morf.indexOf(".") == -1)) ? "node._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
+        morf = (semFiltro && (morf.indexOf("node_homologacao.") > -1 || morf.indexOf(".") == -1)) ? "node_homologacao._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
+        morf = (semFiltro && (morf.indexOf("node_treinamento.") > -1 || morf.indexOf(".") == -1)) ? "node_treinamento._old_" + morf.substring(morf.indexOf(".") + 1) : morf;
         sopmac = query.substring(query.indexOf("("));
         sopmac = g$.separaMantendoParenteses(sopmac);
         jsonQuery = { tipo: tipo, sopmac: sopmac, morf: morf, ortlif: null };

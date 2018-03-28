@@ -255,9 +255,7 @@ app.post("/geraArquivoPDF/", jsonParser, function (req, res) {
 
 });
 
-app.post("/leArquivo/", jsonParser, function (req, res) {
-    console.log("entrou no le arquivo")
-    
+app.post("/leArquivo/", jsonParser, function (req, res) {    
     var post = req.body,
         arquivo = post.arquivo;
 
@@ -388,14 +386,15 @@ app.post("/post/:table", jsonParser, function (req, res) {
     });
 });
 
-app.get("/le/:consulta/:banco/:filtro/:le3", function (req, res) {
+app.get("/le/:consulta/:banco/:filtro/:le3/:ambiente", function (req, res) {
     var consulta = req.params.consulta,
         banco = req.params.banco,
         filtro = req.params.filtro,
         le = (req.params.le3 == "true") ? "le3" : "le",
+        ambiente = (ambiente == "homologacao") ? "node_homologacao." : (ambiente == "treinamento") ? "node_treinamento." : "node.",
         query;
 
-    query = 'call node.' + le + '("' + consulta + '","' + banco + '", "' + filtro + '")';
+    query = 'call ' + ambiente + le + '("' + consulta + '","' + banco + '", "' + filtro + '")';
     query = query.replace(/\½/g, "/");
     query = query.replace(/\‰/g, "%");
 
