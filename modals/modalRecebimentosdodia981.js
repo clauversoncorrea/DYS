@@ -1,1 +1,1 @@
-app.directive('modalrecebimentosdodia981', function () {return {restrict: 'E',templateUrl: '../modals/modalRecebimentosdodia981.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Recebimentos do dia');}}});
+app.directive('modalrecebimentosdodia981', function () {return {restrict: 'E',templateUrl: 'modals/modalRecebimentosdodia981.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Recebimentos do dia');}}});

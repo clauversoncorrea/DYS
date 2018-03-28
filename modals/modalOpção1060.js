@@ -1,1 +1,1 @@
-app.directive('modalopção1060', function () {return {restrict: 'E',templateUrl: '../modals/modalOpção1060.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Opção');}}});
+app.directive('modalopção1060', function () {return {restrict: 'E',templateUrl: 'modals/modalOpção1060.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Opção');}}});

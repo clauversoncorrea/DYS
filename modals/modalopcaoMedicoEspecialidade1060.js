@@ -1,1 +1,1 @@
-app.directive('modalopcaomedicoespecialidade1060', function () {return {restrict: 'E',templateUrl: '../modals/modalopcaoMedicoEspecialidade1060.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('opcaoMedicoEspecialidade');}}});
+app.directive('modalopcaomedicoespecialidade1060', function () {return {restrict: 'E',templateUrl: 'modals/modalopcaoMedicoEspecialidade1060.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('opcaoMedicoEspecialidade');}}});

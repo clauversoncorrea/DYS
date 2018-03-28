@@ -1,1 +1,1 @@
-app.directive('modalgerardisponibilidade943', function () {return {restrict: 'E',templateUrl: '../modals/modalGerarDisponibilidade943.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Gerar Disponibilidade');}}});
+app.directive('modalgerardisponibilidade943', function () {return {restrict: 'E',templateUrl: 'modals/modalGerarDisponibilidade943.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Gerar Disponibilidade');}}});

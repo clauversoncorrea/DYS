@@ -1,1 +1,1 @@
-app.directive('modalappagendamentos225', function () {return {restrict: 'E',templateUrl: '../modals/modalAPPAgendamentos225.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('APP Agendamentos');}}});
+app.directive('modalappagendamentos225', function () {return {restrict: 'E',templateUrl: 'modals/modalAPPAgendamentos225.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('APP Agendamentos');}}});

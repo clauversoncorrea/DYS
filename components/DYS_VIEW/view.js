@@ -36,7 +36,7 @@ app.directive("view", function () {
 
                 popup = $scope.montaPopup(nome, tela, isModal);
 
-                g$.controllerModal = "app.directive('modal" + nome.split(" ").join("").toLowerCase() + tela + "', function () {return {restrict: 'E',templateUrl: '../modals/modal" + nome.split(" ").join("") + tela + ".html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('" + nome + "');";
+                g$.controllerModal = "app.directive('modal" + nome.split(" ").join("").toLowerCase() + tela + "', function () {return {restrict: 'E',templateUrl: 'modals/modal" + nome.split(" ").join("") + tela + ".html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('" + nome + "');";
                 g$.funcoesModal = "";
                 if (isModal == true || isModal == "true") {
                     g$.isModal = 1;

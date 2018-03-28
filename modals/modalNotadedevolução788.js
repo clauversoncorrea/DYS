@@ -1,1 +1,1 @@
-app.directive('modalnotadedevolução788', function () {return {restrict: 'E',templateUrl: '../modals/modalNotadedevolução788.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Nota de devolução');}}});
+app.directive('modalnotadedevolução788', function () {return {restrict: 'E',templateUrl: 'modals/modalNotadedevolução788.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Nota de devolução');}}});
