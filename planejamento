@@ -17,7 +17,33 @@ Ao selecionar um medicamento, popular a unidade de medida e se é da rede ou nã
 
 - receituário dentista – não permitir texto na dosagem e incluir alerta para isso
 - receituário dentista – não permitir texto na dosagem
-
 não está chamando o paciente no botão CHAMAR.
 
-Identificando que o sistema operacional é do raspberry fazer entrada automática com todos os telões mostrando todas as etapas
+funcoes: subir openFile com idFuncaoDepois OK
+
+bugs
+tela chamada pre-consulta nao esta pegando o formato em temperatura OK
+tabela atualiza duas vezes e buga os botoes que estao nela
+logar no hambiente de homologacao apartir do link /homologacao, nao apenas do link: /homologacao/
+selecionar tds seleciona a linha vazia, "undefined" e buga a funcao OK
+
+templates:
+ receituario: subir descricao da receita, atualmente esta centralizada OK
+
+tela
+ atendimento guiche OK
+ cadastro > enfermeiro CPF/COREM OK
+ prontuario -- banco inserir filhos da tabela 8053, inserir tabelas e filtro da consulta 469 OK
+ cadastro > auxiliar de enfermagem - CPF OK
+ configurações > edicao de perguntas -- novo campo check OK
+ totem senha -- duas novas funcoes na tela, aumentar input de cartao sus OK
+ chamada pre consulta - botao alterar dados OK
+
+modal 
+triagem paciente - campo de enfermeiro OK
+outros dados - o procedimento OK
+opcao - o procedimento OK
+outros dados - o procedimento OK
+estoque - nao abre la, creio q ainda nao foi gerado OK
+remarcar - botao cancelar agendamento OK
+dados de atendimento - funcao para odonto OK

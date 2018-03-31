@@ -530,7 +530,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
         // Na hora de selecionar
         if (event.target.checked) {
             $("[data-id='" + tabela.dataset.id + "'] tr").addClass("active");
-            g$[tabela.dataset.nome + "_array"] = obj;
+            g$[tabela.dataset.nome + "_array"] = obj.splice(0, obj.length - 1);
             for (var i = 0; i < rows.length; i++) {
                 rows[i].children[0].checked = true;
             }

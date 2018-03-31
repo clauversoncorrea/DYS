@@ -1573,13 +1573,15 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     g$.openFile = function (params) {
         var params = g$.alterSargentos(params),
+            idFuncao = params[0].split("¦")[1],
             arquivo = (params[1].trim().indexOf('/') > -1) ? params[1].trim() : 'https://dys.net.be/' + $rootScope.user.projeto + '/' + params[1].trim(),
             cond = params[2],
             tamanho = (params[3] && params[3].trim() != "") ? params[3].split("¦") : false,
             valida = (!cond) ? true : g$.validaCondicao(cond);
 
         if (valida == false) {
-            return console.log("Não executou porque " + cond + " é falso");
+            console.log("Não executou porque " + cond + " é falso");
+            return g$.vfyFuncaoDepois(idFuncao);
         };
         // if (params[1].indexOf(".pdf") > 0) {
         //     var ref = window.open(params[1], '_system', 'location=yes');
@@ -1596,6 +1598,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
         if (params.indexOf("https://dys.net.br/")) arquivo = arquivo.replaceAll("https://dys.net.br/", g$.link);
         if (tamanho) window.open(arquivo, "", "width=" + tamanho[1], "height=" + tamanho[2]);
         else window.open(arquivo, "_blank");
+        return g$.vfyFuncaoDepois(idFuncao);
     }
 
     g$.convertImgToBase64 = function (params) {
