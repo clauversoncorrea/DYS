@@ -209,9 +209,6 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                     $("#loadzinTelaTb")[0].outerHTML = "";
                 }
 
-                var table = $("#view [data-id=" + elm.dataset.id + "]").DataTable();
-                table.destroy();
-
                 // Compila o template
                 template = $compile(template)($scope)[0];
                 template = (template) ? template : elm;
@@ -253,9 +250,6 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
                         $("#loadzinTabelaz")[0].outerHTML = "";
                     }
 
-                    var table = $("#view [data-id=" + elm.dataset.id + "]").DataTable();
-                    table.destroy();
-
                     // Compila o template
                     template = $compile(template)($scope)[0];
                     template = (template) ? template : elm;
@@ -286,6 +280,10 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
     }
 
     $scope.dataTable = function (elm, nome) {
+
+        var table = $("#view [data-id=" + elm.dataset.id + "]").DataTable();
+        table.destroy();
+
         var query = "SELECT coluna_id, visivel FROM node.elemento_nao_visivel WHERE tabela_id = " + elm.dataset.id + " AND user_id = " + g$.user.id;
         $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
@@ -308,7 +306,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
             }
             $("#view [data-id=" + elm.dataset.id + "]").DataTable({
                 dom: 'l' + ((elm.dataset.tabela_botao_filtro == "1") ? 'c' : '') +
-                ((elm.dataset.tbl_modal && elm.dataset.tbl_modal.trim() != "" && elm.dataset.tbl_modal.trim() != "null") ? 'm' : '') + 'Brtip',
+                    ((elm.dataset.tbl_modal && elm.dataset.tbl_modal.trim() != "" && elm.dataset.tbl_modal.trim() != "null") ? 'm' : '') + 'Brtip',
                 "language": {
                     "url": "../lib/datatable/js/Portuguese-Brasil.json"
                 },
