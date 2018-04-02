@@ -2064,7 +2064,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
     }
 
     function elementoClick(elemento_id) {
-        var query = "SELECT e.nome, ef.*, e.menu_id FROM elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and ef.elemento_id =  "
+        var query = "SELECT e.nome, ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and ef.elemento_id =  "
             + elemento_id + " and isnull(ef.depois) ORDER BY ef.ordem;",
             elm = $("[data-id='" + elemento_id + "'")[0];
         $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {

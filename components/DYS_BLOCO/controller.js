@@ -240,7 +240,7 @@ app.controller("bloco", function ($scope, $http, $rootScope, $compile) {
 
     // Adiciona os eventos nos elementos da tela
     $scope.addEventosElmsBloco = function (elm, elemento_bloco) {
-        var queryEventsBlocos = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
+        var queryEventsBlocos = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elm.dataset.menu_id + " AND evento_bloco='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
         $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsBlocos.trim())).success(function (data) {

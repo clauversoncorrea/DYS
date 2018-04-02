@@ -1,1 +1,1 @@
-app.directive('modalminhaconta833', function () {return {restrict: 'E',templateUrl: 'modals/modalMinhaConta833.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Minha Conta');}}});
+app.directive('modalminhaconta833', function () {return {restrict: 'E',templateUrl: '../modals/modalMinhaConta833.html', scope: {}, controller: function ($scope, $element, $http, $compile, $rootScope) {g$.configTela('Minha Conta');}}});

@@ -93,7 +93,7 @@ app.directive("teste", function () {
 
             function onComboChange(id) {
                 // Chama todas as funcoes change
-                var queryElementoChange = "SELECT funcao FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and ef.elemento_id = " +
+                var queryElementoChange = "SELECT funcao FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and ef.elemento_id = " +
                     id + " and evento = 'change' and isnull(ef.depois) ORDER BY ef.ordem;"
                 $http.post(URL + "jsonQuery/", g$.trataQuery(queryElementoChange.trim())).success(function (data) {
                     // Trata Excecao

@@ -138,7 +138,7 @@ app.directive("view", function () {
                     loadzinTela = angular.element($.template[0]["loadzinTela"])[0];
                     // document.body.append(loadzinTela);
                     // $("#loadzinTela")[0].id = "loadzinTelaf"
-                    queryEventosElm = "SELECT e.nome, ef.*, e.menu_id FROM elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and " +
+                    queryEventosElm = "SELECT e.nome, ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and " +
                         "e.menu_id = " + tela + " and coalesce(evento_bloco, '0') <> '1' and coalesce(evento_check, '0') <> '1' and coalesce(evento_tabela, '0') <> '1' and isnull(ef.depois) ORDER BY ef.ordem;";
                     $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventosElm.trim())).success(function (data) {
                         // Trata Excecao

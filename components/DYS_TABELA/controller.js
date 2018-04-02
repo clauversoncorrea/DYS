@@ -456,7 +456,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
     // Adiciona os eventos nos elementos da tela
     $scope.addEventosElmsTabela = function (elmTabela) {
-        var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
+        var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elmTabela.dataset.menu_id + " AND evento_tabela='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
         $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsTabela.trim())).success(function (data) {
@@ -1330,7 +1330,7 @@ app.controller("tabela", function ($scope, $http, $compile, $rootScope) {
 
     // Adiciona os eventos nos elementos de uma linha da tabela
     $scope.addEventosRowTabela = function (elmTabela, row) {
-        var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
+        var queryEventsTabela = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elmTabela.dataset.menu_id + " AND evento_tabela='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
         $http.get(URL + "get/" + queryEventsTabela).success(function (data) {

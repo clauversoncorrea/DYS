@@ -90,7 +90,7 @@ app.controller("checkbox", function ($scope, $http, $rootScope, $compile) {
 
     // Adiciona os eventos nos elementos da tela
     $scope.addEventosElmsCheck = function (elm, elemento_check) {
-        var queryEventsCheck = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
+        var queryEventsCheck = "SELECT ef.*, e.menu_id FROM node.elemento_funcao ef, node.elemento e WHERE e.id = ef.elemento_id and e.menu_id = " +
             elm.dataset.menu_id + " AND evento_check='1' and isnull(ef.depois) ORDER BY ef.ordem";
 
         $http.post(URL + "jsonQuery/", g$.trataQuery(queryEventsCheck)).success(function (data) {
