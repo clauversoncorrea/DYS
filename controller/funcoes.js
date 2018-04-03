@@ -1960,8 +1960,12 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         if (elm) {
             if (elm.id == "tab") {
-                elm.click();
-                elm.children[0].click();
+                var id_tela =  $("[data-id='" + elm.dataset.id + "']")[0].dataset.menu_id;
+                tela = $("#view #" + id_tela)[0].dataset.nome;
+                g$.displayTab(elm.dataset.id, tela);
+                elementoClick(elm.dataset.id);
+                // elm.click();
+                // elm.children[0].click();
                 // $('ul.tabs').tabs('select_tab', elm.children[0].href.split("#")[1]);
             }
             else if (elm.id == "link") {
