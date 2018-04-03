@@ -522,7 +522,7 @@ setDadosView = function (elm, obj, th, alterCombo) {
         }
         else if (obj.tag == "tab") {
             elm.children[0].textContent = obj.texto;
-            elm.addEventListener("click", g$.displayTab.bind(null, obj.id), false);
+            // elm.addEventListener("click", g$.displayTab.bind(null, obj.id), false);
             // if (!g$.user.sysCli) elm.children[0].href = "#aba" + obj.id;
         }
         else if (obj.tag == "input") {

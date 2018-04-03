@@ -661,7 +661,7 @@ app.directive("view", function () {
                 query = "SELECT * FROM tela_funcao WHERE isnull(depois) and tela_id=" + tela + " ORDER BY ordem";
                 $http.post(URL + "jsonQuery/", g$.trataQuery(query.trim())).success(function (data) {
 
-                    g$.displayTab(null, popup.dataset.nome);
+                    // g$.displayTab(null, popup.dataset.nome);
 
                     // Trata Excecao
                     if (g$.exceptionRequisicao("Eventos Tela", data)) return;;
