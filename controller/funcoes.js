@@ -1962,7 +1962,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             if (elm.id == "tab") {
                 var id_tela =  $("[data-id='" + elm.dataset.id + "']")[0].dataset.menu_id;
                 tela = $("#view #" + id_tela)[0].dataset.nome;
-                g$.displayTab(elm.dataset.id, tela);
+                g$.ativaTab(elm.dataset.id, tela);
                 elementoClick(elm.dataset.id);
                 // elm.click();
                 // elm.children[0].click();

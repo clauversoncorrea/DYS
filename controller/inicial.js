@@ -980,6 +980,36 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             $("[data-id='" + id + "'] a")[0].classList.add("active");
         }
 
+        g$.ativaTab = function (id, nomeTela) {
+
+            elm = $("[data-id='" + id + "'")[0];
+            id = elm.dataset.id;
+
+            paiUl = elm.parentElement.parentElement;
+            // Faz um for para adicionar os play-nones em todos os corpos 
+            // as abas do pai
+            lis = paiUl.querySelectorAll("li#tab")
+
+            // Desativa todas as abas do pai
+            for (var i = 0; i < lis.length; i++) {
+                paiUls = $("[data-id='" + lis[i].dataset.id + "']")[1].classList.add("play-none");
+            }
+
+            // Ativa a aba que acabou de clicar
+            paiUl.querySelector(".active").classList.remove("active");
+            elm.classList.add("active");
+            $("[data-id='" + id + "']")[1].classList.remove("play-none");
+
+            // filhos da aba ativa
+            filhosLis = $("[data-id='" + id + "']")[1].querySelectorAll("li#tab");
+            filhosLis.forEach(function (v) {
+                $("[data-id='" + v.dataset.id + "']")[1].classList.add("play-none");
+            });
+            // Ativa a primeira aba do filho
+            if (filhosLis && filhosLis.length) $("[data-id='" + filhosLis[0].dataset.id + "']")[1].classList.remove("play-none");
+            $("[data-id='" + id + "'] a")[0].classList.add("active");
+        }
+
         // Inicia o menu
         g$._init = function (menu) {
             $("li a").on('click', function (e) {
