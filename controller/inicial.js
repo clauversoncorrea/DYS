@@ -996,7 +996,8 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             }
 
             // Ativa a aba que acabou de clicar
-            paiUl.querySelector(".active").className = "";
+            paiUl.querySelector(".active").classList.remove("active");
+            paiUl.querySelector("a.active").className = "";
             elm.classList.add("active");
             $("[data-id='" + id + "']")[1].classList.remove("play-none");
 
