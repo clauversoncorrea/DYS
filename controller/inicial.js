@@ -977,6 +977,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             });
             // Ativa a primeira aba do filho
             if (filhosLis && filhosLis.length) $("[data-id='" + filhosLis[0].dataset.id + "']")[1].classList.remove("play-none");
+            lis.forEach(function (v) { if (v.querySelector("a.active")) v.querySelector("a").className = "" });
             $("[data-id='" + id + "'] a")[0].classList.add("active");
         }
 
@@ -1007,6 +1008,7 @@ app.controller("inicial", function ($scope, $http, $rootScope, $timeout, $compil
             });
             // Ativa a primeira aba do filho
             if (filhosLis && filhosLis.length) $("[data-id='" + filhosLis[0].dataset.id + "']")[1].classList.remove("play-none");
+            lis.forEach(function (v) { if (v.querySelector("a.active")) v.querySelector("a").className = "" });
             $("[data-id='" + id + "'] a")[0].classList.add("active");
         }
 
