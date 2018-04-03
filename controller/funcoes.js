@@ -5174,14 +5174,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
     function teste(id) {
         if ($(".popup[data-tela='1054']")[0]) {
-            var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND f.id = " + id + " AND COALESCE(quantidade_chamado,0)>0 ORDER BY ordem DESC LIMIT 1");
+            var query = g$.trataQuery("SELECT descricao_chamada,senha, local, ordem, CONCAT('Senha ', senha, ' em ', descricao_chamada,'.. Senha ', senha, ' em ', descricao_chamada) as descricao FROM " + g$.user.banco + ".fila_chamada f LEFT JOIN " + g$.user.banco + ".local l ON l.id = f.local_id WHERE local_id in (0 " + g$.memo40 + ") AND f.id = " + id + " AND COALESCE(quantidade_chamado,0)>0 AND COALESCE(oculto,0) = 0 ORDER BY ordem DESC LIMIT 1");
             $http.post(URL + "jsonQuery/", query).success(function (primeiro_bloco) {
                 if (primeiro_bloco.data[0] && g$.memo43 != primeiro_bloco.data[0].ordem) {
                     g$.memo43 = primeiro_bloco.data[0].ordem;
                     // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length] = { primeiro_bloco: data.data[0] }
                     $http.post(URL + "jsonQuery/", g$.trataQuery("SELECT ordem FROM saude.fila_chamada where id = " + id)).success(function (data) {
                         var ordem = data.data[0].ordem;
-                        var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 AND ordem < " + ordem + " order by ordem desc limit 3;");
+                        var query = g$.trataQuery("SELECT FICH.descricao_chamada AS e_53460, FICH.id AS e_53546, FICH.senha AS e_53458, LOCL.local AS e_53704 FROM saude.fila_chamada FICH LEFT JOIN saude.local LOCL on FICH.local_id = LOCL.id WHERE local_id in (0 " + g$.memo40 + ") and COALESCE(quantidade_chamado,0)>0 AND ordem < " + ordem + " AND COALESCE(oculto,0) = 0 order by ordem desc limit 3;");
                         $http.post(URL + "jsonQuery/", query).success(function (segundo_bloco) {
                             // if (paramData) g$.filaSenhaaChamar[g$.filaSenhaaChamar.length - 1].segundo_bloco = data.data;
                             $("[data-id='53453'")[0].innerHTML = primeiro_bloco.data[0].descricao_chamada;
