@@ -3,7 +3,7 @@ app.controller("template", function ($scope, $http, $rootScope) {
     var obj = g$.urlObj(location.href);
 
     // Funcao para carregar a query
-    var query = "SELECT CONCAT(p.descricao,IF ( u.id in(4),'________ PASSAR',CONCAT('________ TOMAR ', dosagem,' ',IF(p.descricao LIKE '%gotas%','GOTAS',IF(u.id IN (6 , 1), ' ML', u.unidade)))), ' de ', r.frequencia,'/', r.frequencia, 'h por ', SUM(r.duracao),' dias') receita " +
+    var query = "SELECT CONCAT(p.descricao,IF ( u.id in(4),'________ PASSAR',CONCAT('________ TOMAR ', dosagem,' ',IF(p.descricao LIKE '%gotas%','GOTAS',IF(u.id IN (6 , 1), ' ML', u.unidade)))), ' de ', r.frequencia,'/', r.frequencia, 'h por ', SUM(r.duracao),' dias.',COALESCE(CONCAT(' Posologia: ', MAX(r.posologia)),'')) receita " +
         "FROM " + obj.banco.trim() + ".receituario r " +
         "LEFT JOIN " + obj.banco.trim() + ".produto p on p.id = r.remedio_id " +
         "LEFT JOIN " + obj.banco.trim() + ".unidade_remedio u on u.id = p.unidade_id " +
