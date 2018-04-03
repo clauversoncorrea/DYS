@@ -391,6 +391,7 @@ app.get("/le/:consulta/:banco/:filtro/:le3/:ambiente", function (req, res) {
         banco = req.params.banco,
         filtro = req.params.filtro,
         le = (req.params.le3 == "true") ? "le3" : "le",
+        ambiente = req.params.ambiente,
         ambiente = (ambiente == "homologacao") ? "node_homologacao." : (ambiente == "treinamento") ? "node_treinamento." : "node.",
         query;
 
