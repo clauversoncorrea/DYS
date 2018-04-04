@@ -1245,8 +1245,14 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
             }
             else if (propriedade == "disabled") {
                 if (elemento.id == "selectbox") {
-                    if (valor == "true") elemento.querySelector("#selectbox").setAttribute("disabled", valor);
-                    else elemento.querySelector("#selectbox").removeAttribute("disabled");
+                    if (valor == "true") {
+                        elemento.querySelector("#selectbox").setAttribute("disabled", valor);
+                        elemento.dataset.bloqueado = 1;
+                    }
+                    else {
+                        elemento.querySelector("#selectbox").removeAttribute("disabled");
+                        elemento.dataset.bloqueado = 0;
+                    }
                 }
                 else if (elemento.tagName == "INPUT") {
                     if (valor == "true") elemento.setAttribute("disabled", valor);

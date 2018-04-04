@@ -29,7 +29,10 @@ app.directive("teste", function () {
 
             g$.openCombo = function () {
                 var query, template, elm = event.target.parentElement,
-                    filtro = (!elm.dataset.comboFiltro || elm.dataset.comboFiltro == "null") ? "" : elm.dataset.comboFiltro;
+                filtro = (!elm.dataset.comboFiltro || elm.dataset.comboFiltro == "null") ? "" : elm.dataset.comboFiltro;
+                
+                if (elm.dataset.bloqueado == "1") return;
+                
 
                 if (elm.dataset.combo_tabela) {
                     tabela = g$.filterTabela(elm.dataset.combo_tabela, true);
@@ -45,7 +48,6 @@ app.directive("teste", function () {
                 coluna = campo;
                 value = elm.dataset.comboGravaCampo || "id";
 
-                if (elm.dataset.bloqueado == "1") return;
 
                 if (elm.dataset.comboQuery) {
                     coluna = elm.dataset.combo_campo;
