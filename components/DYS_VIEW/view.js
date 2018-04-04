@@ -507,8 +507,10 @@ app.directive("view", function () {
                     // if (td.dataset.display && td.dataset.display.trim() != "none") {
                     $("[data-nome='" + tela + "'] .card-content [data-id='" + obj.pai + "'] thead tr")[0].appendChild(th);
                     $("[data-nome='" + tela + "'] .card-content [data-id='" + obj.pai + "'] tbody tr")[0].appendChild(td);
-                    th.style.minWidth = th.offsetWidth + 10 + "px";
-                    td.style.minWidth = td.offsetWidth + 10 + "px";
+                    if (!obj.largura) {
+                        th.style.minWidth = th.offsetWidth + 10 + "px";
+                        td.style.minWidth = td.offsetWidth + 10 + "px";
+                    }
                     // }
                 }
                 else g$.exibeQuery("Erro", "Não encontrou o pai do TD ID: " + obj.id);
