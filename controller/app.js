@@ -9,8 +9,8 @@ if(location.href.indexOf("localhost") > -1) {
     link = "http://localhost:8000/" + ((ambiente == "") ? "/" : ambiente);
 }
 else {
-    URL = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente);
-    link = "http://192.168.66.19/" + ((ambiente == "") ? "/" : ambiente) + "/";
+    URL = "http://192.168.66.19/" + ((ambiente == "") ? "" : ambiente);
+    link = "http://192.168.66.19/" + ((ambiente == "") ? "" : ambiente + "/");
 }
 
 const KEYPAYGOL = "gXdeOtns6R1Iex0qQ77hq8O7fRlKOcTs%2bDE5yqJkpWjggbXzfMIKfgR6kOH1L6hT1vQ193YiLer15y04yPGACvFqep2Ns2brBkjW%2bV8flwE%3d";
