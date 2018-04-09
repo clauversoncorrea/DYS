@@ -1,0 +1,519 @@
+<html ng-app="myApp">
+
+<head>
+
+  <style type="text/css">
+    td {
+      font-size: 10px;
+    }
+
+    .Selecionado {
+      background-color: #999;
+
+    }
+  </style>
+
+</head>
+
+<body ng-controller="inicial">
+
+  <div ng-controller="template">
+    <table class="a" border='1px' align="center" style="width:100%;border-collapse: collapse; ">
+
+      <tr>
+        <th>Logo</th>
+        <th colspan="19">Prefeitura Municipal da Estancia Balnearia de Caraguatatuba</th>
+      </tr>
+      <tr>
+        <td>&nbsp&nbsp</td>
+        <td colspan="19">Secretaria Municipal de Saude&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td>&nbsp&nbsp</td>
+        <td colspan="19">REQUISIÇÃO DE SERVIÇOS DE DUAGNOSE E TERAPIA - SADT&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="20">UNIDADE SOLICITANTE&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="10">Nome&nbsp&nbsp{{(encaminhamento.unidade_solicitante) ? encaminhamento.unidade_solicitante : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+        <td colspan="10">CNES&nbsp&nbsp{{(encaminhamento.cnes) ? encaminhamento.cnes : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+      </tr>
+      <tr>
+        <td colspan="20">UNIDADE PRESTADORA&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="10">Nome:&nbsp&nbsp</td>
+        <td colspan="10">CNES&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="20">IDENTIFICAÇÃO DO CLIENTE&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="7">CNS&nbsp&nbsp{{(encaminhamento.cartao_sus) ? encaminhamento.cartao_sus : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+        <td colspan="10">D.N.&nbsp&nbsp{{(encaminhamento.nascimento) ? encaminhamento.nascimento : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+        <td colspan="4">Sexo:{{(encaminhamento.sexo) ? encaminhamento.sexo : "M() F()"}}&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="20">Nome:&nbsp&nbsp{{(encaminhamento.nome) ? encaminhamento.nome : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+      </tr>
+      <tr>
+        <td colspan="20">Endereço:&nbsp&nbsp{{(encaminhamento.cbrEndereco) ? encaminhamento.cbrEndereco : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+      </tr>
+      <tr>
+        <td colspan="8">Bairro:&nbsp&nbsp{{(encaminhamento.cbrBairro) ? encaminhamento.cbrBairro : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+        <td colspan="10">CEP:&nbsp&nbsp{{(encaminhamento.cbrCep) ? encaminhamento.cbrCep : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+        <td colspan="3">Tel:{{(encaminhamento.tel1) ? encaminhamento.tel1 : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+      </tr>
+      <tr>
+        <td colspan="20">Data da Solicitação:&nbsp&nbsp{{(encaminhamento.data_solicitacao) ? encaminhamento.data_solicitacao : "&nbsp;&nbsp;&nbsp;&nbsp;"}}</td>
+      </tr>
+      <tr>
+        <td colspan="20">Suspeita Clínica:&nbsp&nbsp</td>
+      </tr>
+      <tr>
+        <td colspan="20">Raça/Cor [{{(encaminhamento.raca_cor == 1) ? "X" : " "}}] 01 Branco [{{(encaminhamento.raca_cor == 2) ? "X" : " "}}] 02 Negra [{{(encaminhamento.raca_cor == 3) ? "X" : " "}}] 03 Parda [{{(encaminhamento.raca_cor == 4) ? "X" : " "}}] 04 Amarela [{{(encaminhamento.raca_cor == 5) ? "X" : " "}}]05 Indígena [{{(encaminhamento.raca_cor == 99) ? "X" : " "}}] 99 Sem informação&nbsp&nbsp</td>
+      </tr>
+    </table>
+    <br>
+    <label id=a>
+      <center>
+        <strong>PROCEDIMENTO SOLICITADO</strong>
+      </center>
+    </label>
+    <br>
+
+    <table class="a" border='0 px' align="center" style="width:100%;border-collapse: collapse;font-size: 10px; ">
+      <tr>
+        <td style="width:25px;">
+          <input id="AcidoUrico" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010120</td>
+        <td>Ácido Úrico</td>
+        <td style="width:25px;">
+          <input id="DosagemdeUreia" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010694</td>
+        <td>Dosagem de Uréia</td>
+        <td style="width:25px;">
+          <input id ="DesidrogenaseLatica" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010368</td>
+        <td>Desidrogenase Lática</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeAmilase" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010180</td>
+        <td>Dosagem de Amilase</td>
+        <td style="width:25px;">
+          <input id="DosagemdeCreatina" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010317</td>
+        <td>Dosagem de Creatina</td>
+        <td style="width:25px;">
+          <input id="DesidLaticaIsoenzimasFracion" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010376</td>
+        <td>Desid. Lática (Isoenzimas Fracion.)</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosBilirrubinasFrac" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010201</td>
+        <td>Dos. Bilirrubinas Fraç</td>
+        <td style="width:25px;">
+          <input id="DosagemdeSodio" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010635</td>
+        <td>Dosagem de Sódio</td>
+        <td style="width:25px;">
+          <input id="PesquisaOvosCistoParatida" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010376</td>
+        <td>Pesquisa Ovos Cisto Paratida</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemTriglicerideos" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010678</td>
+        <td>Dosagem Triglicerídeos</td>
+        <td style="width:25px;">
+          <input id ="DosagemdePotassio" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010600</td>
+        <td>Dosagem de Potássio</td>
+        <td style="width:25px;">
+          <input id="SangueOcultonasfezes" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202040127</td>
+        <td>Sangue Oculto nas fezes</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="ColesterolTotal" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010295</td>
+        <td>Colesterol Total</td>
+        <td style="width:25px;">
+          <input id="DosagemdeCalcio" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010210</td>
+        <td>Dosagem de Cálcio</td>
+        <td style="width:25px;">
+          <input id="UrinaI" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202050017</td>
+        <td>Urina I</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="ColesterolLDL" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010287</td>
+        <td>Colesterol LDL</td>
+        <td style="width:25px;">
+          <input id="TempoSangramentoDuke" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020096</td>
+        <td>Tempo Sangramento Duke</td>
+        <td style="width:25px;">
+          <input id="ClearancedeCreatina" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202050025</td>
+        <td>Clearance de Creatina</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="ColesterolHDL" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010279</td>
+        <td>Colesterol HDL</td>
+        <td style="width:25px;">
+          <input id="DetTempodeCoagulacao" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020070</td>
+        <td>DetTempodeCoagulacao</td>
+        <td style="width:25px;">
+          <input id="ClearancedeUreia" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202050041</td>
+        <td>Clearance de Ureia</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="Creatinofosfoquinase" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010325</td>
+        <td>Creatinofosfoquinase</td>
+        <td style="width:25px;">
+          <input id="DetTempodeTrombina" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020126</td>
+        <td>Det. Tempo de Trombina</td>
+        <td style="width:25px;">
+          <input id="DosdeProteinasUrina24horas" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202050114</td>
+        <td>Dos. de Proteínas Urina 24 horas</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeFerritina" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010384</td>
+        <td>Dosagem de Ferritina</td>
+        <td style="width:25px;">
+          <input id="TempoAtividProtrombinaTAP" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020142</td>
+        <td>Tempo/Ativid. Protrombina TAP</td>
+        <td style="width:25px;">
+          <input id = "ProteinasTotaisFracoes" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010627</td>
+        <td>Proteínas Totais Frações</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeFerroSerico" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010392</td>
+        <td>Dosagem de Ferro Sérico</td>
+        <td style="width:25px;">
+          <input id="ContagemdePlaquetas" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020029</td>
+        <td>Contagem de Plaquetas</td>
+        <td style="width:25px;">
+          <input id="DosagemTestosterona" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060349</td>
+        <td>Dosagem Testosterona</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="FosfatasseAlcalina" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010422</td>
+        <td>Fosfatasse Alcalina</td>
+        <td style="width:25px;">
+          <input id="VelocHemosedimentacaoVHS" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020150</td>
+        <td>Veloc. Hemosedimentação VHS</td>
+        <td style="width:25px;">
+          <input id="HormonioFSH" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060233</td>
+        <td>Hormonío FSH</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeFosforo" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010430</td>
+        <td>Dosagem de Fósforo</td>
+        <td style="width:25px;">
+          <input id="HemogramaCompleto" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202020380</td>
+        <td>Hemograma Completo</td>
+        <td style="width:25px;">
+          <input id="HormonioLH" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060241</td>
+        <td>Hormonío LH</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeGamaGT" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010465</td>
+        <td>Dosagem de Gama GT</td>
+        <td style="width:25px;">
+          <input id="AntigProstaticoEspecfPSA" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202030105</td>
+        <td>Antíg. Prostático Especf PSA</td>
+        <td style="width:25px;">
+          <input id="HormonioTSH" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060250</td>
+        <td>Hormonío TSH</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="TGO" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010643</td>
+        <td>TGO</td>
+        <td style="width:25px;">
+          <input id="AntigProstaticoPSAlivre" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202030741</td>
+        <td>Antíg. Prostático (PSA livre)</td>
+        <td style="width:25px;">
+          <input id="DosagemTriodotironinaT3" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060390</td>
+        <td>Dosagem Triodotironina T3</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="TGP" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010643</td>
+        <td>TGP</td>
+        <td style="width:25px;">
+          <input id="IGGAnticitomegalovirus" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202030857</td>
+        <td>IGG Anticitomegalovirus</td>
+        <td style="width:25px;">
+          <input id="DosTiroxinaT4" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060373</td>
+        <td>Dos. Tiroxina T4</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id ="DosagemGlicose" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010473</td>
+        <td>Dosagem Glicose</td>
+        <td style="width:25px;">
+          <input id="IGMAnticitomegalovirus" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202030857</td>
+        <td>IGM Anticitomegalovirus</td>
+        <td style="width:25px;">
+          <input id="TiroxinaLivreT4Livre" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202060373</td>
+        <td>Tiroxina Livre T4 Livre</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="HemoglobGlicolisada" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010503</td>
+        <td>Hemoglob. Glicolisada</td>
+        <td style="width:25px;">
+          <input id="DeterminFatorReumatoide" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202010075</td>
+        <td>Determin. Fator Reumatoide</td>
+        <td style="width:25px;">
+          <input id="Antibiogramasecrescdemicroorg" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td  style="width:25px;">0202060373</td>
+        <td> Antibiograma (se cresc/ de microorg.)</td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input id="DosagemdeFrutose" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202090108</td>
+        <td>Dosagem de Frutose</td>
+        <td style="width:25px;">
+          <input id="PesqFatorReumatWaalerRose" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202031012</td>
+        <td>Pesq Fator Reumat. (Waaler - Rose)</td>
+        <td style="width:25px;">
+          <input id="AntibiogramacMIC" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202080013</td>
+        <td>Antibiograma (c/ MIC)</td>
+      </tr>
+      <tr>
+        <td style="width:25px;"></td>
+        <td style="width:25px;"></td>
+        <td style="width:25px;"></td>
+        <td style="width:25px;">
+          <input id="PdoLatexpPesqFatReumatoide" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202090302</td>
+        <td> P. do Latex p/ Pesq. Fat. Reumatoide</td>
+        <td style="width:25px;">
+          <input id="BacterioscopiaGRAM" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202080072</td>
+        <td>Bacterioscopia (GRAM)</td>
+      </tr>
+      <tr>
+        <td style="width:25px;"></td>
+        <td style="width:25px;"></td>
+        <td style="width:25px;"></td>
+        <td style="width:25px;">
+          <input id="FentipSistemaRHHR" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td>0202120031</td>
+        <td>Fentip. Sistema RH - HR</td>
+        <td style="width:25px;">
+          <input id="CulturadeBacterias" style="width:25px;width:100%;height: 100%; text-align:  center; " type=text></input>
+        </td>
+        <td style="width:25px;">0202080080</td>
+        <td>Cultura de Bactérias</td>
+      </tr>
+
+    </table>
+
+
+    <table  id="outrosexames" class="a" border='0px' align="center" style="width:100%;border-collapse: collapse;font-size: 10px; ">
+
+
+      <tr>
+        <td colspan="2">Outros Exames</td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:25px;">
+          <input style="width:100%;height: 100%; text-align:  center; " type=text>
+          
+        </td>
+        <td>
+          <input style="width:100%;height: 100%; " type=text>
+        </td>
+      </tr>
+      <tr>
+        <td>Indentificação do Solicitante</td>
+        <td align="right">Assinatura</td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+<script type="text/javascript" src="../../controller/app.js"></script>
+<script src="../../lib/angular/angular.js" type="text/javascript"></script>
+<script src="../../temp/template.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../lib/jQuery/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="template.js"></script>
+
+</html>
