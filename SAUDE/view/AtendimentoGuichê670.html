@@ -283,9 +283,11 @@
                                     <th id="th" style="min-width: 62px;">Horário</th>
                                     <th id="th" style="min-width: 56px;">Senha</th>
                                     <th id="th" style="min-width: 52px;">Local</th>
+                                    <th id="th" style="min-width: 52px;display:none;">Pago</th>
                                     <th id="th" style="min-width: 64px;">Retorno</th>
                                     <th id="th" style="min-width: 200px;">Paciente</th>
                                     <th id="th" style="min-width: 62px;">Serviço</th>
+                                    <th id="th" style="min-width: 150px;display:none;">Convênio</th>
                                     <th id="th" style="min-width: 150px;">Especialidade</th>
                                     <th id="th" style="min-width: 150px;">Medico</th>
                                     <th id="th" style="min-width: 150px;">Unidade</th>
@@ -367,7 +369,11 @@
                                         data-le_do_campo_id="19619" data-input_ativo="1" data-ordem="27" class=" null" style="font-size: 13px; font-family: Roboto; min-width: 62px;">
                                         <span class="tblTdFalse"> Texto </span>
                                     </td>
-                                    
+                                    <td id="td" tabindex="0" "44620 - td" data-id="44620" data-pai="20518" data-texto="Pago"
+                                        data-display="none" data-menu_id="670" data-le_da_tabela="TABELA_SEM_ALIAS" data-le_do_campo="IF(COALESCE(AGDA.valor,0) <= COALESCE(CLTF.credito,0),1,0)"
+                                        data-le_do_campo_id="11410" data-coluna_check="1" data-ordem="28" class=" null" style="text-align: center; font-size: 13px; font-family: Roboto; min-width: 62px;display:none;">
+                                        <span class="tblTdFalse"> Texto </span>
+                                    </td>
                                     <td id="td" tabindex="0" "55905 - td" data-id="55905" data-pai="20518" data-texto="Retorno"
                                         data-menu_id="670" data-le_da_tabela="agenda" data-le_da_tabela_alias="AGDA" data-le_do_campo="retorno"
                                         data-le_do_campo_id="11346" data-coluna_check="1" data-ordem="28" class=" null" style="text-align: center; font-size: 13px; font-family: Roboto; min-width: 74px;">
@@ -393,6 +399,21 @@
                                         data-le_do_campo_id="3893" data-grava_na_tabela="agenda" data-grava_no_campo="servico_id"
                                         data-input_ativo="1" data-ordem="31" class=" null" style="font-size: 13px; font-family: Roboto; min-width: 72px;">
                                         <span class="tblTdFalse"> Texto </span>
+                                    </td>
+                                    <td id="td" tabindex="0" "44619 - td" data-id="44619" data-pai="20518" data-texto="Convênio"
+                                        data-display="none" data-menu_id="670" data-combo_tabela="cliente_fornecedor" data-combo_campo="razao"
+                                        data-le_da_tabela="TABELA_SEM_ALIAS" data-le_do_campo="COALESCE(ORCO.nome, 'PARTICULAR')"
+                                        data-le_do_campo_id="19265" data-largura="150" data-combo-grava-campo="id" data-combo_ativo="1"
+                                        data-ordem="32" class=" null" style="font-size: 13px; font-family: Roboto; min-width: 150px;display:none;">
+                                        <span class="tblTdFalse"> Texto </span>
+                                        <a id="botao" onclick="selecionarCelula();" class="waves-effect waves-light btn transparent ng-scope"
+                                            "52818 - botao" data-id="52818" data-pai="44619" data-menu_id="670" data-input_ativo="1" data-ordem="168"
+                                            style="padding: 1px; margin: 0px;">
+                                            <i id="icone" class="fa fa-edit null ng-scope" "52819 - icone" data-id="52819" data-pai="52818"
+                                                data-texto="fa-edit" data-menu_id="670" data-tamanho="20" data-combo_ativo="1"
+                                                data-ordem="170" style="padding: 0px; margin: 0px; color: rgb(0, 0, 255);"> </i>
+                                            <span id="botao"></span>
+                                        </a>
                                     </td>
                                     <td id="td" tabindex="0" "20537 - td" data-id="20537" data-pai="20518" data-texto="Especialidade"
                                         data-menu_id="670" data-le_da_tabela="especialidade" data-le_da_tabela_alias="ESPE" data-le_do_campo="especialidade"
