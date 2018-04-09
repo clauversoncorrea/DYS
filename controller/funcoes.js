@@ -1966,7 +1966,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
 
         if (elm) {
             if (elm.id == "tab") {
-                var id_tela =  $("[data-id='" + elm.dataset.id + "']")[0].dataset.menu_id;
+                var id_tela = $("[data-id='" + elm.dataset.id + "']")[0].dataset.menu_id;
                 tela = $("#view #" + id_tela)[0].dataset.nome;
                 g$.ativaTab(elm.dataset.id, tela);
                 elementoClick(elm.dataset.id);
@@ -5220,14 +5220,17 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 g$.podeChamar = false;
             }
             else g$.podeChamar = true;
-        }, 7000);
+        }, 6000);
     }
 
     if (g$.user.projeto == "SAUDE") {
         g$._socket.on('senha', function (data) {
-            g$.filaSenhaaChamar.push({ data: data, chamou: false });
-            console.log("cadastrou uma senha");
-            teste(g$.filaSenhaaChamar[0].data);
+            var if_existy = g$.filaSenhaaChamar.filter(function (v) { return v.data.trim() == data.trim() });
+            if (!if_existy.length) {
+                g$.filaSenhaaChamar.push({ data: data, chamou: false });
+                console.log("cadastrou uma senha");
+                teste(g$.filaSenhaaChamar[0].data);
+            }
         });
 
         g$._socket.on('atendimento', function (data) {
