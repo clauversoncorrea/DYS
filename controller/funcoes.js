@@ -5220,7 +5220,7 @@ app.controller("funcoes", function ($scope, $http, $rootScope, $compile) {
                 g$.podeChamar = false;
             }
             else g$.podeChamar = true;
-        }, 1000);
+        }, 3000);
     }
 
     if (g$.user.projeto == "SAUDE") {
