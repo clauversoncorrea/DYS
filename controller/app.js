@@ -3,14 +3,15 @@ var ambiente = (location.href.indexOf("treinamento") > -1 ? "treinamento" : (loc
 var banco_node = (ambiente == "") ? "node" : "node_" + ambiente;
 var banco_saude = (ambiente == "") ? "saude" : "saude_" + ambiente;
 var port = (location.href.indexOf("treinamento") > -1 ? "8020" : (location.href.indexOf("homologacao") > -1) ? "8010" : "8000");
-var URL, link;
+var URL, _link, link;
+_link = location.href.split("/")[2];
 if(location.href.indexOf("localhost") > -1) {
     URL = "" + ((ambiente == "") ? "/" : "");
     link = "http://localhost:8000/" + ((ambiente == "") ? "/" : ambiente);
 }
 else {
-    URL = "http://192.168.66.19/" + ((ambiente == "") ? "" : ambiente);
-    link = "http://192.168.66.19/" + ((ambiente == "") ? "" : ambiente + "/");
+    URL = "http://" + _link + "/" + ((ambiente == "") ? "" : ambiente);
+    link = "http://" + _link + "/" + ((ambiente == "") ? "" : ambiente + "/");
 }
 
 const KEYPAYGOL = "gXdeOtns6R1Iex0qQ77hq8O7fRlKOcTs%2bDE5yqJkpWjggbXzfMIKfgR6kOH1L6hT1vQ193YiLer15y04yPGACvFqep2Ns2brBkjW%2bV8flwE%3d";

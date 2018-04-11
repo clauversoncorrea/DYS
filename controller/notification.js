@@ -27,9 +27,10 @@ var app2 = angular.module('myApp', ['ionic'])
 
     });
 
-var URL;
+var URL, 
+    _link = location.href.split("/")[2];
 if(location.href.indexOf("localhost") > -1) URL = "" + ((ambiente == "") ? "/" : "");
-else URL = "http://192.168.66.19/" + ((ambiente == "") ? "" : ambiente);
+else URL = "http://" + _link + "/" + ((ambiente == "") ? "" : ambiente);
 
 const syek = {
     select: "TCELES",
